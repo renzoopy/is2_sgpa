@@ -2,13 +2,14 @@
 <!doctype html>
 
 <html lang="es">
+
 <head>
   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Sistema Gerenciador de Proyectos Ágiles</title>
+  <title> SGPA </title>
   <meta name="description" content="SGPA">
   <meta name="author" content="SitePoint">
 </head>
@@ -24,9 +25,12 @@
       {% load socialaccount %}
       {% get_providers as socialaccount_providers %}
       {% for provider in socialaccount_providers %}
-      <a title="{{provider.name}}" class="h5 fw-bold text-white login-btn socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params action='reauthenticate'%}" role="button">Iniciar Sesión</a>
+      <a title="{{provider.name}}" class="h5 fw-bold text-white login-btn socialaccount_provider {{provider.id}}"
+        href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params action='reauthenticate'%}"
+        role="button">Iniciar Sesión</a>
       {% endfor %}
     </div>
   </div>
 </body>
+
 </html>
