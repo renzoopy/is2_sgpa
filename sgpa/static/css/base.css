@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: green;
+}
+
+.navbar {
+    background: -webkit-linear-gradient(right,#00dbde,#fc00ff);
+    background: linear-gradient(right,#00dbde,#fc00ff);
+    background: -o-linear-gradient(right,#00dbde,#fc00ff);
+    background: -moz-linear-gradient(right,#00dbde,#fc00ff);
+    padding: 5px;
+}
