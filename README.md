@@ -19,3 +19,5 @@
 3. Correr las migraciones `python manage.py migrate`.
 4. Crear super usuario `python manage.py createsuperuser`.
 5. Correr el servidor `python manage.py runserver`.
+
+rama ricardoE
