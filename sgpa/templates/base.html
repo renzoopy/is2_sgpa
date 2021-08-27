@@ -4,14 +4,11 @@
 <html lang="es">
 
 <head>
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> SGPA </title>
-    <meta name="description" content="SGPA">
-    <meta name="author" content="SitePoint">
 </head>
 
 <body>
@@ -19,22 +16,20 @@
     <div class="container-fluid">
         <div class="row min-vh-100 flex-column flex-md-row">
             <aside class="col-12 col-md-3 col-xl-2 p-0 bg-dark">
-                <nav class="navbar navbar-expand-md navbar-dark bd-dark flex-md-column flex-row align-items-center py-2 text-center sticky-top"
+                <nav class="navbar-expand-md navbar-dark bd-dark flex-md-column flex-row align-items-center py-2 sticky-top"
                     id="sidebar">
-                    <div class="text-center p-3">
-                        <img src="https://impreza.us-themes.com/wp-content/uploads/paolo-bendandi-D-8XODEIr_s-unsplash.jpg"
-                            alt="profile picture" class="img-fluid rounded-circle my-4 p-1 d-none d-md-block shadow" />
-                        <a href="#" class="navbar-brand mx-0 font-weight-bold  text-nowrap">NombreUsuario</a>
-                    </div>
                     <button type="button" class="navbar-toggler border-0 order-1" data-toggle="collapse"
                         data-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div ali class="collapse navbar-collapse order-last" id="nav">
-                        <ul class="navbar-nav flex-column w-100">
+                    <div class="collapse navbar-collapse order-last" id="nav">
+                        <ul class="navbar-nav flex-column w-100 justify-content-center">
                             <li class="nav-item">
-                                <a href="#" class="nav-link active">Perfil</a>
+                                <a href="#" class="nav-link active">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Perfil</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#collapseProyectos" class="nav-link" type="button" data-bs-toggle="collapse"
@@ -70,7 +65,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link"> xD </a>
+                                <a href="#" class="nav-link">Burdownchart</a>
                             </li>
                         </ul>
                     </div>
@@ -79,8 +74,6 @@
                     <a href="accounts/logout" class="btn btn-primary">Logout</a>
                 </div>
             </aside>
-
-
         </div>
     </div>
     {% endblock %}
