@@ -13,69 +13,73 @@
 
 <body>
     {% block navbar %}
-    <div class="container-fluid">
-        <div class="row min-vh-100 flex-column flex-md-row">
-            <aside class="col-12 col-md-3 col-xl-2 p-0 bg-dark">
-                <nav class="navbar-expand-md navbar-dark bd-dark flex-md-column flex-row align-items-center py-2 sticky-top"
-                    id="sidebar">
-                    <button type="button" class="navbar-toggler border-0 order-1" data-toggle="collapse"
-                        data-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+    <input type="checkbox" class="checkbox" id="check">
+    <label class="menu" for="check">|||</label> 
+    <div class="left-panel"> 
+        <div class="container-fluid">
+            <div class="row min-vh-100 flex-column flex-md-row">
+                <aside class="col-12 col-md-3 col-xl-2 p-0 bg-dark">
+                    <nav class="navbar-expand-md navbar-dark bd-dark flex-md-column flex-row align-items-center py-2 sticky-top"
+                        id="sidebar">
+                        <button type="button" class="navbar-toggler border-0 order-1" data-toggle="collapse"
+                            data-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
 
-                    <div class="collapse navbar-collapse order-last" id="nav">
-                        <ul class="navbar-nav flex-column w-100 justify-content-center">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link active">Inicio</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">Perfil</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#collapseProyectos" class="nav-link" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseProyectos" aria-expanded="false"
-                                    aria-controls="collapseProyectos">
-                                    Proyectos</a>
-                                <ul class="collapse" id="collapseProyectos">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link"> Proyecto 1</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link"> Proyecto 2</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link"> Proyecto 3</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#collapseTareas" class="nav-link" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseTareas" aria-expanded="false"
-                                    aria-controls="collapseTareas"> Tareas </a>
-                                <ul class="collapse" id="collapseTareas">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link"> Tarea 1</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link"> Tarea 2</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link"> Tarea 3</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">Burdownchart</a>
-                            </li>
-                        </ul>
+                        <div class="collapse navbar-collapse order-last" id="nav">
+                            <ul class="navbar-nav flex-column w-100 justify-content-center">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link active">Inicio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">Perfil</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#collapseProyectos" class="nav-link" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseProyectos" aria-expanded="false"
+                                        aria-controls="collapseProyectos">
+                                        Proyectos</a>
+                                    <ul class="collapse" id="collapseProyectos">
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link"> Proyecto 1</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link"> Proyecto 2</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link"> Proyecto 3</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#collapseTareas" class="nav-link" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTareas" aria-expanded="false"
+                                        aria-controls="collapseTareas"> Tareas </a>
+                                    <ul class="collapse" id="collapseTareas">
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link"> Tarea 1</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link"> Tarea 2</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link"> Tarea 3</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">Burdownchart</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <div class="text-center">
+                        <a href="accounts/logout" class="btn btn-primary">Logout</a>
                     </div>
-                </nav>
-                <div class="text-center">
-                    <a href="accounts/logout" class="btn btn-primary">Logout</a>
-                </div>
-            </aside>
+                </aside>
+            </div>
         </div>
-    </div>
+    </div>  
     {% endblock %}
 
     {% block content %}
