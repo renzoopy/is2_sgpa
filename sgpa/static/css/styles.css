@@ -27,3 +27,10 @@
 .aside-color{
     background-color: #161b22;
 }
+
+.boton-color{
+    text-decoration: none;
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
