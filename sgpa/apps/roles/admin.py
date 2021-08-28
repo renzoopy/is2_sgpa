@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import Perfil
+from roles.models import Rol
+
 # Register your models here.
-admin.site.register(Perfil)
+admin.site.register(Rol)
