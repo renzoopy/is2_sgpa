@@ -49,7 +49,8 @@ INSTALLED_APPS = [
 
     'allauth.socialaccount.providers.google',
     'usuarios',
-    'proyectos'
+    'proyectos',
+    'roles',
 ]
 
 MIDDLEWARE = [
@@ -149,7 +150,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR,'sgpa/static'),)
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'proyectos:home'
+LOGOUT_REDIRECT_URL = '/login'
 ACCOUNT_LOGOUT_ON_GET = True
 
 # Default primary key field type

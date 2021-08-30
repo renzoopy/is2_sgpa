@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    path('', include('proyectos.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('usuarios/', include(('usuarios.urls', 'usuarios'), namespace='usuarios')),
-    path('', include('proyectos.urls')),
     path('proyectos/', include(('proyectos.urls', 'proyectos'), namespace='proyectos')),
+    path('login',auth_views.LoginView.as_view(template_name='cuenta/login.html'), name='login'),
+    path('logout',auth_views.LogoutView.as_view(), name='logout'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
