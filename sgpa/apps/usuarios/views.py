@@ -13,8 +13,6 @@ def home(request):
 
 
 # Creación de Perfil
-
-
 class CrearPerfil(LoginRequiredMixin, CreateView):
     model = Perfil
     form_class = Perfil_Form
@@ -24,14 +22,14 @@ class CrearPerfil(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         user = User.objects.get(username=self.request.user)
         Perfil.objects.create(
-            usuario=user,
+            user=user,
             ci=self.request.POST["ci"],
             telefono=self.request.POST["telefono"],
         )
         return redirect(self.success_url)
 
 
-# === Editar Perfil ===
+#  Editar Perfil
 @login_required
 def editarPerfil(request, id_perfil):
     """
