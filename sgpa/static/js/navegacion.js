@@ -36,3 +36,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     // Your code to run since DOM is loaded and ready
 });
+
+var activable = document.getElementById("activable"),
+    activar_op = document.getElementById("activador");
+
+function habilitar() {
+    activable.classList.remove("disabled");
+}
+
+activar_op.addEventListener('click', habilitar, true)
