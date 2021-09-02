@@ -12,10 +12,6 @@
                 <input class="form-control" type="text" placeholder="{{ user.last_name }}">
                 <label class="col-form-label">Email:</label>
                 <input class="form-control" type="text" placeholder="{{ user.email }}">
-                <label class="col-form-label">CI:</label>
-                <input class="form-control" type="text" placeholder="{{ usuarios_perfil.ci }}">
-                <label class="col-form-label">Teléfono:</label>
-                <input class="form-control" type="text" placeholder="{{ Perfil.telefono }}">
             </fieldset>
             <form method="post">
                 {% csrf_token %}

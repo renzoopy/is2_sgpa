@@ -6,7 +6,7 @@ from roles.models import Rol
 
 
 class Perfil(models.Model):
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     ci = models.PositiveIntegerField(
         null=False,
         blank=False,
@@ -23,4 +23,4 @@ class Perfil(models.Model):
         )
 
     def __str__(self):
-        return "{} {}".format(self.usuario.first_name, self.usuario.last_name)
+        return "{} {}".format(self.user.first_name, self.user.last_name)

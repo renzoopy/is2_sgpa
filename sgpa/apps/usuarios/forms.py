@@ -6,11 +6,11 @@ from .models import Perfil
 class Perfil_Form(forms.ModelForm):
     def save(self, commit=True, *args, **kwargs):
         ci = kwargs.get("ci")
-        usuario = kwargs.get("usuario")
+        u = kwargs.get("usuario")
         telefono = kwargs.get("telefono")
         instance = super(Perfil_Form, self).save(commit=False)
         instance.ci = ci
-        instance.user = usuario
+        instance.user = u
         instance.telefono = telefono
         if commit:
             instance.save()
