@@ -8,5 +8,8 @@ def base(request):
 def home(request):
     return render(request,'home.html')
 
+def proyectos(request):
+    return render(request,'proyectos/proyectos.html')
+
 def nuevoProyecto(request):
     return render(request,'proyectos/nuevoProyecto.html')
