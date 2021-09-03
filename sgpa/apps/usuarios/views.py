@@ -19,6 +19,12 @@ class CrearPerfil(LoginRequiredMixin, CreateView):
     template_name = "usuarios/perfil_form.html"
     success_url = reverse_lazy("usuarios:home")
 
+    def get_context_data(self, **kwargs):
+        context = super(CrearPerfil, self).get_context_data(**kwargs)
+        perfil = Perfil.objects.get(user=self.request.user)
+        print(perfil)
+        return context
+
     def form_valid(self, form):
         user = User.objects.get(username=self.request.user)
         Perfil.objects.create(
@@ -32,14 +38,9 @@ class CrearPerfil(LoginRequiredMixin, CreateView):
 #  Editar Perfil
 @login_required
 def editarPerfil(request, id_perfil):
-    """
-    Vista para editar la información de un usuario (el email no puede ser modificado)
-    Recibe el request HTTP y el id del perfil de usuario
-    Retorna la renderización de la información del usuario en el template especificado
-    Requiere inicio de sesión
-    """
+
+    usuario = User.objects.get(id=Perfil.user.id)
     perfil = Perfil.objects.get(id=id_perfil)
-    usuario = User.objects.get(id=perfil.user.id)
     if request.method == "GET":
         P_form = Perfil_Form(instance=perfil)
         U_form = Usuario_Form(instance=usuario)
