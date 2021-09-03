@@ -19,11 +19,11 @@ class CrearPerfil(LoginRequiredMixin, CreateView):
     template_name = "usuarios/perfil_form.html"
     success_url = reverse_lazy("usuarios:home")
 
-    def get_context_data(self, **kwargs):
-        context = super(CrearPerfil, self).get_context_data(**kwargs)
-        perfil = Perfil.objects.get(user=self.request.user)
-        print(perfil)
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super(CrearPerfil, self).get_context_data(**kwargs)
+    #     perfil = Perfil.objects.get(user=self.request.user)
+    #     print(perfil)
+    #     return context
 
     def form_valid(self, form):
         user = User.objects.get(username=self.request.user)
