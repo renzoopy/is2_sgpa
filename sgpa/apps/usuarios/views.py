@@ -1,9 +1,11 @@
+from django.http import request
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.views.generic import CreateView
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.list import ListView
 from usuarios.models import Perfil
 from usuarios.forms import Perfil_Form, Usuario_Form
 
@@ -54,3 +56,10 @@ def editarPerfil(request, id_perfil):
     return render(
         request, "usuarios/editar_perfil.html", {"P_form": P_form, "U_form": U_form}
     )
+
+
+class ListarPerfil(LoginRequiredMixin, ListView):
+
+    redirect_field_name = "redirect_to"
+    model = Perfil
+    template_name = "usuarios/listar_perfiles.html"
