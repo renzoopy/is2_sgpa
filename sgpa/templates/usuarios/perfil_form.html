@@ -16,7 +16,7 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label class="col-form-label">CI:</label>
+                    <label class="col-form-label">CI:</label><br>
                     {{ form.ci }}
                 </div>
                 {% if form.errors %}
@@ -31,9 +31,10 @@
                 {% endif %}
 
                 <div class="form-group">
-                    <label class="col-form-label">Teléfono:</label>
+                    <label class="col-form-label">Teléfono:</label><br>
                     {{ form.telefono }}
                 </div>
+                <br>
                 <button type="submit" class="btn boton-color disabled" id="activable">Guardar</button>
                 <a href="{% url 'usuarios:home'%}" class="btn boton-color" role="button">Cancelar</a>
                 <button type="reset" class="btn boton-color" id="activador">Editar</button>

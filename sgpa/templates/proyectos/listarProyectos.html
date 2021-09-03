@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <ins>
+        <h3 align="center">Proyectos</h3>
+    </ins>
+    <br>
+    <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+            {% if object_list%}
+            <table class="table">
+                <thread>
+                    <tr class="table-primary">
+                        <td> ID </td>
+                        <td> Nombre </td>
+                        <td> Descripcion </td>
+                        <td> Fecha de creacion </td>
+                        <td> Sprints </td>
+                        <td> Estado </td>
+                    </tr>
+                </thread>
+                <tbody>
+                    {% for proyecto in object_list%}
+                    <tr>
+                        <td>{{ proyecto.id }}</td>
+                        <td>{{ proyecto.nombre }}</td>
+                        <td>{{ proyecto.descripcion }}</td>
+                        <td>{{ proyecto.fechaCreacion }}</td>
+                        <td>{{ proyecto.numSprints }}</td>
+                        <td>{{ proyecto.estado }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h3 align="center"> No existen proyectos creados </h3>
+            {% endif %}
+            <div align="right">
+                <a class="btn btn-primary" href="{% url 'proyectos:nuevo_proyecto' %}"> Crear Proyecto </a>
+                <!-- Enlace directo por url a Proyectos -->
+                <a class="btn btn-secondary" href="http://127.0.0.1:8000"> Volver </a>
+            </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
