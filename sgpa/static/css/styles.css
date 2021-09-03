@@ -34,3 +34,10 @@
     background-color: #4723D9;
     border-color: #4723D9;
 }
+
+/* TTablero Kanban */
+
+p{
+    text-align: center;
+    font-size: 30px;
+}

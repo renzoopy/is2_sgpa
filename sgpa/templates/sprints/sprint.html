@@ -2,34 +2,54 @@
 
 {% block content %}
 <div class="container-fluid">
-    <ins>
-        <h3 align="center">Tablero Kanban</h3>
-    </ins>
-    <br>
+    <main>
+        <div class="row">  
+                        
+            <div class="col" style="background-color: darksalmon;">
+                <p>To do</p> 
+            </div>
+        
+            <div class="col" style="background-color: lightskyblue;">
+                <p>Doing</p>
+            </div>
+        
+            <div class="col" style="background-color: rgb(137, 160, 90);">
+                <p>Done</p>
+            </div>    
+
+        </div>
+    </main>
+      
     <div class="row">
-        <div class="col-md-3">
-
+        <div class="col-sm-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
         </div>
-        <div class="col-md-6">
-            <form method="POST">
-                
-                <div class="form-group">
-                    <label class="col-form-label">To do</label>
-                   
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label">Doing</label>
-                  
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label">Done</label>
-                   
-                </div>        
-            </form>
+        <div class="col-sm-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
         </div>
-        <div class="cold-md-3">
-
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
         </div>
+      </div>
     </div>
+
+
 </div>
 {% endblock %}
