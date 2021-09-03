@@ -1,6 +1,6 @@
+from django.contrib.auth.models import Group
 from usuarios.models import Perfil
 from django.db import models
-from django.core.validators import MinValueValidator
 
 ESTADOPROY_CHOICES = [
     ("En espera", "En espera"),
@@ -28,6 +28,7 @@ class Proyecto(models.Model):
     estado = models.CharField(default="Pendiente", max_length=10)
     numSprints = models.IntegerField(default=1)
     scrumMaster = models.ForeignKey(Perfil, on_delete=models.CASCADE)
+    equipo = models.OneToOneField(Group, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return "{}".format(self.nombre)
