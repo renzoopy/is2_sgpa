@@ -26,8 +26,18 @@ class Perfil_Form(forms.ModelForm):
             "telefono": "Teléfono",
         }
         widgets = {
-            "ci": forms.TextInput(),
-            "telefono": forms.TextInput(),
+            "ci": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Ingrese su número de CI",
+                }
+            ),
+            "telefono": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Ingrese su número de teléfono",
+                }
+            ),
         }
 
 
