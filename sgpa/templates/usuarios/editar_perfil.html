@@ -15,27 +15,28 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <label class="col-form-label">Nombre:</label>
-                    {{ U_form.first_name }}
+                    {{ usuario_Form.first_name }}
                 </div>
                 <div class="form-group">
                     <label class="col-form-label">Apellido:</label>
-                    {{ U_form.last_name }}
+                    {{ usuario_Form.last_name }}
                 </div>
                 <div class="form-group">
                     <label class="col-form-label">Email:</label>
-                    {{ U_form.email }}
+                    {{ usuario_Form.email }}
                 </div>
                 <div class="form-group">
                     <label class="col-form-label">CI:</label>
-                    {{ P_form.ci }}
+                    {{ perfil_Form.ci }}
                 </div>
                 <div class="form-group">
                     <label class="col-form-label">Teléfono:</label>
-                    {{ P_form.telefono }}
+                    {{ perfil_Form.telefono }}
                 </div>
+                <br>
                 <p align="center">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <a href="{% url 'usuarios:home'%}" class="btn btn-primary" role="button">Cancelar</a>
+                    <a href="{% url 'usuarios:listar_perfiles'%}" class="btn btn-primary" role="button">Cancelar</a>
                 </p>
             </form>
         </div>

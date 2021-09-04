@@ -41,20 +41,22 @@ class CrearPerfil(LoginRequiredMixin, CreateView):
 @login_required
 def editarPerfil(request, id_perfil):
 
-    usuario = User.objects.get(id=Perfil.user.id)
     perfil = Perfil.objects.get(id=id_perfil)
+    usuario = User.objects.get(id=perfil.user.id)
     if request.method == "GET":
-        P_form = Perfil_Form(instance=perfil)
-        U_form = Usuario_Form(instance=usuario)
+        perfil_Form = Perfil_Form(instance=perfil)
+        usuario_Form = Usuario_Form(instance=usuario)
     else:
-        P_form = Perfil_Form(request.POST, instance=perfil)
-        U_form = Usuario_Form(request.POST, instance=usuario)
-        if all([P_form.is_valid(), U_form.is_valid()]):
-            P_form.save()
-            U_form.save()
-        return redirect("usuarios:home")
+        perfil_Form = Perfil_Form(request.POST, instance=perfil)
+        usuario_Form = Usuario_Form(request.POST, instance=usuario)
+        if all([perfil_Form.is_valid(), usuario_Form.is_valid()]):
+            perfil_Form.save()
+            usuario_Form.save()
+        return redirect("usuarios:listar_perfiles")
     return render(
-        request, "usuarios/editar_perfil.html", {"P_form": P_form, "U_form": U_form}
+        request,
+        "usuarios/editar_perfil.html",
+        {"perfil_Form": perfil_Form, "usuario_Form": usuario_Form},
     )
 
 
@@ -63,3 +65,9 @@ class ListarPerfil(LoginRequiredMixin, ListView):
     redirect_field_name = "redirect_to"
     model = Perfil
     template_name = "usuarios/listar_perfiles.html"
+
+
+# @login_required
+# def eliminarPerfil(request, id_perfil):
+
+#     perfil = Perfil.objects.get(id=id_perfil)
