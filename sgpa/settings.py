@@ -79,6 +79,8 @@ TEMPLATES = [
     },
 ]
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
@@ -86,9 +88,6 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
-#! EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-#! ACCOUNT_ATHENTICATION_METHOD = 'email'
-#! ACCOUNT_EMAIL_REQUIRED = True
 
 WSGI_APPLICATION = "sgpa.wsgi.application"
 
@@ -169,3 +168,10 @@ SOCIALACCOUNT_PROVIDERS = {
         },
     }
 }
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST_USER = "is2.sgpa@gmail.com"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_PASSWORD = "CabEscuSeoLegui"
