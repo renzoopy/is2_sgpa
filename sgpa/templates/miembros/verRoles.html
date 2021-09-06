@@ -86,7 +86,7 @@
                             {% endfor %}
                         </td>
                         <td class="text-center">
-                            <a class="btn btn-primary"
+                            <a class="btn boton-color"
                                 href="{% url 'miembros:asignar_rol' idProyecto idMiembro rol.id %}">Asignar Rol</a>
                         </td>
                     </tr>
@@ -99,7 +99,7 @@
         </div>
     </div>
     <p align="center">
-        <a href="{% url 'miembros:listar' idProyecto %}" class="btn btn-primary" role="button">Volver</a>
+        <a href="{% url 'miembros:listar' idProyecto %}" class="btn boton-color" role="button">Volver</a>
     </p>
 </div>
 {% endblock %}
