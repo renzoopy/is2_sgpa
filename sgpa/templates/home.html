@@ -22,9 +22,26 @@
                 </li>
             </ul>
         </div>
+        {% if not perms.usuarios.acceso_usuario %}
+        <a class="btn boton-color btn-lg btn-block" href="{% url 'usuarios:crear_form' %}" role="button">Solicitar
+            Acceso</a>
+        <br>
+        <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <br>
+            <button href="{% url 'logout' %}" class="btn btn-danger btn-lg btn-block" type="submit">Cerrar
+                Sesión</button>
+        </form>
+        {% else %}
         <div class="text-center">
             <a href="http://127.0.0.1:8000" class="boton-color btn">Continuar</a>
         </div>
+        </button>
+        {% endif %}
+
     </div>
 </div>
 {% endblock %}
