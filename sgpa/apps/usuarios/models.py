@@ -18,6 +18,8 @@ class Perfil(models.Model):
 
     class Meta:
         permissions = (
+            ("autorizar_usuario", "Permite autorizar el acceso a SGPA"),
+            ("acceso_usuario", "Permite el acceso a SGPA"),
             ("editar_usuario", "Permite editar usuario"),
             ("eliminar_usuario", "Permite eliminar usuario"),
         )
