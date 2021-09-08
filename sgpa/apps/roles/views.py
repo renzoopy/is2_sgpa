@@ -116,7 +116,7 @@ def desasignar_Rol(request, idProyecto, idMiembro, idRol):
 
 # === Ver todos los roles === #
 @login_required
-def verRoles(request, idProyecto, idMiembro):
+def ver_Roles(request, idProyecto, idMiembro):
 
     miembro = Miembro.objects.get(id=idMiembro)
     user = miembro.idPerfil.user
