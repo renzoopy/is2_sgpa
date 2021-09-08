@@ -10,50 +10,49 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group, Permission, User
 
-# Create your views here.
 
 # === Vista para la creación de un rol === #
-class CrearRol(LoginRequiredMixin, CreateView):
-
+class Crear_Rol(LoginRequiredMixin, CreateView):
+    
     redirect_field_name = "redirect_to"
     model = Rol
     form_class = Rol_Form
-    template_name = "roles/roles_form.html"
+    template_name = "roles/rol_form.html"
 
     def get_success_url(self):
         return reverse("roles:listar_roles.html", args=(self.kwargs["idProyecto"],))
 
-    def get_form_kwargs(self, **kwargs):
-        form_kwargs = super(CrearRol, self).get_form_kwargs(**kwargs)
+    def get_form_kwargs(self, kwargs):
+        form_kwargs = super(Crear_Rol, self).get_form_kwargs(kwargs)
         form_kwargs["idProyecto"] = self.kwargs["idProyecto"]
         return form_kwargs
 
     def form_valid(self, form):
         proyecto = Proyecto.objects.get(id=self.kwargs["idProyecto"])
         form.instance.proyecto = proyecto
-        nombreRol = form.cleaned_data["nombre"]
-        nombreGrupo = "{}_{}".format(nombreRol, proyecto.id)
+        nombreRol = form.cleaneddata["nombre"]
+        nombreGrupo = "{}{}".format(nombreRol, proyecto.id)
         grupo = Group.objects.create(name=nombreGrupo)
         form.instance.grupo = grupo
         permisos = Permission.objects.filter(name__in=form.cleaned_data["select"])
         grupo.permissions.set(permisos)
-        return super(CrearRol, self).form_valid(form)
+        return super(Crear_Rol, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
-        context = super(CrearRol, self).get_context_data()
+        context = super(Crear_Rol, self).get_context_data()
         context["idProyecto"] = self.kwargs["idProyecto"]
         return context
 
 
 # === Vista para listar roles existentes === #
-class ListarRol(LoginRequiredMixin, CreateView):
+class Listar_Rol(LoginRequiredMixin, CreateView):
 
     redirect_field_name = "redirect_to"
     model = Rol
     template_name = "roles/listar_roles.html"
 
     def get_context_data(self, *args, **kwargs):
-        context = super(ListarRol, self).get_context_data()
+        context = super(Listar_Rol, self).get_context_data()
         context["idProyecto"] = self.kwargs["idProyecto"]
         return context
 
@@ -62,7 +61,7 @@ class ListarRol(LoginRequiredMixin, CreateView):
 
 
 # === Vista para eliminar un rol === #
-def ELiminarRol(request, idProyecto, id_rol):
+def ELiminar_Rol(request, idProyecto, id_rol):
     rol = Rol.objects.get(id=id_rol)
     if request.method == "POST":
         grupo = Group.objects.get(id=rol.grupo.id)
@@ -76,7 +75,7 @@ def ELiminarRol(request, idProyecto, id_rol):
 
 # === Vista para la edición de un rol === #
 @login_required
-def EditarRol(request, idProyecto, id_rol):
+def Editar_Rol(request, idProyecto, id_rol):
     rol = Rol.objects.get(id=id_rol)
     grupo = Group.objects.get(id=rol.grupo.id)
     if request.method == "GET":
@@ -95,7 +94,7 @@ def EditarRol(request, idProyecto, id_rol):
 
 # === Asignación de un rol === #
 @login_required
-def asignarRol(request, idProyecto, idMiembro, idRol):
+def asignar_Rol(request, idProyecto, idMiembro, idRol):
 
     miembro = Miembro.objects.get(id=idMiembro)
     user = miembro.idPerfil.user
@@ -106,7 +105,7 @@ def asignarRol(request, idProyecto, idMiembro, idRol):
 
 # === Revocar un rol === #
 @login_required
-def desasignarRol(request, idProyecto, idMiembro, idRol):
+def desasignar_Rol(request, idProyecto, idMiembro, idRol):
 
     miembro = Miembro.objects.get(id=idMiembro)
     user = miembro.idPerfil.user
@@ -126,14 +125,14 @@ def verRoles(request, idProyecto, idMiembro):
         list.append(x.name)
     # print(list)
     for x in range(0, len(list)):
-        n = list[x].split("_")
+        n = list[x].split("")
         list[x] = n[0]
     roles_asignados = Rol.objects.distinct("nombre").filter(
-        nombre__in=list, proyecto=idProyecto
+        nombrein=list, proyecto=idProyecto
     )
     roles_sinasignar = (
         Rol.objects.distinct("nombre")
-        .exclude(nombre__in=list)
+        .exclude(nombrein=list)
         .exclude(fase=None)
         .filter(proyecto=idProyecto)
     )

@@ -1,4 +1,5 @@
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
+from django.db.models.deletion import CASCADE
 from usuarios.models import Perfil
 from django.db import models
 
@@ -30,13 +31,14 @@ class Proyecto(models.Model):
     scrumMaster = models.ForeignKey(Perfil, on_delete=models.CASCADE)
     equipo = models.OneToOneField(Group, on_delete=models.CASCADE, null=True)
 
-    def __str__(self):
+    def str(self):
         return "{}".format(self.nombre)
 
 
 class Sprint(models.Model):
     numTareas = models.IntegerField(default=0)
+    duracion = models.IntegerField(default=0)
     estado = models.CharField(max_length=7, default="En cola")
 
-    def __str__(self):
+    def str(self):
         return "{}".format(self.estado)
