@@ -76,8 +76,7 @@ def test_crearSegundoPerfil():
     if perfil_Form.is_valid():
         perfil_Form.save(ci=4177075, usuario=usuario, telefono="0982186022")
 
-    # ??? Cambiar el valor False a True para ver el error ???#
-    assert perfil_Form.is_valid() is False, perfil_Form.errors
+    assert perfil_Form.is_valid() is True, perfil_Form.errors
 
 
 # === Verifica la eliminarción de un perfil de usuario === #
