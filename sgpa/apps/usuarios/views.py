@@ -10,7 +10,7 @@ from django.conf import settings
 from django.views.generic import CreateView
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
-from usuarios.forms import Perfil_Form, Usuario_Form
+from usuarios.forms import Perfil_Form, Usuario_Form, PerfilEdit_Form
 from django.contrib.auth.models import User, Permission
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required, permission_required
@@ -39,7 +39,7 @@ class CrearPerfil(LoginRequiredMixin, CreateView):
 
 # === Editar Perfil === #
 @login_required
-def editarPerfil(request, id_perfil):
+def editarPerfil_Admin(request, id_perfil):
 
     perfil = Perfil.objects.get(id=id_perfil)
     usuario = User.objects.get(id=perfil.user.id)
@@ -50,12 +50,33 @@ def editarPerfil(request, id_perfil):
         perfil_Form = Perfil_Form(request.POST, instance=perfil)
         usuario_Form = Usuario_Form(request.POST, instance=usuario)
         if all([perfil_Form.is_valid(), usuario_Form.is_valid()]):
-            perfil_Form.save()
+            perfil_Form.save(ci=perfil.ci, usuario=usuario, telefono=perfil.telefono)
             usuario_Form.save()
         return redirect("usuarios:listar_perfiles")
     return render(
         request,
         "usuarios/editar_perfil.html",
+        {"perfil_Form": perfil_Form, "usuario_Form": usuario_Form},
+    )
+
+
+@login_required
+def editarPerfil_General(request, id_perfil):
+    perfil = Perfil.objects.get(id=id_perfil)
+    usuario = User.objects.get(id=perfil.user.id)
+    if request.method == "GET":
+        perfil_Form = PerfilEdit_Form(instance=perfil)
+        usuario_Form = Usuario_Form(instance=usuario)
+    else:
+        perfil_Form = PerfilEdit_Form(request.POST, instance=perfil)
+        usuario_Form = Usuario_Form(request.POST, instance=usuario)
+        if all([perfil_Form.is_valid(), usuario_Form.is_valid()]):
+            perfil_Form.save(usuario=usuario, telefono=perfil.telefono)
+            usuario_Form.save()
+        return redirect("usuarios:listar_perfiles")
+    return render(
+        request,
+        "usuarios/editar_perfilGeneral.html",
         {"perfil_Form": perfil_Form, "usuario_Form": usuario_Form},
     )
 
