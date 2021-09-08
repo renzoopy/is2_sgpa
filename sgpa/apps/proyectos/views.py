@@ -6,6 +6,7 @@ from django.urls.base import reverse_lazy
 from django.views.generic import ListView
 from proyectos.forms import Proyecto_Form
 from django.shortcuts import redirect, render
+
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.mixins import LoginRequiredMixin
 

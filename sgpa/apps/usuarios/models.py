@@ -17,7 +17,10 @@ class Perfil(models.Model):
     telefono = models.PositiveIntegerField(blank=False, null=True)
 
     class Meta:
+        ordering = ["id"]
         permissions = (
+            ("autorizar_usuario", "Permite la administración del SGPA"),
+            ("acceso_usuario", "Permite el acceso a SGPA"),
             ("editar_usuario", "Permite editar usuario"),
             ("eliminar_usuario", "Permite eliminar usuario"),
         )

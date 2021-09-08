@@ -13,7 +13,7 @@ from django.contrib.auth.models import Group, Permission, User
 
 # === Vista para la creación de un rol === #
 class Crear_Rol(LoginRequiredMixin, CreateView):
-
+    
     redirect_field_name = "redirect_to"
     model = Rol
     form_class = Rol_Form

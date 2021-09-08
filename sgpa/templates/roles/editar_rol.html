@@ -1,27 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<br>
 <div class="container-fluid">
     <ins>
-        <h3 align="center">Crear nuevo rol</h3>
-    </ins><br>
+        <h3 align="center">Editar Rol</h3>
+    </ins>
+    <br>
     <div class="row">
         <div class="col-md-3">
+
         </div>
         <div class="col-md-6">
             <form method="post">
                 {% csrf_token %}
                 <div class="form-group">
                     <label class="col-form-label">Nombre:</label>
-                    {form.nombre}
+                    {{form.nombre}}
                 </div>
                 <div class="form-group">
-                    <label class="col-form-label">Sprint:</label>
-                    {form.sprint}
+                    <label class="col-form-label">Fase:</label>
+                    <br>
+                    {{ form.fase }}
                 </div>
                 <div class="form-group">
                     <label class="col-form-label">Permisos:</label>
-                    {form.select}
+                    {{form.select}}
                 </div>
                 <p align="center">
                     <button type="submit" class="btn boton-color">Guardar</button>
@@ -31,6 +35,7 @@
             </form>
         </div>
         <div class="col-md-3">
+
         </div>
     </div>
 </div>
