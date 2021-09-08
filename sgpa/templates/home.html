@@ -31,9 +31,6 @@
             {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
             {% endif %}
-            <br>
-            <button href="{% url 'logout' %}" class="btn btn-danger btn-lg btn-block" type="submit">Cerrar
-                Sesión</button>
         </form>
         {% else %}
         <div class="text-center">
