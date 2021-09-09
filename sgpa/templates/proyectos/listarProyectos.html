@@ -22,6 +22,7 @@
                         <td scope="col"> Fecha de creacion </td>
                         <td scope="col"> Sprints </td>
                         <td scope="col"> Estado </td>
+                        <td scope="col"> Acciones </td>
                     </tr>
                 </thread>
                 <tbody>
@@ -34,6 +35,12 @@
                         <td>{{ proyecto.fechaCreacion }}</td>
                         <td>{{ proyecto.numSprints }}</td>
                         <td>{{ proyecto.estado }}</td>
+                        <td>
+                            <a class="btn boton-color" role="button"><i class="fas fa-pen"></i></a>
+                            <a class="btn btn-danger" role="button"
+                                href="{% url 'proyectos:eliminar_proyectos' proyecto.id %}"><i
+                                    class="fas fa-trash"></i></a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
