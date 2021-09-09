@@ -15,12 +15,13 @@
             <table class="table">
                 <thread>
                     <tr class="table-primary">
-                        <td> ID </td>
-                        <td> Nombre </td>
-                        <td> Descripcion </td>
-                        <td> Fecha de creacion </td>
-                        <td> Sprints </td>
-                        <td> Estado </td>
+                        <td scope="col"> ID </td>
+                        <td scope="col"> Nombre </td>
+                        <td scope="col"> Descripcion </td>
+                        <td scope="col"> Scrum Master </td>
+                        <td scope="col"> Fecha de creacion </td>
+                        <td scope="col"> Sprints </td>
+                        <td scope="col"> Estado </td>
                     </tr>
                 </thread>
                 <tbody>
@@ -29,6 +30,7 @@
                         <td>{{ proyecto.id }}</td>
                         <td>{{ proyecto.nombre }}</td>
                         <td>{{ proyecto.descripcion }}</td>
+                        <td>{{ proyecto.scrumMaster }}</td>
                         <td>{{ proyecto.fechaCreacion }}</td>
                         <td>{{ proyecto.numSprints }}</td>
                         <td>{{ proyecto.estado }}</td>
@@ -41,8 +43,8 @@
             {% endif %}
             <div align="right">
                 <a class="btn boton-color" href="{% url 'proyectos:nuevo_proyecto' %}"> Crear Proyecto </a>
-                <!-- Enlace directo por url a Proyectos -->
-                <a class="btn boton-color" href="http://127.0.0.1:8000"> Volver </a>
+             
+                <a class="btn boton-color" href="{% url 'usuarios:administrador' %}"> Volver </a>
             </div>
         </div>
         <div class="col-md-2">
