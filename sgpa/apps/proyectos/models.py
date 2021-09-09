@@ -27,7 +27,7 @@ class Proyecto(models.Model):
     fechaInicio = models.DateField(null=True)
     fechaFin = models.DateField(null=True)
     estado = models.CharField(default="Pendiente", max_length=10)
-    numSprints = models.IntegerField(default=1)
+    numSprints = models.IntegerField(default=0)
     scrumMaster = models.ForeignKey(Perfil, on_delete=models.CASCADE)
     equipo = models.OneToOneField(Group, on_delete=models.CASCADE, null=True)
 
