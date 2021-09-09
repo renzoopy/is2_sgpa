@@ -4,14 +4,14 @@ from usuarios.models import Perfil
 from django.db import models
 
 ESTADOPROY_CHOICES = [
-    ("En espera", "En espera"),
-    ("En desarrollo", "En desarrollo"),
+    ("Pendiente", "Pendiente"),
+    ("En_desarrollo", "En desarrollo"),
     ("Cancelado", "Cancelado"),
     ("Culminado", "Culminado"),
 ]
 
 ESTADOSPR_CHOICES = [
-    ("En cola", "En cola"),
+    ("En_cola", "En_cola"),
     ("Activo", "Activo"),
     ("Cancelado", "Cancelado"),
     ("Finalizado", "Finalizado"),
@@ -38,7 +38,7 @@ class Proyecto(models.Model):
 class Sprint(models.Model):
     numTareas = models.IntegerField(default=0)
     duracion = models.IntegerField(default=0)
-    estado = models.CharField(max_length=7, default="En cola")
+    estado = models.CharField(max_length=10, default="En_cola")
 
     def str(self):
         return "{}".format(self.estado)
