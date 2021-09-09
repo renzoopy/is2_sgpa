@@ -28,7 +28,7 @@ def miembroCrear(request, idProyecto):
         form = MiembrosForm(request.POST or None, idProyecto=idProyecto)
 
     return render(
-        request, "miembros/nuevoMiembro.html", {"form": form, "proyecto": idProyecto}
+        request, "miembros/nuevo_miembro.html", {"form": form, "proyecto": idProyecto}
     )
 
 
@@ -45,7 +45,7 @@ def miembroEliminar(request, idProyecto, idMiembro):
         return redirect("miembros:lista", idProyecto=idProyecto)
     return render(
         request,
-        "miembros/eliminarMiembro.html",
+        "miembros/eliminar_miembro.html",
         {"miembros": miembro, "idProyecto": idProyecto},
     )
 
@@ -67,7 +67,7 @@ def verMiembros(request, idProyecto):
     g = proyecto.gerente
     return render(
         request,
-        "miembros/verMiembros.html",
+        "miembros/ver_miembros.html",
         {
             "miembros": miembro,
             "gerente": g,
