@@ -33,7 +33,9 @@
             <h2>No hay solicitudes de acceso al sistema</h2>
             <a href="{% url 'usuarios:home' %}" class="btn boton-color btn-lg">Volver</a>
             {% endif %}
+           
         </tbody>
     </table>
+    <a class="btn boton-color " href="{% url 'usuarios:administrador' %}"> Volver </a>
 </div>
 {% endblock %}
