@@ -1,80 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
 <br>
-<div class="container-fluid">
-    <h2 align="center">Administración del Sistema</h2><br>
-    <div class="row">
-        <div class="col-md-5">
-            <ins>
-                <h3 align="center">Proyectos</h3>
-            </ins>
-            {% if proyectos %}
-            <table class="table">
-                <thead>
-                    <tr class="table-primary">
-                        <td>ID</td>
-                        <td>Nombre</td>
-                        <td>Gerente</td>
-                        <td> Descripción </td>
-                        <td>Estado</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for proyecto in proyectos %}
-                    <tr>
-                        <td>{{proyecto.id}}</td>
-                        <td>{{proyecto.nombre}}</td>
-                        <td>{{proyecto.gerente}}</td>
-                        <td>{{proyecto.descripcion}}</td>
-                        <td>{{proyecto.estado}}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <div class="float-right">
+
+    <div class="container-fluid" >
+        <h2 align="center">Administración del Sistema</h2><br>
+        <div class="row" align="center">
+            <div class="col">
+                {% if proyectos %}       
+                <div class="float-right" align="center">              
+                    <a class="btn btn-info" role="button" href="{% url 'proyectos:listar_proyectos' %}">Proyectos</a>
+                </div>
+                {% else %}
+                <h4>Aún no existen proyectos creados</h4>
                 <a class="btn boton-color" role="button" href="{% url 'proyectos:nuevo_proyecto' %}">Crear Proyecto</a>
-                <a class="btn btn-info" role="button" href="{% url 'proyectos:listar_proyectos' %}">Ver más</a>
+                {% endif %}
             </div>
-            {% else %}
-            <h4>Aún no existen proyectos creados</h4>
-            <a class="btn boton-color" role="button" href="{% url 'proyectos:nuevo_proyecto' %}">Crear Proyecto</a>
-            {% endif %}
+            <div class="col">
+                {% if perfilesAcceso %}
+                <div class="float-right" align="center">
+                    <a class="btn btn-info btn-block" role="button" href="{% url 'usuarios:lista_acceso' %}">Acceso</a>
+                </div>   
+                {% else %}
+                <h4>No hay solicitudes de acceso al sistema</h4>
+                {% endif %}
+            </div>
+            <div class="col">
+            <a class="btn btn-info btn-block" role="button" href="{% url 'usuarios:listar_perfiles' %}">Ver Usuarios</a>
+            </div>
         </div>
-        <div class="col-md-5">
-            <ins>
-                <h3 align="center">Solicitudes de Acceso</h3>
-            </ins>
-            {% if perfilesAcceso %}
-            <table class="table">
-                <thead>
-                    <tr class="table-primary">
-                        <th scope="col">Id</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">CI</th>
-                        <th scope="col">Acceso</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for perfil in perfilesAcceso %}
-                    <tr>
-                        <td style="vertical-align:middle;">{{perfil.id}}</td>
-                        <td style="vertical-align:middle;">{{perfil.user.first_name}}</td>
-                        <td style="vertical-align:middle;">{{perfil.user.last_name}} </td>
-                        <td style="vertical-align:middle;">{{perfil.ci}}</td>
-                        <td><a href="{% url 'usuarios:conceder_acceso' perfil.id%}" class="btn boton-color"
-                                role="button">Conceder</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% else %}
-            <h4>No hay solicitudes de acceso al sistema</h4>
-            {% endif %}
-        </div>
-        <div class="col-md-2">
-            <a class="btn btn-info btn-lg btn-block" href="{% url 'usuarios:listar_perfiles' %}">Ver Usuarios</a>
-        </div>
-    </div>
-</div> <br><br>
+    </div> 
+
 {% endblock %}
