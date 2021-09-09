@@ -1,10 +1,10 @@
 from django import forms
-from proyectos.models import Proyecto
-from usuarios.models import Perfil
 from django.db.models import Q
+from usuarios.models import Perfil
+from proyectos.models import Proyecto, Sprint
 
 
-class ProyectoAdminForm(forms.ModelForm):
+class Proyecto_Form(forms.ModelForm):
     class Meta:
         model = Proyecto
         fields = ["nombre", "descripcion", "scrumMaster"]
@@ -20,22 +20,19 @@ class ProyectoAdminForm(forms.ModelForm):
             "scrumMaster": forms.Select(attrs={"class": "form-control"}),
         }
 
-    def __init__(self, *args, **kwargs):
-        super(ProyectoAdminForm, self).__init__(*args, *kwargs)
-        self.fields["scrumMaster"].queryset = Perfil.objects.filter(~Q(ide=1))
+    def init(self, args, **kwargs):
+        super(Proyecto_Form, self).init(args, **kwargs)
+        self.fields["scrumMaster"].queryset = Perfil.objects.filter(~Q(id=1))
 
 
-class ProyectoMasterForm(forms.ModelForm):
+class Sprint_Form(forms.ModelForm):
     class Meta:
-        model = Proyecto
-        fields = fields = ["nombre", "descripcion", "numSprints"]
+        model = Sprint
+        fields = [
+            "estado",
+            "numTareas",
+        ]
         labels = {
-            "nombre": "Nombre",
-            "descripcion": "Descripcion",
-            "numSprints": "NúmeroSprint",
-        }
-        widgets = {
-            "nombre": forms.TextInput(attrs={"class": "form-control"}),
-            "descripcion": forms.TextInput(attrs={"class": "form-control"}),
-            "numSprints": forms.NumberInput(attrs={"class": "form-control"}),
+            "estado": "Estado",
+            "numTareas": "Número de Tareas",
         }

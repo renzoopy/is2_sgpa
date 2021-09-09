@@ -45,3 +45,17 @@ function habilitar() {
 }
 
 activar_op.addEventListener('click', habilitar, true)
+
+
+/*(function reloj(){
+    var fecha=new Date();
+    document.write(fecha);
+    document.log(fecha.getHours());
+    document.log(fecha.getMinutes());
+    document.log(fecha.getSeconds());
+    
+    document.log(fecha.getDay());
+    document.log(fecha.getDate());
+    document.log(fecha.getMonth());
+    document.log(fecha.getFullYear());
+}())*/

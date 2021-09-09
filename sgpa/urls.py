@@ -25,6 +25,11 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("proyectos/", include(("proyectos.urls", "proyectos"), namespace="proyectos")),
     path("usuarios/", include(("usuarios.urls", "usuarios"), namespace="usuarios")),
+    path("roles/", include(("roles.urls", "roles"), namespace="roles")),
+    path(
+        "proyectos/<int:idProyecto>/miembros/",
+        include(("miembros.urls", "miembros"), namespace="miembros"),
+    ),
     path(
         "login",
         auth_views.LoginView.as_view(template_name="cuenta/login.html"),
