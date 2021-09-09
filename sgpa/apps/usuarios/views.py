@@ -37,29 +37,6 @@ class CrearPerfil(LoginRequiredMixin, CreateView):
         return redirect(self.success_url)
 
 
-# === Editar Perfil === #
-@login_required
-def editarPerfil_Admin(request, id_perfil):
-
-    perfil = Perfil.objects.get(id=id_perfil)
-    usuario = User.objects.get(id=perfil.user.id)
-    if request.method == "GET":
-        perfil_Form = Perfil_Form(instance=perfil)
-        usuario_Form = Usuario_Form(instance=usuario)
-    else:
-        perfil_Form = Perfil_Form(request.POST, instance=perfil)
-        usuario_Form = Usuario_Form(request.POST, instance=usuario)
-        if all([perfil_Form.is_valid(), usuario_Form.is_valid()]):
-            perfil_Form.save(ci=perfil.ci, usuario=usuario, telefono=perfil.telefono)
-            usuario_Form.save()
-        return redirect("usuarios:listar_perfiles")
-    return render(
-        request,
-        "usuarios/editar_perfil.html",
-        {"perfil_Form": perfil_Form, "usuario_Form": usuario_Form},
-    )
-
-
 @login_required
 def editarPerfil_General(request, id_perfil):
     perfil = Perfil.objects.get(id=id_perfil)
@@ -81,38 +58,19 @@ def editarPerfil_General(request, id_perfil):
     )
 
 
-# === Listar Perfiles === #
-class ListarPerfil(LoginRequiredMixin, ListView):
-
-    redirect_field_name = "redirect_to"
-    model = Perfil
-    template_name = "usuarios/listar_perfiles.html"
-
-
-# === Eliminar Perfil === #
+# === Proyectos de Usuario === #
 @login_required
-def eliminarPerfil(request, id_perfil):
+def proyectos_usuario(request, id_usuario):
 
-    perfil = Perfil.objects.get(id=id_perfil)
+    usuario = User.objects.get(id=id_usuario)
+    perfil = Perfil.objects.get(user=usuario)
     miembro = Miembro.objects.filter(idPerfil=perfil.id)
-    if not miembro:
-        if request.method == "POST":
-            usuario = User.objects.get(id=perfil.user.id)
-            usuario.delete()
-            perfil.delete()
-            return redirect("usuarios:listar_perfiles")
-        return render(request, "usuarios/eliminar_perfil.html", {"perfil": perfil})
-    else:
-        messages.add_message(
-            request,
-            messages.ERROR,
-            "No se puede eliminar al usuario: %s  porque forma parte de un proyecto"
-            % perfil.user.first_name,
-        )
-        return redirect("usuarios:listar_perfiles")
+    return render(request, "usuarios/proyectos.html", {"miembros": miembro})
 
 
-# === Apartado Administrador === #
+# ******************************** #
+# *    Apartado Administrador    * #
+# ******************************** #
 
 
 @login_required
@@ -126,7 +84,7 @@ def administrador(request):
     if len(usuario) > 0:
         perfilesAcceso = Perfil.objects.filter(Q(user=usuario[0]))
         for x in range(1, len(usuario)):
-            perfilesAcceso |= Perfil.objects.filter(Q(user=usuario[x]))
+            perfilesAcceso = Perfil.objects.filter(Q(user=usuario[x]))
     return render(
         request,
         "usuarios/administrador.html",
@@ -166,11 +124,55 @@ def concederAcceso(request, id_perfil):
     return redirect("usuarios:administrador")
 
 
-# === Proyectos de Usuario === #
-@login_required
-def proyectos_usuario(request, id_usuario):
+# === Listar Perfiles === #
+class ListarPerfil(LoginRequiredMixin, ListView):
 
-    usuario = User.objects.get(id=id_usuario)
-    perfil = Perfil.objects.get(user=usuario)
+    redirect_field_name = "redirect_to"
+    model = Perfil
+    template_name = "usuarios/listar_perfiles.html"
+
+
+# === Editar Perfil === #
+@login_required
+def editarPerfil_Admin(request, id_perfil):
+
+    perfil = Perfil.objects.get(id=id_perfil)
+    usuario = User.objects.get(id=perfil.user.id)
+    if request.method == "GET":
+        perfil_Form = Perfil_Form(instance=perfil)
+        usuario_Form = Usuario_Form(instance=usuario)
+    else:
+        perfil_Form = Perfil_Form(request.POST, instance=perfil)
+        usuario_Form = Usuario_Form(request.POST, instance=usuario)
+        if all([perfil_Form.is_valid(), usuario_Form.is_valid()]):
+            perfil_Form.save(ci=perfil.ci, usuario=usuario, telefono=perfil.telefono)
+            usuario_Form.save()
+        return redirect("usuarios:listar_perfiles")
+    return render(
+        request,
+        "usuarios/editar_perfil.html",
+        {"perfil_Form": perfil_Form, "usuario_Form": usuario_Form},
+    )
+
+
+# === Eliminar Perfil === #
+@login_required
+def eliminarPerfil(request, id_perfil):
+
+    perfil = Perfil.objects.get(id=id_perfil)
     miembro = Miembro.objects.filter(idPerfil=perfil.id)
-    return render(request, "usuarios/proyectos.html", {"miembros": miembro})
+    if not miembro:
+        if request.method == "POST":
+            usuario = User.objects.get(id=perfil.user.id)
+            usuario.delete()
+            perfil.delete()
+            return redirect("usuarios:listar_perfiles")
+        return render(request, "usuarios/eliminar_perfil.html", {"perfil": perfil})
+    else:
+        messages.add_message(
+            request,
+            messages.ERROR,
+            "No se puede eliminar al usuario: %s  porque forma parte de un proyecto"
+            % perfil.user.first_name,
+        )
+        return redirect("usuarios:listar_perfiles")
