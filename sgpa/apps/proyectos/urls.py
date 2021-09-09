@@ -2,7 +2,7 @@ from os import name
 from django.contrib import admin
 from django.urls import path, include
 
-from .views import crearProyecto, home, listarProyectos, proy, eliminarProyecto
+from proyectos.views import crearProyecto, home, listarProyectos, proy, eliminarProyecto
 
 urlpatterns = [
     path("", proy, name="proy"),
