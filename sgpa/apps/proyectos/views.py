@@ -1,7 +1,7 @@
 from usuarios.models import Perfil
 from django.contrib import messages
 from miembros.models import Miembro
-from proyectos.models import Proyecto
+from proyectos.models import Proyecto, Sprint
 from django.urls.base import reverse_lazy
 from django.views.generic import ListView
 from proyectos.forms import Proyecto_Form
@@ -19,7 +19,10 @@ def base(request):
 
 
 def proy(request):
-    return render(request, "sprints/sprint.html")
+    if request.user.is_authenticated:
+        return render(request, "sprints/sprint.html")
+    else:
+        return redirect("login")
 
 
 def home(request):
