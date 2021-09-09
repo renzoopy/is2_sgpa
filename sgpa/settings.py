@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "proyectos",
     "roles",
     "miembros",
+    "tareas",
 ]
 
 MIDDLEWARE = [
