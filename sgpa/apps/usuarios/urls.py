@@ -20,10 +20,10 @@ urlpatterns = [
     path("nuevo/", CrearPerfil.as_view(), name="crear_form"),
     path("listar/", ListarPerfil.as_view(), name="listar_perfiles"),
     path("<int:id_usuario>/", proyectos_usuario, name="proyectos_usuario"),
+    path("perfil/<int:id_perfil>/", editarPerfil_General, name="editar_perfilGeneral"),
     path("administrador/", administrador, name="administrador"),
     path("acceso/", listaAcceso, name="lista_acceso"),
     path("editar/<int:id_perfil>/", editarPerfil_Admin, name="editar_perfil"),
     path("eliminar/<int:id_perfil>/", eliminarPerfil, name="eliminar_perfil"),
-    path("perfil/<int:id_perfil>/", editarPerfil_General, name="editar_perfilGeneral"),
     path("administrador/<int:id_perfil>", concederAcceso, name="conceder_acceso"),
 ]
