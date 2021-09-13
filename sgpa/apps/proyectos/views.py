@@ -4,9 +4,9 @@ from miembros.models import Miembro
 from proyectos.models import Proyecto, Sprint
 from django.urls.base import reverse_lazy
 from django.views.generic import ListView
-from proyectos.forms import Proyecto_Form
+from proyectos.forms import Proyecto_Form, ProyectoEdit_Form
 from django.shortcuts import redirect, render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required, permission_required
@@ -33,7 +33,7 @@ class crearProyecto(LoginRequiredMixin, CreateView):
     model = Proyecto
     redirect_field_name = "redirect_to"
     form_class = Proyecto_Form
-    template_name = "proyectos/nuevoProyecto.html"
+    template_name = "proyectos/nuevo_proyecto.html"
 
     def get_success_url(self):
         proyecto = Proyecto.objects.get(id=self.object.pk)
@@ -48,7 +48,7 @@ class crearProyecto(LoginRequiredMixin, CreateView):
 class listarProyectos(LoginRequiredMixin, ListView):
     model = Proyecto
     redirect_field_name = "redirect_to"
-    template_name = "proyectos/listarProyectos.html"
+    template_name = "proyectos/listar_proyectos.html"
     ordering = ["id"]
 
 
@@ -73,3 +73,35 @@ def eliminarProyecto(request, id_proyecto):
             % proyecto.numSprints,
         )
         return redirect("proyectos:listar_proyectos")
+
+
+# ===Ver Proyecto===
+@login_required
+def verProyecto(request, id_proyecto):
+    proyecto = Proyecto.objects.get(id=id_proyecto)
+    sprints = Sprint.objects.filter(proyecto=id_proyecto)
+    miembros = Miembro.objects.filter(idProyecto=id_proyecto)
+    return render(
+        request,
+        "proyectos/ver_proyecto.html",
+        {"miembros": miembros, "proyecto": proyecto, "sprints": sprints},
+    )
+
+
+# === Modificar Proyecto ===#
+@login_required
+def modificarProyecto(request, id_proyecto):
+    proyecto = Proyecto.objects.get(id=id_proyecto)
+
+    if request.method == "GET":
+        proyecto_Form = ProyectoEdit_Form(instance=proyecto)
+    else:
+        proyecto_Form = ProyectoEdit_Form(request.POST, instance=proyecto)
+        if proyecto_Form.is_valid():
+            proyecto_Form.save()
+        return redirect("proyectos:home")
+    return render(
+        request,
+        "proyectos/modificar_proyecto.html",
+        {"proyecto_Form": proyecto_Form, "id_proyecto": id_proyecto},
+    )
