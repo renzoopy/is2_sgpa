@@ -64,13 +64,13 @@ def verMiembros(request, idProyecto):
                 valid_id.append(p.id)
     perfiles = Perfil.objects.filter(id__in=valid_id)
     miembro = Miembro.objects.filter(idProyecto=idProyecto)
-    g = proyecto.gerente
+    scrummaster = proyecto.scrumMaster
     return render(
         request,
         "miembros/ver_miembros.html",
         {
             "miembros": miembro,
-            "gerente": g,
+            "scrumMaster": scrummaster,
             "idProyecto": idProyecto,
             "participantes_para_agregar": perfiles.all().count() > 0,
         },
