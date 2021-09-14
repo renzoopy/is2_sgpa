@@ -6,9 +6,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
-
-# === Crear nuevo Miembro === #
+# --- Crear nuevo Miembro --- #
 @login_required
 def miembroCrear(request, idProyecto):
 
@@ -22,27 +20,24 @@ def miembroCrear(request, idProyecto):
             user = User.objects.get(username=request.user)
             perfil = Perfil.objects.get(user=user)
 
-        return redirect("miembros:lista", idProyecto=idProyecto)
+        return redirect("miembros:listar", idProyecto=idProyecto)
 
     else:
         form = MiembrosForm(request.POST or None, idProyecto=idProyecto)
 
     return render(
-        request, "miembros/nuevo_miembro.html", {"form": form, "proyecto": idProyecto}
+        request, "miembros/nuevo_miembro.html", {"form": form, "idProyecto": idProyecto}
     )
 
 
-# === Eliminar Miembro === #
+# --- Eliminar Miembro --- #
 @login_required
 def miembroEliminar(request, idProyecto, idMiembro):
-
-    miembro = Miembro.objects.get(id=idMiembro)
+    miembro = Miembro.objects.get(idPerfil=idMiembro, idProyecto=idProyecto)
     if request.method == "POST":
         miembro.delete()
-        user = User.objects.get(username=request.user)
-        perfil = Perfil.objects.get(user=user)
 
-        return redirect("miembros:lista", idProyecto=idProyecto)
+        return redirect("miembros:listar", idProyecto=idProyecto)
     return render(
         request,
         "miembros/eliminar_miembro.html",
@@ -50,28 +45,28 @@ def miembroEliminar(request, idProyecto, idMiembro):
     )
 
 
-# === Listar Miembros === #
+# --- Listar Miembros --- #
+#! Se puede optimizar
 @login_required
 def verMiembros(request, idProyecto):
-
+    miembros = Miembro.objects.filter(idProyecto=idProyecto)
     proyecto = Proyecto.objects.get(id=idProyecto)
     miembro = proyecto.miembro_set.all()
     perfil = Perfil.objects.all()
     valid_id = []
     for p in perfil:
-        if not Miembro.objects.filter(idProyecto=proyecto).filter(idPerfil=p).exists():
+        if Miembro.objects.filter(idProyecto=proyecto).filter(idPerfil=p.id).exists():
             if not p.id == 1:
                 valid_id.append(p.id)
-    perfiles = Perfil.objects.filter(id__in=valid_id)
-    miembro = Miembro.objects.filter(idProyecto=idProyecto)
+    miembro = Miembro.objects.filter(id__in=valid_id)
     scrummaster = proyecto.scrumMaster
     return render(
         request,
         "miembros/ver_miembros.html",
         {
-            "miembros": miembro,
+            "miembros": miembros,
+            "miembro": miembro,
             "scrumMaster": scrummaster,
             "idProyecto": idProyecto,
-            "participantes_para_agregar": perfiles.all().count() > 0,
         },
     )

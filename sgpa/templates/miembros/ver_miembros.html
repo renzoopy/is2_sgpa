@@ -22,13 +22,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% if object_list %}
-                    {% for miembros in object_list %}
+                    {% if miembros %}
+                    {% for miembro in miembros %}
                     <tr>
-                        <td> {{ miembros.idPerfil.user.first_name }} </td>
-                        <td> {{ miembros.idPerfil.user.last_name }} </td>
-                        <td> {{ miembros.idProyecto.nombre }} </td>
-                        <td> <a class="btn btn-danger" href="{% url 'miembros:eliminar' miembros.id %}">Eliminar</a>
+                        <td> {{ miembro.idPerfil.user.first_name }} </td>
+                        <td> {{ miembro.idPerfil.user.last_name }} </td>
+                        <td> {{ miembro.idProyecto.nombre }} </td>
+                        <td> <a class="btn btn-danger"
+                                href="{% url 'miembros:eliminar' miembro.idProyecto.id miembro.idPerfil.id %}">Eliminar</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -41,7 +42,9 @@
         <div class="col-md-3">
         </div>
         <p align=center>
-            <a href="{% url 'proyectos:ver_proyecto' idProyecto%}" class="btn boton-color" role="button">Volver</a>
+            <a href="{% url 'miembros:nuevo' idProyecto %}" class="btn boton-color" role="button">Agregar
+                miembro</a>
+            <a href="{% url 'proyectos:ver_proyecto' idProyecto %}" class="btn boton-color" role="button">Volver</a>
         </p>
     </div>
 </div>
