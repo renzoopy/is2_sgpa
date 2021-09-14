@@ -99,7 +99,7 @@ def modificarProyecto(request, id_proyecto):
         proyecto_Form = ProyectoEdit_Form(request.POST, instance=proyecto)
         if proyecto_Form.is_valid():
             proyecto_Form.save()
-        return redirect("proyectos:home")
+        return redirect("proyectos:ver_proyecto",id_proyecto)
     return render(
         request,
         "proyectos/modificar_proyecto.html",
