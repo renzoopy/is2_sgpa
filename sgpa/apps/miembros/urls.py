@@ -4,7 +4,7 @@ from miembros.views import miembroCrear, miembroEliminar, verMiembros
 
 
 urlpatterns = [
-    path("listar/", verMiembros, name="lista"),
+    path("listar/", verMiembros, name="listar"),
     path("nuevo/", miembroCrear, name="nuevo"),
     path("<int:idMiembro>/eliminar/", miembroEliminar, name="eliminar"),
     path("<int:idMiembro>/roles/", ver_Roles, name="ver_roles"),

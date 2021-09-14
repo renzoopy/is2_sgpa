@@ -4,14 +4,14 @@ from usuarios.models import Perfil
 from django.db import models
 
 ESTADOPROY_CHOICES = [
-    ("En espera", "En espera"),
-    ("En desarrollo", "En desarrollo"),
+    ("Pendiente", "Pendiente"),
+    ("Iniciado", "Iniciado"),
     ("Cancelado", "Cancelado"),
-    ("Culminado", "Culminado"),
+    ("Finalizado", "Finalizado"),
 ]
 
 ESTADOSPR_CHOICES = [
-    ("En cola", "En cola"),
+    ("En_cola", "En_cola"),
     ("Activo", "Activo"),
     ("Cancelado", "Cancelado"),
     ("Finalizado", "Finalizado"),
@@ -26,7 +26,13 @@ class Proyecto(models.Model):
     fechaCreacion = models.DateField(auto_now_add=True)
     fechaInicio = models.DateField(null=True)
     fechaFin = models.DateField(null=True)
-    estado = models.CharField(default="Pendiente", max_length=10)
+    estado = models.CharField(
+        default="Pendiente",
+        max_length=10,
+        null=False,
+        blank=False,
+        choices=ESTADOPROY_CHOICES,
+    )
     numSprints = models.IntegerField(default=0)
     scrumMaster = models.ForeignKey(Perfil, on_delete=models.CASCADE)
     equipo = models.OneToOneField(Group, on_delete=models.CASCADE, null=True)
@@ -38,7 +44,10 @@ class Proyecto(models.Model):
 class Sprint(models.Model):
     numTareas = models.IntegerField(default=0)
     duracion = models.IntegerField(default=0)
-    estado = models.CharField(max_length=7, default="En cola")
+    estado = models.CharField(max_length=10, default="En_cola")
+    proyecto = models.ForeignKey(
+        Proyecto, null=True, blank=False, on_delete=models.CASCADE
+    )
 
     def str(self):
         return "{}".format(self.estado)

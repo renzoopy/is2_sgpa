@@ -24,8 +24,8 @@ def home(request):
 class CrearPerfil(LoginRequiredMixin, CreateView):
     model = Perfil
     form_class = Perfil_Form
-    template_name = "usuarios/perfil_form.html"
-    success_url = reverse_lazy("usuarios:home")
+    template_name = "usuarios/nuevo_perfil.html"
+    success_url = reverse_lazy("proyectos:home")
 
     def form_valid(self, form):
         user = User.objects.get(username=self.request.user)
@@ -84,7 +84,7 @@ def administrador(request):
     if len(usuario) > 0:
         perfilesAcceso = Perfil.objects.filter(Q(user=usuario[0]))
         for x in range(1, len(usuario)):
-            perfilesAcceso = Perfil.objects.filter(Q(user=usuario[x]))
+            perfilesAcceso |= Perfil.objects.filter(Q(user=usuario[x]))
     return render(
         request,
         "usuarios/administrador.html",

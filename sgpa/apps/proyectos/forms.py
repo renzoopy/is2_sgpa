@@ -36,3 +36,26 @@ class Sprint_Form(forms.ModelForm):
             "estado": "Estado",
             "numTareas": "Número de Tareas",
         }
+
+
+class ProyectoEdit_Form(forms.ModelForm):
+    class Meta:
+        model = Proyecto
+        fields = [
+            "nombre",
+            "descripcion",
+            "estado",
+            "fechaFin",
+        ]
+        labels = {
+            "nombre": "Nombre",
+            "descripcion": "Descripcion",
+            "estado": "Estado",
+            "fechaFin": "Fecha de finalización",
+        }
+        widgets = {
+            "nombre": forms.TextInput(attrs={"class": "form-control"}),
+            "descripcion": forms.TextInput(attrs={"class": "form-control"}),
+            "estado": forms.Select(attrs={"class": "form-control"}),
+            "fechaFin": forms.DateInput(attrs={"type": "date"}),
+        }
