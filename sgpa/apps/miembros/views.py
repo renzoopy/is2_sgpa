@@ -30,19 +30,7 @@ def miembroCrear(request, idProyecto):
     )
 
 
-# --- Eliminar Miembro --- #
-@login_required
-def miembroEliminar(request, idProyecto, idMiembro):
-    miembro = Miembro.objects.get(idPerfil=idMiembro, idProyecto=idProyecto)
-    if request.method == "POST":
-        miembro.delete()
-
-        return redirect("miembros:listar", idProyecto=idProyecto)
-    return render(
-        request,
-        "miembros/eliminar_miembro.html",
-        {"miembros": miembro, "idProyecto": idProyecto},
-    )
+###
 
 
 # --- Listar Miembros --- #
