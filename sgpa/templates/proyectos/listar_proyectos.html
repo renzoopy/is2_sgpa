@@ -41,7 +41,8 @@
                     {% for proyecto in object_list%}
                     <tr>
                         <td>{{ proyecto.id }}</td>
-                        <td>{{ proyecto.nombre }}</td>
+                        <td><a href="{% url 'proyectos:ver_proyecto' proyecto.id %}">
+                            {{ proyecto.nombre}} </a></td>
                         <td>{{ proyecto.descripcion }}</td>
                         <td>{{ proyecto.scrumMaster }}</td>
                         <td>{{ proyecto.fechaCreacion }}</td>
