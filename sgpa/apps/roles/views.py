@@ -11,9 +11,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group, Permission, User
 
 
-# === Vista para la creación de un rol === #
+# --- Vista para la creación de un rol --- #
 class Crear_Rol(LoginRequiredMixin, CreateView):
-    
+
     redirect_field_name = "redirect_to"
     model = Rol
     form_class = Rol_Form
@@ -44,23 +44,23 @@ class Crear_Rol(LoginRequiredMixin, CreateView):
         return context
 
 
-# === Vista para listar roles existentes === #
+# --- Vista para listar roles existentes --- #
 class Listar_Rol(LoginRequiredMixin, CreateView):
 
     redirect_field_name = "redirect_to"
     model = Rol
     template_name = "roles/listar_roles.html"
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(Listar_Rol, self).get_context_data()
+    def get_context_data(self, **kwargs):
+        context = super(Listar_Rol, self).get_context_data(**kwargs)
         context["idProyecto"] = self.kwargs["idProyecto"]
         return context
 
     def get_queryset(self):
-        return Rol.objects.filter(proyectos=self.kwargs["idPoryecto"]).order_by("id")
+        return Rol.objects.filter(proyectos=self.kwargs["idProyecto"]).order_by("id")
 
 
-# === Vista para eliminar un rol === #
+# --- Vista para eliminar un rol --- #
 def ELiminar_Rol(request, idProyecto, id_rol):
     rol = Rol.objects.get(id=id_rol)
     if request.method == "POST":
@@ -73,7 +73,7 @@ def ELiminar_Rol(request, idProyecto, id_rol):
     )
 
 
-# === Vista para la edición de un rol === #
+# --- Vista para la edición de un rol --- #
 @login_required
 def Editar_Rol(request, idProyecto, id_rol):
     rol = Rol.objects.get(id=id_rol)
@@ -92,7 +92,7 @@ def Editar_Rol(request, idProyecto, id_rol):
     )
 
 
-# === Asignación de un rol === #
+# --- Asignación de un rol --- #
 @login_required
 def asignar_Rol(request, idProyecto, idMiembro, idRol):
 
@@ -103,7 +103,7 @@ def asignar_Rol(request, idProyecto, idMiembro, idRol):
     return redirect("miembros:ver_roles", idProyecto=idProyecto, idMiembro=idMiembro)
 
 
-# === Revocar un rol === #
+# --- Revocar un rol --- #
 @login_required
 def desasignar_Rol(request, idProyecto, idMiembro, idRol):
 
@@ -114,7 +114,7 @@ def desasignar_Rol(request, idProyecto, idMiembro, idRol):
     return redirect("miembros:ver_roles", idProyecto=idProyecto, idMiembro=idMiembro)
 
 
-# === Ver todos los roles === #
+# --- Ver todos los roles --- #
 @login_required
 def ver_Roles(request, idProyecto, idMiembro):
 

@@ -17,8 +17,6 @@ def miembroCrear(request, idProyecto):
             miembro = form.save(commit=False)
             miembro.idProyecto = Proyecto.objects.get(id=idProyecto)
             miembro.save()
-            user = User.objects.get(username=request.user)
-            perfil = Perfil.objects.get(user=user)
 
         return redirect("miembros:listar", idProyecto=idProyecto)
 
@@ -30,7 +28,19 @@ def miembroCrear(request, idProyecto):
     )
 
 
-###
+# --- Eliminar Miembro --- #
+@login_required
+def miembroEliminar(request, idProyecto, idMiembro):
+    miembro = Miembro.objects.get(idPerfil=idMiembro, idProyecto=idProyecto)
+    if request.method == "POST":
+        miembro.delete()
+
+        return redirect("miembros:listar", idProyecto=idProyecto)
+    return render(
+        request,
+        "miembros/eliminar_miembro.html",
+        {"miembros": miembro, "idProyecto": idProyecto},
+    )
 
 
 # --- Listar Miembros --- #
