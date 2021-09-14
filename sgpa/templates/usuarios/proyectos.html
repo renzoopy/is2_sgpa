@@ -18,6 +18,7 @@
                     <tr class="table-primary">
                         <td>ID</td>
                         <td>Nombre</td>
+                        <td>Estado</td>
                         <td>Scrum Master</td>
                         <td>Descripción</td>
                     </tr>
@@ -27,7 +28,8 @@
                     <tr>
                         <td>{{ miembro.idProyecto.id }}</td>
                         <td><a href="{% url 'proyectos:ver_proyecto' miembro.idProyecto.id %}">
-                                {{ miembro.idProyecto.nombre}} </a></td>
+                            {{ miembro.idProyecto.nombre}} </a></td>
+                        <td>{{ miembro.idProyecto.estado }}</td>
                         <td>{{miembro.idProyecto.scrumMaster}}</td>
                         <td>{{ miembro.idProyecto.descripcion }}</td>
                     </tr>
