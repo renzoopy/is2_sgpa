@@ -36,7 +36,8 @@
                 <br>
                 <p align="center">
                     <button type="submit" class="btn boton-color">Guardar</button>
-                    <a href="{% url 'usuarios:home'%}" class="btn boton-color" role="button">Cancelar</a>
+                    <a href="{% url 'usuarios:proyectos_usuario' user.id%}" class="btn boton-color"
+                        role="button">Cancelar</a>
                 </p>
             </form>
         </div>

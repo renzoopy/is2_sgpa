@@ -17,8 +17,6 @@ ESTADOSPR_CHOICES = [
     ("Finalizado", "Finalizado"),
 ]
 
-# Create your models here.
-
 
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=50, blank=False)

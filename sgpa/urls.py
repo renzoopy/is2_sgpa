@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path("", include("proyectos.urls")),
+    path("", include("usuarios.urls")),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
     path("proyectos/", include(("proyectos.urls", "proyectos"), namespace="proyectos")),

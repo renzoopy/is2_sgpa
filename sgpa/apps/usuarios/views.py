@@ -50,7 +50,7 @@ def editarPerfil_General(request, id_perfil):
         if all([perfil_Form.is_valid(), usuario_Form.is_valid()]):
             perfil_Form.save(usuario=usuario, telefono=perfil.telefono)
             usuario_Form.save()
-        return redirect("usuarios:listar_perfiles")
+        return redirect("usuarios:proyectos_usuario", id_perfil)
     return render(
         request,
         "usuarios/editar_perfilGeneral.html",
