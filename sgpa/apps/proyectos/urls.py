@@ -1,15 +1,17 @@
 from os import name
 from django.contrib import admin
 from django.urls import path, include
-
 from proyectos.views import (
-    crearProyecto,
+    finalizarProyecto,
     home,
-    listarProyectos,
-    proy,
-    eliminarProyecto,
     verProyecto,
+    crearProyecto,
+    iniciarProyecto,
+    cancelarProyecto,
+    listarProyectos,
+    eliminarProyecto,
     modificarProyecto,
+    proy,
 )
 
 urlpatterns = [
@@ -20,4 +22,7 @@ urlpatterns = [
     path("eliminar/<int:id_proyecto>/", eliminarProyecto, name="eliminar_proyectos"),
     path("<int:id_proyecto>/", verProyecto, name="ver_proyecto"),
     path("modificar/<int:id_proyecto>/", modificarProyecto, name="modificar_proyecto"),
+    path("<int:id_proyecto>/iniciar/", iniciarProyecto, name="iniciar_proyecto"),
+    path("<int:id_proyecto>/finalizar/", finalizarProyecto, name="finalizar_proyecto"),
+    path("<int:id_proyecto>/cancelar/", cancelarProyecto, name="cancelar_proyecto"),
 ]
