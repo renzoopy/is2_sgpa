@@ -44,27 +44,14 @@ def miembroEliminar(request, idProyecto, idMiembro):
 
 
 # --- Listar Miembros --- #
-#! Se puede optimizar
 @login_required
 def verMiembros(request, idProyecto):
     miembros = Miembro.objects.filter(idProyecto=idProyecto)
-    proyecto = Proyecto.objects.get(id=idProyecto)
-    miembro = proyecto.miembro_set.all()
-    perfil = Perfil.objects.all()
-    valid_id = []
-    for p in perfil:
-        if Miembro.objects.filter(idProyecto=proyecto).filter(idPerfil=p.id).exists():
-            if not p.id == 1:
-                valid_id.append(p.id)
-    miembro = Miembro.objects.filter(id__in=valid_id)
-    scrummaster = proyecto.scrumMaster
     return render(
         request,
         "miembros/ver_miembros.html",
         {
             "miembros": miembros,
-            "miembro": miembro,
-            "scrumMaster": scrummaster,
             "idProyecto": idProyecto,
         },
     )

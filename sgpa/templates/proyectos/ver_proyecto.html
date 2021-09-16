@@ -23,7 +23,7 @@
     {% endif %}
     {% endfor %}
     {% endif %}
-    <h2 align="center">Proyecto</h2><br>
+    <h2 align="center">Detalles del Proyecto</h2><br>
     <div class="row">
         <div class="col-md-5">
             <ins>
@@ -46,14 +46,6 @@
                     <tr>
                         <th class="table-light">Creación:</th>
                         <td>{{proyecto.fechaCreacion}}</td>
-                    </tr>
-                    <tr>
-                        <th class="table-light">Inicio:</th>
-                        <td>{{proyecto.fechaInicio}}</td>
-                    </tr>
-                    <tr>
-                        <th class="table-light">Finalización</th>
-                        <td>{{proyecto.fechaFin}}</td>
                     </tr>
                     <tr>
                         <th class="table-light">Estado:</th>
@@ -108,20 +100,33 @@
         <div class="col-md-12">
 
             {% if user.id == proyecto.scrumMaster.user.id and proyecto.estado != 'Cancelado'%}
+
             {% if proyecto.estado == 'Pendiente' %}
             <h1>Sprint Planning</h1>
-            <h1>Iniciar Proyecto</h1>
+            <a href="{% url 'proyectos:iniciar_proyecto' proyecto.id %}" class="btn btn-success"
+                role="button">Iniciar</a>
             {% elif proyecto.estado == 'Iniciado'%}
-            <h1>Finalizar Proyecto</h1>
+            <a href="{% url 'proyectos:finalizar_proyecto' proyecto.id %}" class="btn btn-success"
+                role="button">Finalizar</a>
+            <a href="{% url 'proyectos:cancelar_proyecto' proyecto.id %}" class="btn btn-danger"
+                role="button">Cancelar</a>
             {% endif %}
 
             <a href="{% url 'proyectos:modificar_proyecto' proyecto.id %}" class="btn btn-primary">Modificar
                 Proyecto</a>
-            {% endif %}
-            <a href="{% url 'miembros:listar' proyecto.id %}" class="btn btn-primary" role="button">Miembros</a>
+
             <h2>Ver roles</h2>
             <h3>Cancelar Sprint</h3>
-            <h4>Cancelar Proyecto</h4>
+
+
+            <a href="{% url 'miembros:listar' proyecto.id %}" class="btn btn-primary" role="button">Miembros</a>
+
+            {% elif proyecto.estado == 'Finalizado' or proyecto.estado == 'Cancelado' %}
+
+            <h2>Ver Historial</h2>
+
+            {% endif %}
+
 
         </div>
     </div>

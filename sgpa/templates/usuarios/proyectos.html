@@ -28,7 +28,7 @@
                     <tr>
                         <td>{{ miembro.idProyecto.id }}</td>
                         <td><a href="{% url 'proyectos:ver_proyecto' miembro.idProyecto.id %}">
-                            {{ miembro.idProyecto.nombre}} </a></td>
+                                {{ miembro.idProyecto.nombre}} </a></td>
                         <td>{{ miembro.idProyecto.estado }}</td>
                         <td>{{miembro.idProyecto.scrumMaster}}</td>
                         <td>{{ miembro.idProyecto.descripcion }}</td>
@@ -46,7 +46,6 @@
     </div>
     <p align="center">
         <a class="btn boton-color" href="{% url 'proyectos:nuevo_proyecto' %}"> Crear Proyecto </a>
-        <a class="btn boton-color" role="button" href="{% url 'usuarios:home'%}">Volver</a>
     </p>
 </div>
 {% endblock %}
