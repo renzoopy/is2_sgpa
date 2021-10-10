@@ -1,7 +1,8 @@
-from django.contrib.auth.models import Group, User
-from django.db.models.deletion import CASCADE
-from usuarios.models import Perfil
 from django.db import models
+from tareas.models import UserStory
+from usuarios.models import Perfil
+from django.db.models.deletion import CASCADE
+from django.contrib.auth.models import Group, User
 
 ESTADOPROY_CHOICES = [
     ("Pendiente", "Pendiente"),
@@ -15,6 +16,19 @@ ESTADOSPR_CHOICES = [
     ("Activo", "Activo"),
     ("Cancelado", "Cancelado"),
     ("Finalizado", "Finalizado"),
+]
+
+ESTADOBL_CHOICES = [
+    ("Vacio", "Vacio"),
+    ("Cargado", "Cargado"),
+]
+
+TIPOBL_CHOICES = [
+    ("Product_Backlog", "Product_Backlog"),
+    ("Sprint_Backlog", "Sprint_Backlog"),
+    ("Do", "Do"),
+    ("To_Do", "To_Do"),
+    ("Done", "Done"),
 ]
 
 
@@ -39,13 +53,31 @@ class Proyecto(models.Model):
         return "{}".format(self.nombre)
 
 
-class Sprint(models.Model):
+class Backlog(models.Model):
+    tipo = models.CharField(max_length=16, choices=TIPOBL_CHOICES)
+    estado = models.CharField(max_length=8, choices=ESTADOBL_CHOICES, default="Vacio")
+    fechaCreacion = models.DateField(auto_now_add=True)
     numTareas = models.IntegerField(default=0)
-    duracion = models.IntegerField(default=0)
-    estado = models.CharField(max_length=10, default="En_cola")
     proyecto = models.ForeignKey(
         Proyecto, null=True, blank=False, on_delete=models.CASCADE
     )
+
+    def __str__(self):
+        return "{}".format(self.estado)
+
+
+class Sprint(models.Model):
+    numTareas = models.IntegerField(default=0)
+    duracion = models.IntegerField(default=0)
+    estado = models.CharField(
+        max_length=10, choices=ESTADOSPR_CHOICES, default="En_cola"
+    )
+    proyecto = models.ForeignKey(
+        Proyecto, null=True, blank=False, on_delete=models.CASCADE
+    )
+    fechaCreacion = models.DateField(auto_now_add=True)
+    fechaInicio = models.DateField(null=True)
+    fechaFin = models.DateField(null=True)
 
     def str(self):
         return "{}".format(self.estado)

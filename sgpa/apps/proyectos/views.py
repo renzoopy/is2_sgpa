@@ -99,7 +99,7 @@ def modificarProyecto(request, id_proyecto):
     proyecto = Proyecto.objects.get(id=id_proyecto)
 
     if request.method == "GET":
-     proyecto_Form = ProyectoEdit_Form(instance=proyecto)
+        proyecto_Form = ProyectoEdit_Form(instance=proyecto)
     else:
         proyecto_Form = ProyectoEdit_Form(request.POST, instance=proyecto)
         if proyecto_Form.is_valid():
