@@ -46,7 +46,9 @@ def miembroEliminar(request, idProyecto, idMiembro):
 # --- Listar Miembros --- #
 @login_required
 def verMiembros(request, idProyecto):
+
     miembros = Miembro.objects.filter(idProyecto=idProyecto)
+
     return render(
         request,
         "miembros/ver_miembros.html",

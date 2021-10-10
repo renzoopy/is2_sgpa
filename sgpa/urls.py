@@ -23,12 +23,15 @@ urlpatterns = [
     path("", include("usuarios.urls")),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
-    path("proyectos/", include(("proyectos.urls", "proyectos"), namespace="proyectos")),
     path("usuarios/", include(("usuarios.urls", "usuarios"), namespace="usuarios")),
-    path("roles/", include(("roles.urls", "roles"), namespace="roles")),
+    path("proyectos/", include(("proyectos.urls", "proyectos"), namespace="proyectos")),
     path(
         "proyectos/<int:idProyecto>/miembros/",
         include(("miembros.urls", "miembros"), namespace="miembros"),
+    ),
+    path(
+        "proyectos/<int:idProyecto>/roles/",
+        include(("roles.urls", "roles"), namespace="roles"),
     ),
     path(
         "login",

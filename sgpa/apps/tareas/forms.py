@@ -11,18 +11,18 @@ class UserStoryForm(forms.ModelForm):
         nombre = kwargs.pop("nombre")
         super(UserStoryForm, self).__init__(*args, **kwargs)
         self.fields["identificacion"].initial = nombre
-        self.fields["prioridad"].widget.attrs["min"] = 10
+        self.fields["prioridad"].widget.attrs["min"] = 1
 
-        def save(self, commit=True, *args, **kwargs):
-            sprint = kwargs.get("sprint")
-            nombre = kwargs.get("nombre")
-            desarrollador = kwargs.get("desarrollador")
-            descripcion = kwargs.get("descripcion")
-            instance = super(UserStoryForm, self).save(commit=False)
-            instance.sprint = sprint
-            instance.nombre = nombre
-            instance.desarrollador = desarrollador
-            instance.descripcion = descripcion
-            if commit:
-                instance.save()
-            return instance
+    def save(self, commit=True, *args, **kwargs):
+        sprint = kwargs.get("sprint")
+        nombre = kwargs.get("nombre")
+        desarrollador = kwargs.get("desarrollador")
+        descripcion = kwargs.get("descripcion")
+        instance = super(UserStoryForm, self).save(commit=False)
+        instance.sprint = sprint
+        instance.nombre = nombre
+        instance.desarrollador = desarrollador
+        instance.descripcion = descripcion
+        if commit:
+            instance.save()
+        return instance

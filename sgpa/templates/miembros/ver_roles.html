@@ -16,7 +16,6 @@
                     <tr class="table-primary">
                         <th class="text-center" scope="col">Rol</th>
                         <th class="text-center" scope="col">Permisos</th>
-                        <th class="text-center" scope="col">Fase</th>
                         <th class="text-center" scope="col">Accion</th>
                     </tr>
                 </thead>
@@ -31,12 +30,6 @@
                             <br><br>
                             {% endfor %}
                             {% endif %}
-                        </td>
-                        <td class="text-center">
-                            {% for fase in rol.fase.all %}
-                            {{fase}}
-                            <br>
-                            {% endfor %}
                         </td>
                         <td class="text-center">
                             <a class="btn btn-danger"
@@ -61,7 +54,6 @@
                     <tr class="table-primary">
                         <th class="text-center" scope="col">Rol</th>
                         <th class="text-center" scope="col">Permisos</th>
-                        <th class="text-center" scope="col">Fase</th>
                         <th class="text-center" scope="col">Accion</th>
                     </tr>
                 </thead>
@@ -76,14 +68,6 @@
                             <br><br>
                             {% endfor %}
                             {% endif %}
-                        </td>
-                        <td class="text-center">
-                            {% for fase in rol.fase.all %}
-                            {{fase}}
-                            <br>
-                            {% empty %}
-                            No pertenece a ninguna fase
-                            {% endfor %}
                         </td>
                         <td class="text-center">
                             <a class="btn boton-color"

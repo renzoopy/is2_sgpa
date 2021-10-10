@@ -30,6 +30,9 @@
                         <td> {{ miembro.idProyecto.nombre }} </td>
                         <td> <a class="btn btn-danger"
                                 href="{% url 'miembros:eliminar' miembro.idProyecto.id miembro.idPerfil.id %}">Eliminar</a>
+                            <a class="btn btn-primary"
+                                href="{% url 'miembros:ver_roles' miembro.idProyecto.id miembro.idPerfil.id %}">Ver
+                                Roles</a>
                         </td>
                     </tr>
                     {% endfor %}
