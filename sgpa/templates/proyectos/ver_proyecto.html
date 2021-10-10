@@ -51,12 +51,13 @@
                         <th class="table-light">Estado:</th>
                         <td>{{proyecto.estado}}</td>
                     </tr>
-                    {% if proyecto.estado == 'Iniciado' %}
+                    {% if proyecto.estado != 'Pendiente' %}
                     <tr>
                         <th class="table-light">Fecha de Inicio:</th>
                         <td>{{proyecto.fechaInicio}}</td>
                     </tr>
-                    {%elif proyecto.estado == 'Finalizado' or proyecto.estado == 'Cancelado' %}
+                    {% endif %}
+                    {% if proyecto.estado == 'Finalizado' or proyecto.estado == 'Cancelado' %}
                     <tr>
                         <th class="table-light">Fecha de Finalización:</th>
                         <td>{{proyecto.fechaFin}}</td>
@@ -99,8 +100,13 @@
 
         <div class="col-md-12">
 
-            {% if user.id == proyecto.scrumMaster.user.id and proyecto.estado != 'Cancelado'%}
+            {% if user.id == proyecto.scrumMaster.user.id%}
 
+            {% if proyecto.estado == 'Finalizado' or proyecto.estado == 'Cancelado' %}
+
+            <h2>Ver Historial</h2>
+
+            {% else %}
             {% if proyecto.estado == 'Pendiente' %}
             <h1>Sprint Planning</h1>
             <a href="{% url 'proyectos:iniciar_proyecto' proyecto.id %}" class="btn btn-success"
@@ -110,21 +116,15 @@
                 role="button">Finalizar</a>
             <a href="{% url 'proyectos:cancelar_proyecto' proyecto.id %}" class="btn btn-danger"
                 role="button">Cancelar</a>
+            <h3>Cancelar Sprint</h3>
             {% endif %}
 
             <a href="{% url 'proyectos:modificar_proyecto' proyecto.id %}" class="btn btn-primary">Modificar
                 Proyecto</a>
-
-            <h2>Ver roles</h2>
-            <h3>Cancelar Sprint</h3>
-
-
             <a href="{% url 'miembros:listar' proyecto.id %}" class="btn btn-primary" role="button">Miembros</a>
-
-            {% elif proyecto.estado == 'Finalizado' or proyecto.estado == 'Cancelado' %}
-
-            <h2>Ver Historial</h2>
-
+            <h2>Product Backlog</h2>
+            <a href="{% url 'roles:listar_roles' proyecto.id %}" class="btn btn-primary" role="button">Roles</a>
+            {% endif %}
             {% endif %}
 
 
