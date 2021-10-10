@@ -95,7 +95,6 @@ def editarRol(request, idProyecto, id_rol):
 # --- Asignación de un rol --- #
 @login_required
 def asignarRol(request, idProyecto, idMiembro, idRol):
-    miembro = Miembro.objects.get(id=idMiembro)
     user = User.objects.get(id=idMiembro)
     rol = Rol.objects.get(id=idRol)
     rol.grupo.user_set.add(user)
@@ -106,7 +105,6 @@ def asignarRol(request, idProyecto, idMiembro, idRol):
 @login_required
 def desasignarRol(request, idProyecto, idMiembro, idRol):
 
-    miembro = Miembro.objects.get(id=idMiembro)
     user = User.objects.get(id=idMiembro)
     rol = Rol.objects.get(id=idRol)
     rol.grupo.user_set.remove(user)
@@ -120,7 +118,8 @@ def verRoles(request, idProyecto, idMiembro):
     user = User.objects.get(id=idMiembro)
     roles_asignados = []
     roles_noasignados = []
-
+    user = User.objects.get(id=idMiembro)
+    print(user.id)
     for x in roles:
         roles_noasignados.append(x)
 
