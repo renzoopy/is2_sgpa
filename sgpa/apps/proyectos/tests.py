@@ -151,7 +151,7 @@ def test_creaSprint():
 # --- Test Finalizar Fase --- #
 # Verifica la correcta finalizacion de un Sprint
 @pytest.mark.django_db
-def test_finalizarFase():
+def test_finalizarSprint():
     usuario = User.objects.create_user("Won", "won@seo.com", "hyungwon")
     usuario.save()
     perfil = Perfil.objects.create(ci=108108, telefono=108108, user=usuario)
@@ -182,9 +182,11 @@ def test_finalizarFase():
     tarea2.estado = "Done"
     tarea1.save()
     tarea2.save()
+    sprint.estado = "Finalizado"
+    sprint.save()
 
     # Finalización del Sprint
-    path = r"<int:id_proyecto>/fases/<int:id_fase>/cerrar/"
+    path = "<int:id_proyecto>/sprint/<int:id_sprint>/finalizar/"
     request1 = RequestFactory().get(path)
     request1.user = usuario
 
