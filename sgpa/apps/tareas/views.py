@@ -5,4 +5,10 @@ from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+# --- Crear User Story --- #
+@login_required
+def CrearTarea(request, idProyecto, idSprint, idTipo):
+    sprint = Sprint.objects.get(id=idSprint)
+
+
+# --- Listar User Story --- #

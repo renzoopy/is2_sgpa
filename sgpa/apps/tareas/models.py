@@ -1,12 +1,8 @@
+import proyectos.models
 from django.db import models
-from django.db.models.deletion import CASCADE
 from usuarios.models import Perfil
+from django.db.models.deletion import CASCADE
 from django.core.validators import MinValueValidator, MaxValueValidator
-
-#
-# *  Añadir campo para la ubicacion del user story
-# *  Product backlog y Sprint backlog
-#
 
 ESTADOUS_CHOICES = [
     ("En_Cola", "En Cola"),
@@ -17,6 +13,13 @@ ESTADOUS_CHOICES = [
 
 
 class UserStory(models.Model):
+
+    backlog = models.ForeignKey(
+        to="proyectos.Backlog",
+        on_delete=models.CASCADE,
+        null=True,
+        related_name="user_stories",
+    )
     nombre = models.CharField(max_length=150, blank=False)
     descripcion = models.TextField(max_length=300, blank=False)
     estado = models.CharField(default="En_Cola", max_length=7)
