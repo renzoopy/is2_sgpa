@@ -1,7 +1,9 @@
+from datetime import date, datetime
 from django import forms
 from django.db.models import Q
 from usuarios.models import Perfil
 from proyectos.models import Proyecto, Sprint
+from django.core.validators import MinValueValidator
 
 
 class Proyecto_Form(forms.ModelForm):
@@ -29,12 +31,23 @@ class Sprint_Form(forms.ModelForm):
     class Meta:
         model = Sprint
         fields = [
+            "objetivos",
             "estado",
-            "numTareas",
+            "fechaInicio",
+            "fechaFin",
         ]
         labels = {
             "estado": "Estado",
             "numTareas": "Número de Tareas",
+        }
+        widgets = {
+            "fechaInicio": forms.DateInput(
+                attrs={"type": "date"},
+                # validators=[MinValueValidator(date.today())],
+            ),
+            "fechaFin": forms.DateInput(
+                attrs={"type": "date"},
+            ),
         }
 
 

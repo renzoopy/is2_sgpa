@@ -67,8 +67,9 @@ class Backlog(models.Model):
 
 
 class Sprint(models.Model):
+    objetivos = models.CharField(max_length=300, blank=False)
     numTareas = models.IntegerField(default=0)
-    duracion = models.IntegerField(default=0)
+    duracion = models.IntegerField(default=0)  # entero referido al numero de semanas
     estado = models.CharField(
         max_length=10, choices=ESTADOSPR_CHOICES, default="En_cola"
     )

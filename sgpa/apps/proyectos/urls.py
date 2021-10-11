@@ -12,6 +12,8 @@ from proyectos.views import (
     eliminarProyecto,
     modificarProyecto,
     proy,
+    crearSprints,
+    listarSprint,
 )
 
 urlpatterns = [
@@ -25,4 +27,10 @@ urlpatterns = [
     path("<int:id_proyecto>/iniciar/", iniciarProyecto, name="iniciar_proyecto"),
     path("<int:id_proyecto>/finalizar/", finalizarProyecto, name="finalizar_proyecto"),
     path("<int:id_proyecto>/cancelar/", cancelarProyecto, name="cancelar_proyecto"),
+    path(
+        "<int:id_proyecto>/listarSprints/",
+        listarSprint.as_view(),
+        name="listar_sprints",
+    ),
+    path("sprint/nuevo/", crearSprints.as_view(), name="nuevo_sprint"),
 ]

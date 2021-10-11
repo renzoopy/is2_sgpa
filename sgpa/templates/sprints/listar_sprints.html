@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <ins>
+        <h3 align="center">Sprints</h3>
+    </ins>
+    <br>
+    <div class="row">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-10">
+            {% if object_list %}
+            <table class="table">
+                <thead>
+                    <tr class="table-primary">
+                        <th scope="col">ID</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">N° de US</th>
+                        <th scope="col">Objetivos</th>
+                        <th scope="col">Fecha de Inicio</th>
+                        <th scope="col">Fecha de Finalización</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if 'error' in message.tags %}
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    {% for sprint in object_list%}
+                    <tr>
+                        <td>{{ sprint.id }}</td>
+                        <td>{{ sprint.estado }}</td>
+                        <td>{{ sprint.numTareas }}</td>
+                        <td>{{ sprint.objetivos }}</td>
+                        <td>{{ sprint.fechaInicio }}</td>
+                        <td>{{ sprint.fechaFin }}</td>
+                        <td>
+                            <a class="btn btn-danger" role="button" href=""><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h3 align="center"> No existen sprints creados </h3>
+            {% endif %}
+            <div align="right">
+                <a class="btn boton-color" href=""> Crear Sprint </a>
+                <a class="btn boton-color" href="{% url 'usuarios:administrador' %}"> Volver </a>
+            </div>
+        </div>
+        <div class="col-md-1">
+
+        </div>
+    </div>
+</div>
+{% endblock %}

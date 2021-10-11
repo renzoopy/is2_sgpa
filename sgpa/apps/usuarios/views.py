@@ -20,8 +20,14 @@ def home(request):
     return render(request, "home.html")
 
 
-# === Creación de Perfil === #
+# --- Creación de Perfil --- #
 class CrearPerfil(LoginRequiredMixin, CreateView):
+    """
+    Clase para la creacion de un perfil de usuario
+    Hereda de la clase genérica CreateView
+    Requiere inicio de sesión
+    """
+
     model = Perfil
     form_class = Perfil_Form
     template_name = "usuarios/nuevo_perfil.html"
@@ -37,8 +43,15 @@ class CrearPerfil(LoginRequiredMixin, CreateView):
         return redirect(self.success_url)
 
 
+# --- Edición de Perfil --- #
 @login_required
 def editarPerfil_General(request, id_perfil):
+    """
+    Vista para la edición de los datos de un usuario (el email y el ci no puede ser modificado)
+    Recibe el request HTTP y el id del perfil de un usuario
+    Devuelve la renderización de la información del usuario
+    Requiere inicio de sesión
+    """
     perfil = Perfil.objects.get(id=id_perfil)
     usuario = User.objects.get(id=perfil.user.id)
     if request.method == "GET":
@@ -58,9 +71,10 @@ def editarPerfil_General(request, id_perfil):
     )
 
 
-# === Proyectos de Usuario === #
+# --- Proyectos de Usuario --- #
 @login_required
 def proyectos_usuario(request, id_usuario):
+    """ """
 
     usuario = User.objects.get(id=id_usuario)
     perfil = Perfil.objects.get(user=usuario)
@@ -92,7 +106,7 @@ def administrador(request):
     )
 
 
-# === Listar Solicitudes de Acceso === #
+# --- Listar Solicitudes de Acceso --- #
 @login_required
 @permission_required("usuarios.autorizar_usuario", login_url="usuarios:home")
 def listaAcceso(request):
@@ -106,7 +120,7 @@ def listaAcceso(request):
     return render(request, "usuarios/usuario_acceso.html", contexto)
 
 
-# === Conceder Acceso al Sistema === #
+# --- Conceder Acceso al Sistema --- #
 @login_required
 @permission_required("usuarios.autorizar_usuario", login_url="usuarios:home")
 def concederAcceso(request, id_perfil):
@@ -124,7 +138,7 @@ def concederAcceso(request, id_perfil):
     return redirect("usuarios:administrador")
 
 
-# === Listar Perfiles === #
+# --- Listar Perfiles --- #
 class ListarPerfil(LoginRequiredMixin, ListView):
 
     redirect_field_name = "redirect_to"
@@ -132,7 +146,7 @@ class ListarPerfil(LoginRequiredMixin, ListView):
     template_name = "usuarios/listar_perfiles.html"
 
 
-# === Editar Perfil === #
+# --- Editar Perfil --- #
 @login_required
 def editarPerfil_Admin(request, id_perfil):
 
@@ -155,7 +169,7 @@ def editarPerfil_Admin(request, id_perfil):
     )
 
 
-# === Eliminar Perfil === #
+# --- Eliminar Perfil --- #
 @login_required
 def eliminarPerfil(request, id_perfil):
 

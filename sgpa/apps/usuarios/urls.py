@@ -17,7 +17,7 @@ from .views import (
 
 urlpatterns = [
     path("", home, name="home"),
-    path("nuevo/", CrearPerfil.as_view(), name="crear_form"),
+    # path("nuevo/", CrearPerfil.as_view(), name="crear_form"),
     path("listar/", ListarPerfil.as_view(), name="listar_perfiles"),
     path("<int:id_usuario>/", proyectos_usuario, name="proyectos_usuario"),
     path("perfil/<int:id_perfil>/", editarPerfil_General, name="editar_perfilGeneral"),

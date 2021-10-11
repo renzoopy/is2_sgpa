@@ -7,10 +7,10 @@ from tareas.models import UserStory
 from django.urls.base import reverse_lazy
 from django.views.generic import ListView
 from proyectos.models import Proyecto, Sprint
-from django.shortcuts import redirect, render
+from django.shortcuts import reverse, redirect, render, get_object_or_404
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.mixins import LoginRequiredMixin
-from proyectos.forms import Proyecto_Form, ProyectoEdit_Form
+from proyectos.forms import Proyecto_Form, ProyectoEdit_Form, Sprint_Form
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.decorators import login_required, permission_required
 
@@ -177,3 +177,72 @@ def finalizarProyecto(request, id_proyecto):
         proyecto.fechaFin = datetime.now()
         proyecto.save()
     return redirect("proyectos:ver_proyecto", id_proyecto)
+
+
+# --- Crear Sprint --- #
+@login_required()
+def crearSprint(request, id_proyecto):
+    form = Sprint_Form(request.POST or None)
+    form.initial["proyecto"] = id_proyecto
+    proyecto = get_object_or_404(Proyecto, id=id_proyecto)
+    datos = {"proyecto": proyecto, "form": form, "title": "Crear Sprint"}
+    if form.is_valid():
+        if (
+            form.cleaned_data["fecha_inicio"] != None
+            and form.cleaned_data["fecha_fin"] != None
+        ):
+            ini = (form.cleaned_data["fecha_inicio"]).date()
+            fin = (form.cleaned_data["fecha_fin"]).date()
+            aux = (fin - ini).days
+            if aux >= 0:
+                sprint = form.save()
+            else:
+                datos["Error_fechas"] = True
+                template = "sprint/crear_sprint.html"
+                return render(request, template, datos)
+        else:
+            sprint = form.save()
+
+    if request.method == "POST":
+        return redirect(reverse("sprint", kwargs={"proyecto_id": proyecto.id}))
+    else:
+        template = "sprint/crear_sprint.html"
+        return render(request, template, datos)
+
+
+# --- Crear Sprint 2--- #
+class crearSprints(LoginRequiredMixin, CreateView):
+    model = Sprint
+    redirect_field_name = "redirect_to"
+    form_class = Sprint_Form
+    template_name = "sprints/nuevo_sprint.html"
+
+    def get_success_url(self):
+        return reverse_lazy(
+            "proyectos:listar_sprints", args=(self.kwargs["idroyecto"],)
+        )
+
+    def get_form_kwargs(self, **kwargs):
+        form_kwargs = super(crearSprints, self).get_form_kwargs(**kwargs)
+        form_kwargs["idProyecto"] = self.kwargs["idProyecto"]
+        return form_kwargs
+
+    def form_valid(self, form):
+        proyecto = Proyecto.objects.get(id="idProyecto")
+        sprint = Sprint.objects.get(id=self.object.pk)
+        sprint.proyecto = proyecto
+        sprint.save()
+        return super(crearSprints, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(crearSprints, self).get_context_data()
+        context["idProyecto"] = self.kwargs["idProyecto"]
+        return context
+
+
+# --- Ver Sprints --- #
+class listarSprint(LoginRequiredMixin, ListView):
+    model = Sprint
+    redirect_field_name = "redirect_to"
+    template_name = "sprints/listar_sprints.html"
+    ordering = ["id"]
