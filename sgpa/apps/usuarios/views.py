@@ -73,8 +73,13 @@ def editarPerfil_General(request, id_perfil):
 
 # --- Proyectos de Usuario --- #
 @login_required
-def proyectos_usuario(request, id_usuario):
-    """ """
+def proyectosUsuario(request, id_usuario):
+    """
+    Función que permite visualizar los proyectos de un determinado usuario
+    Recibe el request HTTP y el id del usuario
+    Retorna la renderización de los proyectos asociados en el template detallado
+    Requiere inicio de sesión
+    """
 
     usuario = User.objects.get(id=id_usuario)
     perfil = Perfil.objects.get(user=usuario)
@@ -90,6 +95,12 @@ def proyectos_usuario(request, id_usuario):
 @login_required
 @permission_required("usuarios.autorizar_usuario", login_url="usuarios:home")
 def administrador(request):
+    """
+    Obtiene la información acerca de todos los proyectos existentes, las solicitudes de acceso al sistema y el control de usuarios
+    Recibe el request HTTP
+    Retorna la renderización de la información ya mencionada en el template especificado
+    Requiere inicio de sesión y permisos administrador
+    """
 
     proyectos = Proyecto.objects.all()
     permiso = Permission.objects.get(codename="acceso_usuario")
@@ -110,6 +121,12 @@ def administrador(request):
 @login_required
 @permission_required("usuarios.autorizar_usuario", login_url="usuarios:home")
 def listaAcceso(request):
+    """
+    Lista de las solicitudes de acceso al sistema
+    Retorna la rendererización de la información solicitada en el template
+    Recibe el request HTTP
+    Requiere inicio de sesión y permisos administrador
+    """
 
     perm = Permission.objects.get(codename="acceso_usuario")
     usuario = User.objects.filter(~Q(user_permissions=perm))
@@ -124,6 +141,12 @@ def listaAcceso(request):
 @login_required
 @permission_required("usuarios.autorizar_usuario", login_url="usuarios:home")
 def concederAcceso(request, id_perfil):
+    """
+    Concede permiso de acceso al sistema y envía un email notificando lo acontecido al usuario
+    Recibe el request HTTP y el id del perfil de usuario
+    El retorno es una redirección a la página de solicitud
+    Requiere inicio de sesión y permisos administrador
+    """
 
     perfil = Perfil.objects.get(id=id_perfil)
     usuario = User.objects.get(id=perfil.user.id)
@@ -140,6 +163,11 @@ def concederAcceso(request, id_perfil):
 
 # --- Listar Perfiles --- #
 class ListarPerfil(LoginRequiredMixin, ListView):
+    """
+    Clase utilizada para listar los perfiles de usuarios existentes
+    Hereda de la clase ListView
+    Requiere inicio de sesión y permiso de administrador
+    """
 
     redirect_field_name = "redirect_to"
     model = Perfil
@@ -149,6 +177,12 @@ class ListarPerfil(LoginRequiredMixin, ListView):
 # --- Editar Perfil --- #
 @login_required
 def editarPerfil_Admin(request, id_perfil):
+    """
+    Vista para la edición de los datos de un usuario (el email puede ser modificado)
+    Recibe el request HTTP y el id del perfil de un usuario
+    Devuelve la renderización de la información del usuario
+    Requiere inicio de sesión y permiso de administrador
+    """
 
     perfil = Perfil.objects.get(id=id_perfil)
     usuario = User.objects.get(id=perfil.user.id)
@@ -172,6 +206,12 @@ def editarPerfil_Admin(request, id_perfil):
 # --- Eliminar Perfil --- #
 @login_required
 def eliminarPerfil(request, id_perfil):
+    """
+    Elimina el perfil del usuario solicitado
+    Recibe el request HTTP y el id del perfil de usuario
+    Retorna la renderización en el template especificado, en el cual solicita confirmación y luego redirige a la lista de perfiles
+    Requiere inicio de sesión y permiso de administrador
+    """
 
     perfil = Perfil.objects.get(id=id_perfil)
     miembro = Miembro.objects.filter(idPerfil=perfil.id)

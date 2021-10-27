@@ -32,6 +32,13 @@ def home(request):
 
 # --- Crear Proyecto --- #
 class crearProyecto(LoginRequiredMixin, CreateView):
+    """
+    Vista basada en la clase CreateView para crear un nuevo proyecto
+    No recibe parámetros
+    Al completar los campos del formulario, guarda la información y redirige a la lista de los proyectos asociados
+    Requiere inicio de sesión
+    """
+
     model = Proyecto
     redirect_field_name = "redirect_to"
     form_class = Proyecto_Form
@@ -50,6 +57,13 @@ class crearProyecto(LoginRequiredMixin, CreateView):
 
 # --- Listar Proyectos --- #
 class listarProyectos(LoginRequiredMixin, ListView):
+    """
+    Vista basada en la clase ListView para listar los proyectos
+    No recibe parámetros
+    Muestra la lista de los proyectos asociados en forma de tabla
+    Requiere inicio de sesión
+    """
+
     model = Proyecto
     redirect_field_name = "redirect_to"
     template_name = "proyectos/listar_proyectos.html"
@@ -59,6 +73,12 @@ class listarProyectos(LoginRequiredMixin, ListView):
 # --- Eliminar Proyecto --- #
 @login_required
 def eliminarProyecto(request, id_proyecto):
+    """
+    Elimina el proyecto solicitado
+    Recibe el request HTTP y el id del proyecto
+    Retorna la renderización en el template especificado, en el cual solicita confirmación y luego redirige a la lista de proyectos
+    Requiere inicio de sesión y permiso de administrador
+    """
 
     proyecto = Proyecto.objects.get(id=id_proyecto)
     if proyecto.numSprints == 0:
@@ -83,6 +103,12 @@ def eliminarProyecto(request, id_proyecto):
 # --- Ver Proyecto --- #
 @login_required
 def verProyecto(request, id_proyecto):
+    """
+    Muiestra el proyecto, la lista de los usuarios asociados y las funciones correspondientes al mismo
+    Vista basada en función, para mostrar el menú de un proyecto
+    Recibe el request HTTP y el id del poryecto correspondiente como parámetros
+    """
+
     proyecto = Proyecto.objects.get(id=id_proyecto)
     sprints = Sprint.objects.filter(proyecto=id_proyecto)
     miembros = Miembro.objects.filter(idProyecto=id_proyecto)
@@ -96,6 +122,13 @@ def verProyecto(request, id_proyecto):
 # --- Modificar Proyecto --- #
 @login_required
 def modificarProyecto(request, id_proyecto):
+    """
+    Vista basada en función, para actualizar un proyecto existente
+    Recibe el request HTTP y el id del poryecto correspondiente como parámetros
+    Al finalizar los cambios en los campos del formulario, guarda la información y redirige a la lista de los proyectos asociados
+    Requiere inicio de sesión y permisos de Scrum Master o administrador
+    """
+
     proyecto = Proyecto.objects.get(id=id_proyecto)
 
     if request.method == "GET":
@@ -115,6 +148,13 @@ def modificarProyecto(request, id_proyecto):
 # --- Iniciar Proyecto --- #
 @login_required
 def iniciarProyecto(request, id_proyecto):
+    """
+    Función para cambiar el estado de un proyecto de 'Pendiente' a 'Iniciado'
+    Recibe el request HTTP y el id del proyecto
+    Previo al cambio de estado hace las comprobaciones correspondientes
+    Requiere inicio de sesión y permisos de Scrum Master o administrador
+    """
+
     proyecto = Proyecto.objects.get(id=id_proyecto)
     sprints = Sprint.objects.filter(proyecto=id_proyecto)
     contador = 0
@@ -151,6 +191,12 @@ def iniciarProyecto(request, id_proyecto):
 # --- Cancelar Proyecto --- #
 @login_required
 def cancelarProyecto(request, id_proyecto):
+    """
+    Función que cambia el estado de un proyecto a 'Cancelado'
+    Recibe el request HTTP y el id del proyecto que se desea cambiar
+    Requiere inicio de sesión y permisos de Scrum Master o administrador
+    """
+
     proyecto = Proyecto.objects.get(id=id_proyecto)
     sprints = Sprint.objects.filter(proyecto=id_proyecto)
     for sprint in sprints:
@@ -165,6 +211,12 @@ def cancelarProyecto(request, id_proyecto):
 # --- Finalizar Proyecto --- #
 @login_required()
 def finalizarProyecto(request, id_proyecto):
+    """
+    Función que cambia el estado de un proyecto a 'Finalizado' si este cumple con las condiciones (todos los sprints finalizados)
+    Recibe el request HTTP y el id del proyecto que se desea cambiar
+    Requiere inicio de sesión y permisos de Scrum Master o administrador
+    """
+
     proyecto = Proyecto.objects.get(id=id_proyecto)
     sprints = Sprint.objects.filter(proyecto=id_proyecto)
     i = len(sprints)
@@ -182,6 +234,13 @@ def finalizarProyecto(request, id_proyecto):
 # --- Crear Sprint --- #
 @login_required()
 def crearSprint(request, id_proyecto):
+    """
+    Crea un sprint sobre el conjunto de User Stories seleccionados por el usuario
+    Recibe el request HTTP y el id del proyecto
+    Actualiza la cantidad de Sprints y el estado de los User Stories
+    Requiere inicio de sesión
+    """
+
     form = Sprint_Form(request.POST or None)
     form.initial["proyecto"] = id_proyecto
     proyecto = get_object_or_404(Proyecto, id=id_proyecto)
@@ -212,6 +271,14 @@ def crearSprint(request, id_proyecto):
 
 # --- Crear Sprint 2--- #
 class crearSprints(LoginRequiredMixin, CreateView):
+    """
+    Vista basada en la clase CreateView
+    Crea un sprint sobre el conjunto de User Stories seleccionados por el usuario
+    Actualiza la cantidad de Sprints y el estado de los User Stories
+    No recibe parámetros
+    Requiere inicio de sesión
+    """
+
     model = Sprint
     redirect_field_name = "redirect_to"
     form_class = Sprint_Form
@@ -242,7 +309,13 @@ class crearSprints(LoginRequiredMixin, CreateView):
 
 # --- Ver Sprints --- #
 class listarSprint(LoginRequiredMixin, ListView):
+    """
+    Vista basada en la clase ListView para listar los sprints
+    Muestra la lista de los sprints asociados en forma de tabla
+    No recibe parámetros
+    Requiere inicio de sesión
+    """
+
     model = Sprint
     redirect_field_name = "redirect_to"
     template_name = "sprints/listar_sprints.html"
-    ordering = ["id"]

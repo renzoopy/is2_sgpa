@@ -13,6 +13,12 @@ from django.contrib.auth.models import Group, Permission, User
 
 # --- Vista para la creación de un rol --- #
 class CrearRol(LoginRequiredMixin, CreateView):
+    """
+    Vista basada en modelos que permite crear un rol y el grupo asociado con los permisos correspondientes
+    La Validación se redefine para permitir la creación del grupo y asociar los permisos correspondientes
+    No recibe parámetros
+    Requiere inicio de sesión
+    """
 
     redirect_field_name = "redirect_to"
     model = Rol
@@ -46,6 +52,12 @@ class CrearRol(LoginRequiredMixin, CreateView):
 
 # --- Vista para listar roles existentes --- #
 class ListarRol(LoginRequiredMixin, ListView):
+    """
+    Vista basada en modelos que permite listar todos los roles creados
+    Muestra la lista de los roles asociados al proyecto en forma de tabla
+    No recibe parámetros
+    Requiere inicio de sesión
+    """
 
     redirect_field_name = "redirect_to"
     model = Rol
@@ -62,6 +74,12 @@ class ListarRol(LoginRequiredMixin, ListView):
 
 # --- Vista para eliminar un rol --- #
 def eliminarRol(request, idProyecto, id_rol):
+    """
+    Vista basada en funciones que permite eliminar un rol seleccionado y su grupo asociado
+    Recibe el request HTTP y el id del rol a eliminar
+    Requiere inicio de sesión
+    """
+
     rol = Rol.objects.get(id=id_rol)
     if request.method == "POST":
         grupo = Group.objects.get(id=rol.grupo.id)
@@ -76,6 +94,12 @@ def eliminarRol(request, idProyecto, id_rol):
 # --- Vista para la edición de un rol --- #
 @login_required
 def editarRol(request, idProyecto, id_rol):
+    """
+    Vista basada en funciones que permite editar un rol seleccionado y su grupo asociado
+    Recibe el request HTTP y el id del rol a editar
+    Requiere inicio de sesión
+    """
+
     rol = Rol.objects.get(id=id_rol)
     grupo = Group.objects.get(id=rol.grupo.id)
     if request.method == "GET":
@@ -95,6 +119,12 @@ def editarRol(request, idProyecto, id_rol):
 # --- Asignación de un rol --- #
 @login_required
 def asignarRol(request, idProyecto, idMiembro, idRol):
+    """
+    Vista basada en funciones que permite asignar un rol seleccionado y su grupo asociado a un usuario miembro del proyecto
+    Recibe el request HTTP, el id del proyecto asociado, el id miembro y el id del rol a asignar
+    Requiere inicio de sesión
+    """
+
     user = User.objects.get(id=idMiembro)
     rol = Rol.objects.get(id=idRol)
     rol.grupo.user_set.add(user)
@@ -104,6 +134,11 @@ def asignarRol(request, idProyecto, idMiembro, idRol):
 # --- Revocar un rol --- #
 @login_required
 def desasignarRol(request, idProyecto, idMiembro, idRol):
+    """
+    Vista basada en funciones que permite revocar un rol seleccionado y su grupo asociado a un usuario miembro del proyecto
+    Recibe el request HTTP, el id del proyecto asociado, el id del miembro y el id del rol a revocar
+    Requiere inicio de sesión
+    """
 
     user = User.objects.get(id=idMiembro)
     rol = Rol.objects.get(id=idRol)
@@ -114,6 +149,12 @@ def desasignarRol(request, idProyecto, idMiembro, idRol):
 # --- Ver todos los roles --- #
 @login_required
 def verRoles(request, idProyecto, idMiembro):
+    """
+    Vista basada en modelos que permite listar todos los reoles creados
+    Recibe el request HTTP, el id del proyecto asociado y el id del miembro
+    Requiere inicio de sesión
+    """
+
     roles = Rol.objects.filter(proyecto=idProyecto)
     user = User.objects.get(id=idMiembro)
     roles_asignados = []
