@@ -23,7 +23,7 @@
             </ul>
         </div>
         {% if not perms.usuarios.acceso_usuario %}
-        <a class="btn boton-color btn-lg btn-block" href="{% url 'usuarios:crear_form' %}" role="button">Solicitar
+        <a class="btn boton-color btn-lg btn-block" href="{% url 'usuarios:solicitar_acceso' %}" role="button">Solicitar
             Acceso</a>
         <br>
         <form method="post" action="{% url 'account_logout' %}">
