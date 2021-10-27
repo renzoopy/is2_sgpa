@@ -50,6 +50,9 @@ class Sprint_Form(forms.ModelForm):
             ),
         }
 
+    def init(self, args, **kwargs):
+        super(Sprint_Form, self).init(args, **kwargs)
+
 
 class ProyectoEdit_Form(forms.ModelForm):
     class Meta:

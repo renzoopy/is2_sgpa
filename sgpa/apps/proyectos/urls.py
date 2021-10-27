@@ -32,5 +32,5 @@ urlpatterns = [
         listarSprint.as_view(),
         name="listar_sprints",
     ),
-    path("sprint/nuevo/", crearSprints.as_view(), name="nuevo_sprint"),
+    # path("sprint/nuevo/", crearSprints.as_view(), name="nuevo_sprint"),
 ]
