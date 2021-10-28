@@ -1,6 +1,6 @@
 from usuarios.models import Perfil
 from miembros.models import Miembro
-from proyectos.models import Proyecto
+from proyectos.models import Proyecto, Historial
 from miembros.forms import MiembrosForm
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
@@ -23,6 +23,14 @@ def miembroCrear(request, idProyecto):
             miembro = form.save(commit=False)
             miembro.idProyecto = Proyecto.objects.get(id=idProyecto)
             miembro.save()
+            user = User.objects.get(username=request.user)
+            perfil = Perfil.objects.get(user=user)
+            Historial.objects.create(
+                operacion="Agregar a {} al proyecto".format(miembro.idPerfil.__str__()),
+                autor=perfil.__str__(),
+                proyecto=Proyecto.objects.get(id=idProyecto),
+                categoria="Miembros",
+            )
 
         return redirect("miembros:listar", idProyecto=idProyecto)
 
@@ -47,7 +55,14 @@ def miembroEliminar(request, idProyecto, idMiembro):
     miembro = Miembro.objects.get(idPerfil=idMiembro, idProyecto=idProyecto)
     if request.method == "POST":
         miembro.delete()
-
+        user = User.objects.get(username=request.user)
+        perfil = Perfil.objects.get(user=user)
+        Historial.objects.create(
+            operacion="Eliminar a {} del proyecto".format(miembro.idPerfil.__str__()),
+            autor=perfil.__str__(),
+            proyecto=Proyecto.objects.get(id=idProyecto),
+            categoria="Miembros",
+        )
         return redirect("miembros:listar", idProyecto=idProyecto)
     return render(
         request,

@@ -102,9 +102,10 @@
 
             {% if user.id == proyecto.scrumMaster.user.id%}
 
+            <a href="{% url 'proyectos:ver_historial' proyecto.id %}" class="btn btn-info" role="button">Historial</a>
+
             {% if proyecto.estado == 'Finalizado' or proyecto.estado == 'Cancelado' %}
 
-            <h2>Ver Historial</h2>
 
             {% else %}
             {% if proyecto.estado == 'Pendiente' %}

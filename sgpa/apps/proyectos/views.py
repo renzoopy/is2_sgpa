@@ -3,10 +3,11 @@ from django.http import request
 from usuarios.models import Perfil
 from django.contrib import messages
 from miembros.models import Miembro
+from django.core.mail import send_mail
 from tareas.models import UserStory
 from django.urls.base import reverse_lazy
 from django.views.generic import ListView
-from proyectos.models import Proyecto, Sprint
+from proyectos.models import Proyecto, Sprint, Historial
 from django.shortcuts import reverse, redirect, render, get_object_or_404
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -51,7 +52,14 @@ class crearProyecto(LoginRequiredMixin, CreateView):
         equipo = Group.objects.create(name="equipo%s" % self.object.pk)
         proyecto.equipo = equipo
         proyecto.save()
-
+        user = User.objects.get(username=self.request.user)
+        perfil = Perfil.objects.get(user=user)
+        Historial.objects.create(
+            operacion="Crear Proyecto",
+            autor=perfil.__str__(),
+            proyecto=proyecto,
+            categoria="Proyecto",
+        )
         return reverse_lazy("usuarios:administrador")
 
 
@@ -112,6 +120,7 @@ def verProyecto(request, id_proyecto):
     proyecto = Proyecto.objects.get(id=id_proyecto)
     sprints = Sprint.objects.filter(proyecto=id_proyecto)
     miembros = Miembro.objects.filter(idProyecto=id_proyecto)
+
     return render(
         request,
         "proyectos/ver_proyecto.html",
@@ -137,6 +146,27 @@ def modificarProyecto(request, id_proyecto):
         proyecto_Form = ProyectoEdit_Form(request.POST, instance=proyecto)
         if proyecto_Form.is_valid():
             proyecto_Form.save()
+            miembros = Miembro.objects.filter(idProyecto=proyecto)
+            correos = []
+            for miembro in miembros:
+                correos.append(miembro.idPerfil.user.email)
+            send_mail(
+                "El proyecto ha sido modificado",
+                "Usted es miembro del proyecto '{0}' y el mismo acaba de ser modificado, ingrese a la plataforma para observar los cambios.".format(
+                    proyecto.nombre
+                ),
+                "is2.sgpa@gmail.com",
+                correos,
+            )
+            user = User.objects.get(username=request.user)
+            perfil = Perfil.objects.get(user=user)
+            Historial.objects.create(
+                operacion="Modificar Proyecto",
+                autor=perfil.__str__(),
+                proyecto=proyecto,
+                categoria="Proyecto",
+            )
+
         return redirect("proyectos:ver_proyecto", id_proyecto)
     return render(
         request,
@@ -185,6 +215,26 @@ def iniciarProyecto(request, id_proyecto):
         proyecto.estado = "Iniciado"
         proyecto.fechaInicio = datetime.now()
         proyecto.save()
+        correos = []
+        miembros = Miembro.objects.filter(idProyecto=proyecto)
+        for miembro in miembros:
+            correos.append(miembro.idPerfil.user.email)
+        send_mail(
+            "El proyecto ha sido iniciado",
+            "Usted es miembro del proyecto '{0}' y el cuial acaba de ser iniciado, puede ingresar a la plataforma para realizar sus tareas.".format(
+                proyecto.nombre
+            ),
+            "is2.sgpa@gmail.com",
+            correos,
+        )
+        user = User.objects.get(username=request.user)
+        perfil = Perfil.objects.get(user=user)
+        Historial.objects.create(
+            operacion="Iniciar Proyecto",
+            autor=perfil.__str__(),
+            proyecto=proyecto,
+            categoria="Proyecto",
+        )
     return redirect("proyectos:ver_proyecto", id_proyecto)
 
 
@@ -205,6 +255,27 @@ def cancelarProyecto(request, id_proyecto):
     proyecto.estado = "Cancelado"
     proyecto.fechaFin = datetime.now()
     proyecto.save()
+    miembros = Miembro.objects.filter(idProyecto=proyecto)
+    correos = []
+    for miembro in miembros:
+        correos.append(miembro.idPerfil.user.email)
+    send_mail(
+        "El proyecto ha sido cancelado",
+        "Usted es miembro del proyecto '{0}' y este acaba de ser cancelado.".format(
+            proyecto.nombre
+        ),
+        "is2.sgpa@gmail.com",
+        correos,
+    )
+    user = User.objects.get(username=request.user)
+    perfil = Perfil.objects.get(user=user)
+    Historial.objects.create(
+        operacion="Cancelar Proyecto",
+        autor=perfil.__str__(),
+        proyecto=proyecto,
+        categoria="Proyecto",
+    )
+
     return redirect("proyectos:ver_proyecto", id_proyecto)
 
 
@@ -228,6 +299,26 @@ def finalizarProyecto(request, id_proyecto):
         proyecto.estado = "Finalizado"
         proyecto.fechaFin = datetime.now()
         proyecto.save()
+        miembros = Miembro.objects.filter(idProyecto=proyecto)
+        correos = []
+        for miembro in miembros:
+            correos.append(miembro.idPerfil.user.email)
+        send_mail(
+            "Un proyecto ha sido finalizado",
+            "Usted es miembro del proyecto '{0}' y este acaba de finalizar.".format(
+                proyecto.nombre
+            ),
+            "is2.sgpa@gmail.com",
+            correos,
+        )
+        user = User.objects.get(username=request.user)
+        perfil = Perfil.objects.get(user=user)
+        Historial.objects.create(
+            operacion="Finalizar proyecto",
+            autor=perfil.__str__(),
+            proyecto=Proyecto.objects.get(id=id_proyecto),
+            categoria="Proyecto",
+        )
     return redirect("proyectos:ver_proyecto", id_proyecto)
 
 
@@ -257,7 +348,7 @@ def crearSprint(request, id_proyecto):
                 sprint = form.save()
             else:
                 datos["Error_fechas"] = True
-                template = "sprint/crear_sprint.html"
+                template = "sprints/nuevo_sprint.html"
                 return render(request, template, datos)
         else:
             sprint = form.save()
@@ -265,7 +356,7 @@ def crearSprint(request, id_proyecto):
     if request.method == "POST":
         return redirect(reverse("sprint", kwargs={"proyecto_id": proyecto.id}))
     else:
-        template = "sprint/crear_sprint.html"
+        template = "sprints/nuevo_sprint.html"
         return render(request, template, datos)
 
 
@@ -286,16 +377,16 @@ class crearSprints(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse_lazy(
-            "proyectos:listar_sprints", args=(self.kwargs["idroyecto"],)
+            "proyectos:listar_sprints", args=(self.kwargs["id_proyecto"],)
         )
 
     def get_form_kwargs(self, **kwargs):
         form_kwargs = super(crearSprints, self).get_form_kwargs(**kwargs)
-        form_kwargs["idProyecto"] = self.kwargs["idProyecto"]
+        form_kwargs["proyecto_id"] = self.kwargs["id_proyecto"]
         return form_kwargs
 
     def form_valid(self, form):
-        proyecto = Proyecto.objects.get(id="idProyecto")
+        proyecto = Proyecto.objects.get(id="id_proyecto")
         sprint = Sprint.objects.get(id=self.object.pk)
         sprint.proyecto = proyecto
         sprint.save()
@@ -303,19 +394,46 @@ class crearSprints(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(crearSprints, self).get_context_data()
-        context["idProyecto"] = self.kwargs["idProyecto"]
+        context["id_proyecto"] = self.kwargs["id_proyecto"]
         return context
 
 
 # --- Ver Sprints --- #
-class listarSprint(LoginRequiredMixin, ListView):
+@login_required
+def listarSprints(request, id_proyecto):
     """
-    Vista basada en la clase ListView para listar los sprints
+    Vista basada en funciones para listar los sprints
     Muestra la lista de los sprints asociados en forma de tabla
-    No recibe parámetros
+    Recibe el request HTTP y el id de un proyecto
     Requiere inicio de sesión
     """
+    sprints = Sprint.objects.filter(proyecto_id=id_proyecto)
+    print("OBJ SPRINT: ", sprints)
 
-    model = Sprint
-    redirect_field_name = "redirect_to"
-    template_name = "sprints/listar_sprints.html"
+    return render(
+        request,
+        "sprints/listar_sprints.html",
+        {
+            "sprints": sprints,
+            "id_proyecto": id_proyecto,
+        },
+    )
+
+
+# --- Ver Historial --- #
+@login_required()
+def verHistorial(request, id_proyecto):
+    """
+    Muestra el historial de cambios de todo el proyecto.
+    Recibe el request HTTP y el id del proyecto.
+    Muestra todos los mensajes guardados en el historial del proyecto desde que se creo.
+    """
+    historiales = Historial.objects.filter(proyecto=id_proyecto)
+    mensajes = []
+    for x in range(0, len(historiales)):
+        mensajes.append(historiales[x].__str__())
+    return render(
+        request,
+        "proyectos/ver_historial.html",
+        {"mensajes": mensajes, "idProyecto": id_proyecto},
+    )

@@ -82,3 +82,18 @@ class Sprint(models.Model):
 
     def str(self):
         return "{}".format(self.estado)
+
+
+class Historial(models.Model):
+    categoria = models.CharField(max_length=80)
+    operacion = models.CharField(max_length=150)
+    fecha = models.DateTimeField(auto_now_add=True)
+    autor = models.CharField(max_length=80, null=True)
+    proyecto = models.ForeignKey(
+        Proyecto, null=False, blank=False, on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return "{} {}: {}".format(
+            self.fecha.strftime("%d/%m/%Y %X"), self.autor, self.operacion
+        )

@@ -3,7 +3,7 @@ from roles.forms import Rol_Form
 from usuarios.models import Perfil
 from miembros.models import Miembro
 from django.urls.base import reverse
-from proyectos.models import Proyecto
+from proyectos.models import Proyecto, Historial
 from django.shortcuts import redirect, render
 from django.views.generic import ListView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -42,6 +42,15 @@ class CrearRol(LoginRequiredMixin, CreateView):
         form.instance.grupo = grupo
         permisos = Permission.objects.filter(name__in=form.cleaned_data["select"])
         grupo.permissions.set(permisos)
+        user = User.objects.get(username=self.request.user)
+        perfil = Perfil.objects.get(user=user)
+        Historial.objects.create(
+            operacion="Crear Rol {}".format(form.instance.nombre),
+            autor=perfil.__str__(),
+            proyecto=proyecto,
+            categoria="Miembros",
+        )
+
         return super(CrearRol, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -84,7 +93,17 @@ def eliminarRol(request, idProyecto, id_rol):
     if request.method == "POST":
         grupo = Group.objects.get(id=rol.grupo.id)
         grupo.delete()
+        nombre = rol.nombre
         rol.delete()
+        user = User.objects.get(username=request.user)
+        perfil = Perfil.objects.get(user=user)
+        Historial.objects.create(
+            operacion="Eliminar Rol {}".format(nombre),
+            autor=perfil.__str__(),
+            proyecto=Proyecto.objects.get(id=idProyecto),
+            categoria="Miembros",
+        )
+
         return redirect("roles:listar_roles", idProyecto=idProyecto)
     return render(
         request, "roles/eliminar_rol.html", {"rol": rol, "idProyecto": idProyecto}
@@ -110,6 +129,15 @@ def editarRol(request, idProyecto, id_rol):
             permisos = Permission.objects.filter(name__in=form.cleaned_data["select"])
             grupo.permissions.set(permisos)
             form.save()
+            user = User.objects.get(username=request.user)
+            perfil = Perfil.objects.get(user=user)
+            Historial.objects.create(
+                operacion="Editar Rol {}".format(rol.nombre),
+                autor=perfil.__str__(),
+                proyecto=Proyecto.objects.get(id=idProyecto),
+                categoria="Miembros",
+            )
+
         return redirect("roles:listar_roles", idProyecto=idProyecto)
     return render(
         request, "roles/editar_rol.html", {"form": form, "idProyecto": idProyecto}
@@ -128,6 +156,16 @@ def asignarRol(request, idProyecto, idMiembro, idRol):
     user = User.objects.get(id=idMiembro)
     rol = Rol.objects.get(id=idRol)
     rol.grupo.user_set.add(user)
+    perfil = Perfil.objects.get(user=user)
+    nombre = perfil.__str__()
+    user = User.objects.get(username=request.user)
+    perfil = Perfil.objects.get(user=user)
+    Historial.objects.create(
+        operacion="Asignar Rol {} a {}".format(rol.nombre, nombre),
+        autor=perfil.__str__(),
+        proyecto=Proyecto.objects.get(id=idProyecto),
+        categoria="Miembros",
+    )
     return redirect("miembros:ver_roles", idProyecto=idProyecto, idMiembro=idMiembro)
 
 
@@ -143,6 +181,14 @@ def desasignarRol(request, idProyecto, idMiembro, idRol):
     user = User.objects.get(id=idMiembro)
     rol = Rol.objects.get(id=idRol)
     rol.grupo.user_set.remove(user)
+    user = User.objects.get(username=request.user)
+    perfil = Perfil.objects.get(user=user)
+    Historial.objects.create(
+        operacion="Desasignar Rol {} a {}".format(rol.nombre, perfil.__str__()),
+        autor=perfil.__str__(),
+        proyecto=Proyecto.objects.get(id=idProyecto),
+        categoria="Miembros",
+    )
     return redirect("miembros:ver_roles", idProyecto=idProyecto, idMiembro=idMiembro)
 
 

@@ -37,7 +37,7 @@
                     {% endif %}
                     {% endfor %}
                     {% endif %}
-                    {% for sprint in object_list%}
+                    {% for sprint in sprints %}
                     <tr>
                         <td>{{ sprint.id }}</td>
                         <td>{{ sprint.estado }}</td>
@@ -56,7 +56,7 @@
             <h3 align="center"> No existen sprints creados </h3>
             {% endif %}
             <div align="right">
-                <a class="btn boton-color" href=""> Crear Sprint </a>
+                <a class="btn boton-color" href="{% url 'proyectos:nuevo_sprint' %}"> Crear Sprint </a>
                 <a class="btn boton-color" href="{% url 'usuarios:administrador' %}"> Volver </a>
             </div>
         </div>
