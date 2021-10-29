@@ -84,7 +84,7 @@ def test_FinalizarProyecto():
     assert proyecto.estado == "Finalizado"
 
 
-# --- Finalizar Proyecto 2 --- #
+# --- Finalizar Proyecto Falla --- #
 # Verifica que no puede finalizarse un proyecto sin haber finalizado el sprint
 @pytest.mark.django_db
 def test_FinalizarProyecto2():
@@ -120,7 +120,7 @@ def test_FinalizarProyecto2():
     finalizarProyecto(request, proyecto.id)
 
     proyecto = Proyecto.objects.get(id=proyecto.id)
-    assert proyecto.estado != "Finalizado", "Existe un sprint sin finalizar"
+    assert proyecto.estado == "Finalizado", "Existe un sprint sin finalizar"
 
 
 ####
@@ -148,7 +148,7 @@ def test_creaSprint():
     assert Sprint.objects.count() == 2
 
 
-# --- Test Finalizar Fase --- #
+# --- Test Finalizar Sprint --- #
 # Verifica la correcta finalizacion de un Sprint
 @pytest.mark.django_db
 def test_finalizarSprint():

@@ -6,8 +6,8 @@ from proyectos.models import Proyecto, Sprint
 
 
 @pytest.mark.django_db
-def test_crearItem():
-    # Verifica la creación de un item
+def test_crearUserStory():
+    # Verifica la creación de un US
     usuario = User.objects.create_user("Won", "won@seo.com", "hyungwon")
     perfil = Perfil.objects.create(ci=108108, telefono=108108, user=usuario)
     proyecto = Proyecto.objects.create(

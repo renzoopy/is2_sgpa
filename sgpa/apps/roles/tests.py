@@ -33,7 +33,7 @@ def test_EliminarRol():
     assert Rol.objects.count() == 0
 
 
-# --- Eliminar Rol 2 --- #
+# --- Eliminar Rol Falla --- #
 # Verifica que un rol que no existe no puede ser eliminado
 @pytest.mark.django_db
 def test_EliminarRol2():
@@ -43,7 +43,7 @@ def test_EliminarRol2():
         rol.delete()
         rol.delete()
     except:
-        assert True, "No se puede eliminar un rol que no existe"
+        assert False, "No se puede eliminar un rol que no existe"
 
 
 # --- Crear Rol --- #
@@ -54,7 +54,7 @@ def test_CrearRol():
     assert Rol.objects.count() == 1
 
 
-# --- Crear Rol 2 --- #
+# --- Crear Rol Falla --- #
 # Verifica que no se puedan crear roles con el mismo nombre
 @pytest.mark.django_db
 def test_CrearRol2():
@@ -74,4 +74,4 @@ def test_CrearRol2():
         Rol.objects.create(nombre="Rol", grupo=grupo1, proyecto=proyecto)
         Rol.objects.create(nombre="Rol", grupo=grupo2, proyecto=proyecto)
     except:
-        assert True, "No se permiten roles con el mismo nombre en un mismo proyecto"
+        assert False, "No se permiten roles con el mismo nombre en un mismo proyecto"

@@ -22,7 +22,7 @@ def test_CrearMiembro():
     assert Miembro.objects.count() == 1
 
 
-# --- Test Eliminar Miembro --- #
+# --- Test Eliminar Miembro Verdadero --- #
 # Verifica la eliminación de un miembro en la base de datos
 @pytest.mark.django_db
 def test_EliminarMiembro():
@@ -41,10 +41,10 @@ def test_EliminarMiembro():
     assert Miembro.objects.count() == 0
 
 
-# --- Test Eliminar Miembro 2 --- #
+# --- Test Eliminar Miembro Falla --- #
 # Verifica que un miembro que no existe no puede ser eliminado
 @pytest.mark.django_db
-def test_EliminarMiembro2():
+def test_EliminarMiembroF():
     usuario = User.objects.create_user("humberto", "humberto@lopez.com", "humlopez")
     perfil = Perfil.objects.create(ci=5178065, telefono=8888888, user=usuario)
     proyecto = Proyecto.objects.create(
@@ -59,4 +59,4 @@ def test_EliminarMiembro2():
         miembro.delete()
         miembro.delete()
     except:
-        assert True, "El objeto que intenta eliminar no existe"
+        assert False, "El objeto que intenta eliminar no existe"

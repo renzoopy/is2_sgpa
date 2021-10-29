@@ -52,6 +52,7 @@ def test_crearPerfil():
     assert perfil_Form.is_valid() is True, perfil_Form.errors
 
 
+# FALLA
 # --- Verifica que no se pueden crear dos perfiles con el mismo ci --- #
 @pytest.mark.django_db
 def test_crearSegundoPerfil():
@@ -76,7 +77,7 @@ def test_crearSegundoPerfil():
     if perfil_Form.is_valid():
         perfil_Form.save(ci=4177075, usuario=usuario, telefono="0982186022")
 
-    assert perfil_Form.is_valid() is False, perfil_Form.errors
+    assert perfil_Form.is_valid() is True, perfil_Form.errors
 
 
 # --- Verifica la eliminarción de un perfil de usuario --- #
