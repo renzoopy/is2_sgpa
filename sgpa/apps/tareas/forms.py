@@ -8,10 +8,8 @@ class UserStoryForm(forms.ModelForm):
     )
 
     def __init__(self, *args, **kwargs):
-        nombre = kwargs.pop("nombre")
-        super(UserStoryForm, self).__init__(*args, **kwargs)
-        self.fields["identificacion"].initial = nombre
-        self.fields["prioridad"].widget.attrs["min"] = 1
+        # super(UserStoryForm, self).__init__(*args, **kwargs)
+        super(UserStoryForm, self).init(args, **kwargs)
 
     def save(self, commit=True, *args, **kwargs):
         sprint = kwargs.get("sprint")

@@ -1,3 +1,7 @@
-from django.urls import path
+from django.urls import path, include
+from tareas.views import ListarUserStory, CrearUserStory
 
-urlpatterns = []
+urlpatterns = [
+    path("nuevo/", CrearUserStory.as_view(), name="crear_tarea"),
+    path("listar/", ListarUserStory.as_view(), name="listar_tareas"),
+]

@@ -26,6 +26,10 @@ urlpatterns = [
     path("usuarios/", include(("usuarios.urls", "usuarios"), namespace="usuarios")),
     path("proyectos/", include(("proyectos.urls", "proyectos"), namespace="proyectos")),
     path(
+        "proyectos/<int:idProyecto>/tareas/",
+        include(("tareas.urls", "tareas"), namespace="tareas"),
+    ),
+    path(
         "proyectos/<int:idProyecto>/miembros/",
         include(("miembros.urls", "miembros"), namespace="miembros"),
     ),

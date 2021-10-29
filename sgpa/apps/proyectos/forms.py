@@ -32,22 +32,15 @@ class Sprint_Form(forms.ModelForm):
         model = Sprint
         fields = [
             "objetivos",
-            "estado",
-            "fechaInicio",
-            "fechaFin",
+            "posicion",
         ]
         labels = {
-            "estado": "Estado",
-            "numTareas": "Número de Tareas",
+            "objetivos": "Objetivos",
+            "posicion": "Posicion",
         }
         widgets = {
-            "fechaInicio": forms.DateInput(
-                attrs={"type": "date"},
-                # validators=[MinValueValidator(date.today())],
-            ),
-            "fechaFin": forms.DateInput(
-                attrs={"type": "date"},
-            ),
+            "objetivos": forms.TextInput(attrs={"class": "form-control"}),
+            "posicion": forms.NumberInput(),
         }
 
     def init(self, args, **kwargs):
