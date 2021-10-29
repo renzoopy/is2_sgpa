@@ -16,7 +16,7 @@
                     <tr class="table-primary">
                         <th scope="col">Nombre</th>
                         <th scope="col">Permisos</th>
-                        <th scope="col">Sprint</th>
+                        <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,16 +31,10 @@
                             {% endif %}
                         </td>
                         <td scope="col">
-                            {% for sprint in rol.sprint.all %}
-                            {{ sprint }} <br><br>
-                            {% empty %}
-                            No pertenece a ningun sprint
-                            {% endfor %}
-                        </td>
-                        <td scope="col"></td>
-                        <td>
-                            <a href="" class="btn boton-color">Modificar Rol</a>
-                            <a href="" class="btn boton-color">Eliminar Rol</a>
+                            <a href="{% url 'roles:editar_rol' idProyecto rol.id %}" class="btn boton-color">Modificar
+                                Rol</a>
+                            <a href="{% url 'roles:eliminar_rol' idProyecto rol.id %}" class="btn boton-color">Eliminar
+                                Rol</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -53,7 +47,7 @@
     {% endif %}
     <p align="center">
         <a href="{% url 'roles:crear_rol' idProyecto %}" class="btn boton-color">Crear Rol</a>
-        <a href="" class="btn boton-color">Volver</a>
+        <a href="{% url 'proyectos:ver_proyecto' idProyecto %}" class="btn boton-color" role="button">Volver</a>
     </p>
 </div>
 {% endblock %}
