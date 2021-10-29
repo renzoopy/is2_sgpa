@@ -102,9 +102,10 @@
 
             {% if user.id == proyecto.scrumMaster.user.id%}
 
+            <a href="{% url 'proyectos:ver_historial' proyecto.id %}" class="btn btn-info" role="button">Historial</a>
+
             {% if proyecto.estado == 'Finalizado' or proyecto.estado == 'Cancelado' %}
 
-            <h2>Ver Historial</h2>
 
             {% else %}
             {% if proyecto.estado == 'Pendiente' %}
@@ -122,7 +123,8 @@
             <a href="{% url 'proyectos:modificar_proyecto' proyecto.id %}" class="btn btn-primary">Modificar
                 Proyecto</a>
             <a href="{% url 'miembros:listar' proyecto.id %}" class="btn btn-primary" role="button">Miembros</a>
-            <h2>Product Backlog</h2>
+            <a href="{% url 'tareas:listar_tareas' proyecto.id %}" class="btn btn-primary" role="button">Product
+                Backlog</a>
             <a href="{% url 'roles:listar_roles' proyecto.id %}" class="btn btn-primary" role="button">Roles</a>
             {% endif %}
             {% endif %}

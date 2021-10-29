@@ -17,7 +17,10 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 
 def home(request):
-    return render(request, "home.html")
+    if request.user.is_authenticated:
+        return render(request, "home.html")
+    else:
+        return redirect("login")
 
 
 # --- Creación de Perfil --- #

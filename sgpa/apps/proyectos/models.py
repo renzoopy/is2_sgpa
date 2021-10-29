@@ -68,6 +68,7 @@ class Backlog(models.Model):
 
 class Sprint(models.Model):
     objetivos = models.CharField(max_length=300, blank=False, null=True)
+    posicion = models.IntegerField(blank=False, null=True)
     numTareas = models.IntegerField(default=0)
     duracion = models.IntegerField(default=0)  # entero referido al numero de semanas
     estado = models.CharField(
@@ -82,3 +83,18 @@ class Sprint(models.Model):
 
     def str(self):
         return "{}".format(self.estado)
+
+
+class Historial(models.Model):
+    categoria = models.CharField(max_length=80)
+    operacion = models.CharField(max_length=150)
+    fecha = models.DateTimeField(auto_now_add=True)
+    autor = models.CharField(max_length=80, null=True)
+    proyecto = models.ForeignKey(
+        Proyecto, null=False, blank=False, on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return "{} {}: {}".format(
+            self.fecha.strftime("%d/%m/%Y %X"), self.autor, self.operacion
+        )
