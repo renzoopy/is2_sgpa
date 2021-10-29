@@ -1,16 +1,20 @@
 from usuarios.models import Perfil
 from miembros.models import Miembro
-from proyectos.models import Proyecto
+from proyectos.models import Proyecto, Historial
 from miembros.forms import MiembrosForm
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
-
-# === Crear nuevo Miembro === #
+# --- Crear nuevo Miembro --- #
 @login_required
 def miembroCrear(request, idProyecto):
+    """
+    Vista basada en funciones que permite crear miembros
+    Recibe el request HTTP y el id de un proyecto como parámetros
+    Al finalizar la petición se retorna a la vista de lista de miembros
+    Requiere inicio de sesión
+    """
 
     if request.method == "POST":
         form = MiembrosForm(request.POST, idProyecto=idProyecto)
@@ -21,57 +25,67 @@ def miembroCrear(request, idProyecto):
             miembro.save()
             user = User.objects.get(username=request.user)
             perfil = Perfil.objects.get(user=user)
+            Historial.objects.create(
+                operacion="Agregar a {} al proyecto".format(miembro.idPerfil.__str__()),
+                autor=perfil.__str__(),
+                proyecto=Proyecto.objects.get(id=idProyecto),
+                categoria="Miembros",
+            )
 
-        return redirect("miembros:lista", idProyecto=idProyecto)
+        return redirect("miembros:listar", idProyecto=idProyecto)
 
     else:
         form = MiembrosForm(request.POST or None, idProyecto=idProyecto)
 
     return render(
-        request, "miembros/nuevoMiembro.html", {"form": form, "proyecto": idProyecto}
+        request, "miembros/nuevo_miembro.html", {"form": form, "idProyecto": idProyecto}
     )
 
 
-# === Eliminar Miembro === #
+# --- Eliminar Miembro --- #
 @login_required
 def miembroEliminar(request, idProyecto, idMiembro):
+    """
+    Vista basada en funciones que permite la eliminación de miembros
+    Recibe el request HTTP, el id de un proyecto y el id de un miembro como parámeetros
+    Una vez finalizada la petición se retorna a la lista de miembros
+    Requiere inicio de sesión
+    """
 
-    miembro = Miembro.objects.get(id=idMiembro)
+    miembro = Miembro.objects.get(idPerfil=idMiembro, idProyecto=idProyecto)
     if request.method == "POST":
         miembro.delete()
         user = User.objects.get(username=request.user)
         perfil = Perfil.objects.get(user=user)
-
-        return redirect("miembros:lista", idProyecto=idProyecto)
+        Historial.objects.create(
+            operacion="Eliminar a {} del proyecto".format(miembro.idPerfil.__str__()),
+            autor=perfil.__str__(),
+            proyecto=Proyecto.objects.get(id=idProyecto),
+            categoria="Miembros",
+        )
+        return redirect("miembros:listar", idProyecto=idProyecto)
     return render(
         request,
-        "miembros/eliminarMiembro.html",
+        "miembros/eliminar_miembro.html",
         {"miembros": miembro, "idProyecto": idProyecto},
     )
 
 
-# === Listar Miembros === #
+# --- Listar Miembros --- #
 @login_required
 def verMiembros(request, idProyecto):
+    """
+    Vista basada en funciones para listar miembros pertenecientes a un proyecto
+    Recibe el request y el id de un proyecto como parámtros
+    Requiere inicio de sesión
+    """
+    miembros = Miembro.objects.filter(idProyecto=idProyecto)
 
-    proyecto = Proyecto.objects.get(id=idProyecto)
-    miembro = proyecto.miembro_set.all()
-    perfil = Perfil.objects.all()
-    valid_id = []
-    for p in perfil:
-        if not Miembro.objects.filter(idProyecto=proyecto).filter(idPerfil=p).exists():
-            if not p.id == 1:
-                valid_id.append(p.id)
-    perfiles = Perfil.objects.filter(id__in=valid_id)
-    miembro = Miembro.objects.filter(idProyecto=idProyecto)
-    g = proyecto.gerente
     return render(
         request,
-        "miembros/verMiembros.html",
+        "miembros/ver_miembros.html",
         {
-            "miembros": miembro,
-            "gerente": g,
+            "miembros": miembros,
             "idProyecto": idProyecto,
-            "participantes_para_agregar": perfiles.all().count() > 0,
         },
     )

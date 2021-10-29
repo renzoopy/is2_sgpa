@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class="container-fluid">
+    {% if messages %}
+    {% for message in messages %}
+    {% if 'error' in message.tags %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    <ins>
+        <h3 align="center">Fases del Proyecto</h3>
+    </ins>
+    <br>
+    <div class="row" align="center">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <form method="post">
+                {% csrf_token %}
+                {{ formset.as_p }}
+                <button type="submit" class="btn btn-primary"> Guardar Sprint </button>
+                <a class="btn btn-outline-secondary" href="{% url 'proyectos:listar_sprints' proyecto %}"> Cancelar
+                </a>
+            </form>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+</div>
+{% endblock %}

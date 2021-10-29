@@ -5,7 +5,7 @@ from usuarios.forms import Usuario_Form, Perfil_Form
 from django.contrib.auth.models import User
 
 
-# === Verifica la creación de usuario === #
+# --- Verifica la creación de usuario --- #
 @pytest.mark.django_db
 def test_crearUsuario():
     data = {
@@ -17,7 +17,7 @@ def test_crearUsuario():
     assert form.is_valid() is True, form.errors
 
 
-# === Verifica la eliminación de un usuario === #
+# --- Verifica la eliminación de un usuario --- #
 @pytest.mark.django_db
 def test_eliminarUsuario():
     data = {
@@ -32,7 +32,7 @@ def test_eliminarUsuario():
     assert not User.objects.filter(email="lorenzocabrea8@fpuna.edu.py").exists()
 
 
-# === Verifica la creación de un perfil de usuario === #
+# --- Verifica la creación de un perfil de usuario --- #
 @pytest.mark.django_db
 def test_crearPerfil():
     data = {
@@ -52,7 +52,7 @@ def test_crearPerfil():
     assert perfil_Form.is_valid() is True, perfil_Form.errors
 
 
-# === Verifica que no se pueden crear dos perfiles con el mismo ci === #
+# --- Verifica que no se pueden crear dos perfiles con el mismo ci --- #
 @pytest.mark.django_db
 def test_crearSegundoPerfil():
     data = {
@@ -76,10 +76,10 @@ def test_crearSegundoPerfil():
     if perfil_Form.is_valid():
         perfil_Form.save(ci=4177075, usuario=usuario, telefono="0982186022")
 
-    assert perfil_Form.is_valid() is True, perfil_Form.errors
+    assert perfil_Form.is_valid() is False, perfil_Form.errors
 
 
-# === Verifica la eliminarción de un perfil de usuario === #
+# --- Verifica la eliminarción de un perfil de usuario --- #
 @pytest.mark.django_db
 def test_eliminarPerfil():
     data = {

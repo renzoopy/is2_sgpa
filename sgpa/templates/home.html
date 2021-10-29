@@ -23,7 +23,7 @@
             </ul>
         </div>
         {% if not perms.usuarios.acceso_usuario %}
-        <a class="btn boton-color btn-lg btn-block" href="{% url 'usuarios:crear_form' %}" role="button">Solicitar
+        <a class="btn boton-color btn-lg btn-block" href="{% url 'usuarios:solicitar_acceso' %}" role="button">Solicitar
             Acceso</a>
         <br>
         <form method="post" action="{% url 'account_logout' %}">
@@ -33,12 +33,18 @@
             {% endif %}
         </form>
         {% else %}
+        {% if not perms.usuarios.autorizar_usuario %}
         <div class="text-center">
-            <a href="http://127.0.0.1:8000" class="boton-color btn">Continuar</a>
+            <a href="{% url 'usuarios:proyectos_usuario' user.id%}" class="boton-color btn">Continuar</a>
+        </div>
+        </button>
+        {% else %}
+        <div class="text-center">
+            <a href="{% url 'usuarios:administrador' %}" class="boton-color btn">Continuar</a>
         </div>
         </button>
         {% endif %}
-
+        {% endif %}
     </div>
 </div>
 {% endblock %}
