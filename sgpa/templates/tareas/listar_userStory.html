@@ -40,7 +40,7 @@
     <h4 align="center">El proyecto no tiene US creados</h4><br>
     {% endif %}
     <p align="center">
-        <a href="y{% url 'tareas:crear_tarea' idProyecto %}" class="btn boton-color">Crear US</a>
+        <a href="{% url 'tareas:crear_tarea' idProyecto %}" class="btn boton-color">Crear US</a>
         <a href="{% url 'proyectos:ver_proyecto' idProyecto %}" class="btn boton-color" role="button">Volver</a>
     </p>
 </div>

@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 from tareas.models import UserStory
 from django.urls.base import reverse_lazy
 from django.views.generic import ListView
-from proyectos.models import Proyecto, Sprint, Historial
+from proyectos.models import Backlog, Proyecto, Sprint, Historial
 from django.shortcuts import reverse, redirect, render, get_object_or_404
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -53,6 +53,7 @@ class crearProyecto(LoginRequiredMixin, CreateView):
         equipo = Group.objects.create(name="equipo%s" % self.object.pk)
         proyecto.equipo = equipo
         proyecto.save()
+        Backlog.objects.create(proyecto=proyecto, tipo="Product_Backlog")
         user = User.objects.get(username=self.request.user)
         perfil = Perfil.objects.get(user=user)
         Historial.objects.create(
