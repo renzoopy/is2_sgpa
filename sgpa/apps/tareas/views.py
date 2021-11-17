@@ -103,10 +103,6 @@ def crearUserStori(request, idProyecto):
             print("USER STORY CREADO")
             userStory.save()
             print("US SAVE")
-
-            # return HttpResponseRedirect(
-            #     reverse("tareas:listar_tareas", kwargs={"idProyecto": idProyecto})
-            # )
             return redirect("tareas:listar_tareas", idProyecto)
         print("NO RETORNA")
 
