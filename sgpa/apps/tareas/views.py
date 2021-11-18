@@ -1,9 +1,10 @@
+from django.core.mail import send_mail
 from django.http.response import HttpResponseRedirect
 from usuarios.models import Perfil
 from django.shortcuts import redirect, render
 from tareas.models import UserStory
 from django.urls.base import reverse
-from tareas.forms import UserStoryForm
+from tareas.forms import UserStoryEdit_Form, UserStoryForm
 from django.contrib.auth.models import User
 from proyectos.models import Backlog, Historial, Proyecto
 from django.views.generic import ListView, CreateView
@@ -11,45 +12,45 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
 # --- Crear User Story --- #
-class CrearUserStory(LoginRequiredMixin, CreateView):
-    """
-    Vista basada en modelos que permite crear un User Story con los campos correspondientes
-    No recibe parámetros
-    Requiere inicio de sesión
-    """
+# class CrearUserStory(LoginRequiredMixin, CreateView):
+#     """
+#     Vista basada en modelos que permite crear un User Story con los campos correspondientes
+#     No recibe parámetros
+#     Requiere inicio de sesión
+#     """
 
-    redirect_field_name = "redirect_to"
-    model = UserStory
-    form_class = UserStoryForm
-    template_name = "tareas/nuevo_userStory.html"
+#     redirect_field_name = "redirect_to"
+#     model = UserStory
+#     form_class = UserStoryForm
+#     template_name = "tareas/nuevo_userStory.html"
 
-    def get_success_url(self):
-        return reverse("tareas:listar_tareas", args=(self.kwargs["idProyecto"],))
+#     def get_success_url(self):
+#         return reverse("tareas:listar_tareas", args=(self.kwargs["idProyecto"],))
 
-    def get_form_kwargs(self, **kwargs):
-        form_kwargs = super(CrearUserStory, self).get_form_kwargs(**kwargs)
-        form_kwargs["idProyecto"] = self.kwargs["idProyecto"]
-        return form_kwargs
+#     def get_form_kwargs(self, **kwargs):
+#         form_kwargs = super(CrearUserStory, self).get_form_kwargs(**kwargs)
+#         form_kwargs["idProyecto"] = self.kwargs["idProyecto"]
+#         return form_kwargs
 
-    def form_valid(self, form):
-        proyecto = Proyecto.objects.get(id=self.kwargs["idProyecto"])
-        form.instance.proyecto = proyecto
-        backlog = Backlog.objects.get(proyecto=proyecto, tipo="Product_Backlog")
-        backlog.numTareas += 1
-        user = User.objects.get(username=self.request.user)
-        perfil = Perfil.objects.get(user=user)
-        Historial.objects.create(
-            operacion="Crear User Story {}".format(form.instance.nombre),
-            autor=perfil.__str__(),
-            proyecto=proyecto,
-            categoria="User Story",
-        )
-        return super(CrearUserStory, self).form_valid(form)
+#     def form_valid(self, form):
+#         proyecto = Proyecto.objects.get(id=self.kwargs["idProyecto"])
+#         form.instance.proyecto = proyecto
+#         backlog = Backlog.objects.get(proyecto=proyecto, tipo="Product_Backlog")
+#         backlog.numTareas += 1
+#         user = User.objects.get(username=self.request.user)
+#         perfil = Perfil.objects.get(user=user)
+#         Historial.objects.create(
+#             operacion="Crear User Story {}".format(form.instance.nombre),
+#             autor=perfil.__str__(),
+#             proyecto=proyecto,
+#             categoria="User Story",
+#         )
+#         return super(CrearUserStory, self).form_valid(form)
 
-    def get_context_data(self, **kwargs):
-        context = super(CrearUserStory, self).get_context_data(**kwargs)
-        context["idProyecto"] = self.kwargs["idProyecto"]
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super(CrearUserStory, self).get_context_data(**kwargs)
+#         context["idProyecto"] = self.kwargs["idProyecto"]
+#         return context
 
 
 # --- Listar User Story --- #
@@ -76,7 +77,7 @@ class ListarUserStory(LoginRequiredMixin, ListView):
         return UserStory.objects.filter(backlog=backlog)
 
 
-def crearUserStori(request, idProyecto):
+def crearUserStory(request, idProyecto):
     proyecto = Proyecto.objects.get(id=idProyecto)
     data = {"idProyecto": idProyecto}
 
@@ -88,23 +89,100 @@ def crearUserStori(request, idProyecto):
         form = UserStoryForm(request.POST)
 
         if form.is_valid():
-            print("HASTA ACA LLEGA")
             backlog = Backlog.objects.get(proyecto=proyecto, tipo="Product_Backlog")
             backlog.numTareas += 1
             backlog.save()
             proyecto.save()
-            print("CREAR USER STORY")
             userStory = UserStory.objects.create(
                 backlog=backlog,
                 nombre=form.cleaned_data["nombre"],
                 descripcion=form.cleaned_data["descripcion"],
                 prioridad=form.cleaned_data["prioridad"],
             )
-            print("USER STORY CREADO")
             userStory.save()
-            print("US SAVE")
+            user = User.objects.get(username=request.user)
+            perfil = Perfil.objects.get(user=user)
+            Historial.objects.create(
+                operacion="Crear User Story",
+                autor=perfil.__str__(),
+                proyecto=proyecto,
+                categoria="User Story",
+            )
             return redirect("tareas:listar_tareas", idProyecto)
-        print("NO RETORNA")
-
         data["form"] = form
         return render(request, "tareas/nuevo_userStory.html", data)
+
+
+def eliminarUserStory(request, idProyecto, id_tarea):
+    """
+    Vista basada en funciones que permite eliminar un User Story seleccionado
+    Recibe el request HTTP y el id del rol a eliminar
+    Requiere inicio de sesión
+    """
+
+    userStory = UserStory.objects.get(id=id_tarea)
+
+    if request.method == "POST":
+        nombre = userStory.nombre
+        userStory.delete()
+        user = User.objects.get(username=request.user)
+        perfil = Perfil.objects.get(user=user)
+        Historial.objects.create(
+            operacion="Eliminar US {}".format(nombre),
+            autor=perfil.__str__(),
+            proyecto=Proyecto.objects.get(id=idProyecto),
+            categoria="User Story",
+        )
+
+        return redirect("tareas:listar_tareas", idProyecto=idProyecto)
+    return render(
+        request,
+        "tareas/eliminar_tarea.html",
+        {"userStory": userStory, "idProyecto": idProyecto},
+    )
+
+
+# --- Modificar Proyecto --- #
+@login_required
+def modificarUserStory(request, idProyecto, id_tarea):
+    """
+    Vista basada en función, para actualizar un proyecto existente
+    Recibe el request HTTP y el id del poryecto correspondiente como parámetros
+    Al finalizar los cambios en los campos del formulario, guarda la información y redirige a la lista de los proyectos asociados
+    Requiere inicio de sesión y permisos de Scrum Master o administrador
+    """
+    tarea = UserStory.objects.get(id=id_tarea)
+
+    if request.method == "GET":
+        tarea_Form = UserStoryEdit_Form(instance=tarea)
+    else:
+        tarea_Form = UserStoryEdit_Form(request.POST, instance=tarea)
+        if tarea_Form.is_valid():
+            tarea_Form.save()
+            desarrollador = tarea.desarrollador
+            send_mail(
+                "El User Story ha sido modificado",
+                "Usted es desarrollador del User Story '{0}' y este acaba de ser modificado, ingrese a la plataforma para observar los cambios".format(
+                    tarea.nombre
+                ),
+                "is2.sgpa@gmail.com",
+                desarrollador,
+            )
+            backlog = Backlog.objects.get(id=tarea.backlog)
+            proyecto = Proyecto.objects.get(id=backlog.proyecto)
+
+            user = User.objects.get(username=request.user)
+            perfil = Perfil.objects.get(user=user)
+            Historial.objects.create(
+                operacion="Modificar Proyecto",
+                autor=perfil.__str__(),
+                proyecto=proyecto,
+                categoria="User Story",
+            )
+
+        return redirect("tareas:listar_tareas", idProyecto)
+    return render(
+        request,
+        "tareas/modificar_tarea.html",
+        {"tarea_Form": tarea_Form, "id_tarea": id_tarea, "idProyecto": idProyecto},
+    )

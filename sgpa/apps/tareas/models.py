@@ -1,3 +1,4 @@
+from django.utils import tree
 import proyectos.models
 from django.db import models
 from usuarios.models import Perfil
@@ -23,7 +24,9 @@ class UserStory(models.Model):
     nombre = models.CharField(max_length=150, blank=False)
     descripcion = models.TextField(max_length=300, blank=False)
     estado = models.CharField(default="En_Cola", max_length=7)
-    desarrollador = models.ForeignKey(Perfil, on_delete=models.CASCADE)
+    desarrollador = models.ForeignKey(
+        Perfil, on_delete=models.CASCADE, null=True, blank=True
+    )
     fechaCreacion = models.DateField(auto_now_add=True)
     fechaInicio = models.DateField(null=True)
     fechaFin = models.DateField(null=True)
