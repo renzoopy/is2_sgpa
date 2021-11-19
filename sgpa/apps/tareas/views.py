@@ -73,10 +73,13 @@ class ListarUserStory(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         proyecto = Proyecto.objects.get(id=self.kwargs["idProyecto"])
-        backlog = Backlog.objects.get(proyecto=proyecto)
+        backlog = Backlog.objects.get(proyecto=proyecto, tipo="Product_Backlog")
+        print("IMPRESION", backlog)
         return UserStory.objects.filter(backlog=backlog)
 
 
+# --- Crear User Story --- #
+@login_required
 def crearUserStory(request, idProyecto):
     proyecto = Proyecto.objects.get(id=idProyecto)
     data = {"idProyecto": idProyecto}
@@ -113,6 +116,8 @@ def crearUserStory(request, idProyecto):
         return render(request, "tareas/nuevo_userStory.html", data)
 
 
+# --- Eliminar User Story --- #
+@login_required
 def eliminarUserStory(request, idProyecto, id_tarea):
     """
     Vista basada en funciones que permite eliminar un User Story seleccionado
@@ -125,6 +130,9 @@ def eliminarUserStory(request, idProyecto, id_tarea):
     if request.method == "POST":
         nombre = userStory.nombre
         userStory.delete()
+        backlog = Backlog.objects.get(id=userStory.backlog)
+        backlog.numTareas -= 1
+        backlog.save()
         user = User.objects.get(username=request.user)
         perfil = Perfil.objects.get(user=user)
         Historial.objects.create(
@@ -142,13 +150,13 @@ def eliminarUserStory(request, idProyecto, id_tarea):
     )
 
 
-# --- Modificar Proyecto --- #
+# --- Modificar User Story --- #
 @login_required
 def modificarUserStory(request, idProyecto, id_tarea):
     """
-    Vista basada en función, para actualizar un proyecto existente
-    Recibe el request HTTP y el id del poryecto correspondiente como parámetros
-    Al finalizar los cambios en los campos del formulario, guarda la información y redirige a la lista de los proyectos asociados
+    Vista basada en función, para actualizar un User Story existente
+    Recibe el request HTTP y el id del US correspondiente como parámetros
+    Al finalizar los cambios en los campos del formulario, guarda la información y redirige a la lista de US asociados
     Requiere inicio de sesión y permisos de Scrum Master o administrador
     """
     tarea = UserStory.objects.get(id=id_tarea)
@@ -186,3 +194,23 @@ def modificarUserStory(request, idProyecto, id_tarea):
         "tareas/modificar_tarea.html",
         {"tarea_Form": tarea_Form, "id_tarea": id_tarea, "idProyecto": idProyecto},
     )
+
+
+# --- Asignación de un User Story--- #
+@login_required
+def asignarSprint(request, idProyecto, idMiembro, id_tarea):
+
+    user = User.objects.get(id=idMiembro)
+    perfil = Perfil.objects.get(user=user)
+    userStory = UserStory.objects.get(id=id_tarea)
+    userStory.desarrollador = perfil
+    nombre = perfil.__str__()
+    user = User.objects.get(username=request.user)
+    perfil = Perfil.objects.get(user=user)
+    Historial.objects.create(
+        operacion="Asignar User Story {} a {}".format(userStory.nombre, nombre),
+        autor=perfil.__str__(),
+        proyecto=Proyecto.objects.get(id=idProyecto),
+        categoria="User Story",
+    )
+    return redirect("tareas:listar_tareas", idProyecto=idProyecto, idMiembro=idMiembro)
