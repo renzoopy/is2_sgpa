@@ -7,28 +7,33 @@
     </ins>
     <br>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-1">
 
         </div>
-        <div class="col-md-6">
+        <div class="col-md-10">
             <table class="table">
                 <thead>
                     <tr class="table-primary">
-                        <th>Objetivo</th>
                         <th>Posición</th>
+                        <th>Objetivo</th>
                         <th>Estado</th>
                         <th>Num. Tareas</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for sprint in sprints %}
                     <tr>
-                        <td><a href="{% url 'proyectos:ver_sprint' sprint.proyecto.id sprint.id%}">{{sprint.id}}</a>
+                        <td scope="col">{{sprint.posicion}}</td>
                         </td>
-                        <td>{{sprint.objetivo}}</td>
-                        <td>{{sprint.posicion}}</td>
-                        <td>{{sprint.estado}}</td>
-                        <td>{{sprint.numTareas}}</td>
+                        <td scope="col">{{sprint.objetivos}}</td>
+                        <td scope="col">{{sprint.estado}}</td>
+                        <td scope="col">{{sprint.numTareas}}</td>
+                        <td scope="col">
+                            <a href="" class="btn boton-color"><i class="fas fa-pen"></i></a>
+                            <a href="{% url 'proyectos:eliminar_sprint' proyecto sprint.id %}" class="btn btn-danger"><i
+                                    class="fas fa-trash"></i></a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -39,7 +44,7 @@
                 <a class="btn btn-primary" href="{% url 'proyectos:ver_proyecto' proyecto %}" role="button">Volver</a>
             </p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-1">
 
         </div>
     </div>

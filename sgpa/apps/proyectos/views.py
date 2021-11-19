@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 from tareas.models import UserStory
 from django.urls.base import reverse_lazy
 from django.views.generic import ListView
-from proyectos.models import Proyecto, Sprint, Historial
+from proyectos.models import Backlog, Proyecto, Sprint, Historial
 from django.shortcuts import reverse, redirect, render, get_object_or_404
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -53,6 +53,7 @@ class crearProyecto(LoginRequiredMixin, CreateView):
         equipo = Group.objects.create(name="equipo%s" % self.object.pk)
         proyecto.equipo = equipo
         proyecto.save()
+        Backlog.objects.create(proyecto=proyecto, tipo="Product_Backlog")
         user = User.objects.get(username=self.request.user)
         perfil = Perfil.objects.get(user=user)
         Historial.objects.create(
@@ -113,7 +114,7 @@ def eliminarProyecto(request, id_proyecto):
 @login_required
 def verProyecto(request, id_proyecto):
     """
-    Muiestra el proyecto, la lista de los usuarios asociados y las funciones correspondientes al mismo
+    Muestra el proyecto, la lista de los usuarios asociados y las funciones correspondientes al mismo
     Vista basada en función, para mostrar el menú de un proyecto
     Recibe el request HTTP y el id del poryecto correspondiente como parámetros
     """
@@ -361,44 +362,6 @@ def finalizarProyecto(request, id_proyecto):
 #         return render(request, template, datos)
 
 
-# # --- Crear Sprint 2--- #
-# class crearSprints(LoginRequiredMixin, CreateView):
-#     """
-#     Vista basada en la clase CreateView
-#     Crea un sprint sobre el conjunto de User Stories seleccionados por el usuario
-#     Actualiza la cantidad de Sprints y el estado de los User Stories
-#     No recibe parámetros
-#     Requiere inicio de sesión
-#     """
-
-#     model = Sprint
-#     redirect_field_name = "redirect_to"
-#     form_class = Sprint_Form
-#     template_name = "sprints/nuevo_sprint.html"
-
-#     def get_success_url(self):
-#         return reverse_lazy(
-#             "proyectos:listar_sprints", args=(self.kwargs["id_proyecto"],)
-#         )
-
-#     def get_form_kwargs(self, **kwargs):
-#         form_kwargs = super(crearSprints, self).get_form_kwargs(**kwargs)
-#         form_kwargs["proyecto_id"] = self.kwargs["id_proyecto"]
-#         return form_kwargs
-
-#     def form_valid(self, form):
-#         proyecto = Proyecto.objects.get(id="id_proyecto")
-#         sprint = Sprint.objects.get(id=self.object.pk)
-#         sprint.proyecto = proyecto
-#         sprint.save()
-#         return super(crearSprints, self).form_valid(form)
-
-#     def get_context_data(self, **kwargs):
-#         context = super(crearSprints, self).get_context_data()
-#         context["id_proyecto"] = self.kwargs["id_proyecto"]
-#         return context
-
-
 # --- Ver Sprints --- #
 # @login_required
 # def listarSprints(request, id_proyecto):
@@ -440,56 +403,55 @@ def verHistorial(request, id_proyecto):
     )
 
 
+# --- Crear Sprint --- #
 @login_required
 def crearSprint(request, id_proyecto):
+    """
+    Crea un sprint sobre el conjunto de User Stories seleccionados por el usuario
+    Recibe el request HTTP y el id del proyecto
+    Requiere inicio de sesión
+    """
     proyecto = Proyecto.objects.get(id=id_proyecto)
-    SprintFormSet = inlineformset_factory(
-        Proyecto,
-        Sprint,
-        fields=(
-            "objetivos",
-            "posicion",
-        ),
-        can_delete=False,
-        extra=proyecto.numSprints,
-        max_num=proyecto.numSprints,
-    )
+    data = {"id_proyecto": id_proyecto}
 
-    if request.method == "POST":
-        formset = SprintFormSet(request.POST, instance=proyecto)
-        if formset.is_valid():
-            for x in range(0, len(formset)):
-                if formset[x].cleaned_data.get("posicion") > proyecto.numSprints:
-                    messages.add_message(
-                        request,
-                        messages.ERROR,
-                        'Posición del sprint con objetivo "%s" no compatible'
-                        % formset[x].cleaned_data.get("objetivos"),
-                    )
-                    return redirect("proyectos:modificar_sprints", id_proyecto)
-                for z in range(x + 1, len(formset)):
-                    if formset[x].cleaned_data.get("posicion") == formset[
-                        z
-                    ].cleaned_data.get("posicion"):
-                        messages.add_message(
-                            request,
-                            messages.ERROR,
-                            "Las sprints '{0}' y '{1} tienen posiciones repetidas".format(
-                                formset[x].cleaned_data.get("objetivos"),
-                                formset[z].cleaned_data.get("objetivos"),
-                            ),
-                        )
-                        return redirect("proyectos:modificar_sprints", id_proyecto)
-                formset.save()
-        return redirect("proyectos:ver_proyecto", id_proyecto)
-    else:
-        formset = SprintFormSet(instance=proyecto)
+    if request.method == "GET":
+        data["form"] = Sprint_Form()
+        return render(request, "sprints/nuevo_sprint.html", data)
 
-    return render(
-        request,
-        "sprints/nuevo_sprint.html",
-        {"formset": formset, "proyecto": id_proyecto},
-    )
+    elif request.method == "POST":
+        form = Sprint_Form(request.POST)
+        print("LLEGA")
+        if form.is_valid():
+            print("VALIDO")
+            proyecto.numSprints += 1
+            proyecto.save()
+            Backlog.objects.create(
+                posicion=proyecto.numSprints, proyecto=proyecto, tipo="Sprint_Backlog"
+            )
+            Backlog.objects.create(proyecto=proyecto, tipo="To_Do")
+            Backlog.objects.create(proyecto=proyecto, tipo="Doing")
+            Backlog.objects.create(proyecto=proyecto, tipo="Done")
+
+            sprint = Sprint.objects.create(
+                objetivos=form.cleaned_data["objetivos"],
+                posicion=proyecto.numSprints,
+                proyecto=proyecto,
+                fechaInicio=form.cleaned_data["fechaInicio"],
+                fechaFin=form.cleaned_data["fechaFin"],
+            )
+            sprint.save()
+            user = User.objects.get(username=request.user)
+            perfil = Perfil.objects.get(user=user)
+            Historial.objects.create(
+                operacion="Crear User Story",
+                autor=perfil.__str__(),
+                proyecto=proyecto,
+                categoria="User Story",
+            )
+            return redirect("proyectos:listar_sprints", id_proyecto)
+        print("NO VALIDO")
+        data["form"] = form
+        return render(request, "sprints/nuevo_sprint.html", data)
 
 
 # --- Modificar Sprints --- #
@@ -552,17 +514,73 @@ def modificarSprints(request, id_proyecto):
     )
 
 
-# ===Ver Sprints de un Proyecto===
+# --- Ver Sprints de un Proyecto --- #
 @login_required
 def listarSprints(request, id_proyecto):
     """
-    Vista basada en función para mostrar las fases de un proyecto específico
+    Vista basada en función para mostrar los Sprints de un proyecto específico
     Recibe la petición http y el id del proyecto en cuestión
-    Muestra el nombre, número de ítems, número de LB de cada fase
+    Muestra la posición, el objetivo, el esado, número de tareas y las acciones posibles
     """
-    sprint = Sprint.objects.filter(proyecto=id_proyecto).order_by("posicion")
+    proyecto = Proyecto.objects.get(id=id_proyecto)
+    sprint = Sprint.objects.filter(proyecto=proyecto)
     return render(
         request,
         "sprints/listar_sprints.html",
-        {"sprint": sprint, "proyecto": id_proyecto},
+        {"sprints": sprint, "proyecto": id_proyecto},
+    )
+
+
+# --- Eliminar Sprint --- #
+@login_required
+def eliminarSprint(request, id_proyecto, id_sprint):
+    """
+    Vista basada en funciones que permite eliminar un User Story seleccionado
+    Recibe el request HTTP y el id del rol a eliminar
+    Requiere inicio de sesión
+    """
+    sprint = Sprint.objects.get(id=id_sprint)
+
+    if request.method == "POST":
+        objetivo = sprint.objetivos
+        sprint.delete()
+        proyecto = Proyecto.objects.get(id=id_proyecto)
+        proyecto.numSprints -= 1
+        proyecto.save()
+        user = User.objects.get(username=request.user)
+        perfil = Perfil.objects.get(user=user)
+        Historial.objects.create(
+            operacion="Eliminar Sprint con objetivo: {}".format(objetivo),
+            autor=perfil.__str__(),
+            proyecto=Proyecto.objects.get(id=id_proyecto),
+            categoria="Sprint",
+        )
+
+        return redirect("proyectos:listar_sprints", id_proyecto)
+    return render(
+        request,
+        "sprints/eliminar_sprint.html",
+        {"sprint": sprint, "id_proyecto": id_proyecto},
+    )
+
+
+# --- Ver Sprint --- #
+@login_required
+def verSprint(request, id_proyecto, id_sprint):
+    """
+    Muestra el proyecto, la lista de los usuarios asociados y las funciones correspondientes al mismo
+    Vista basada en función, para mostrar el menú de un proyecto
+    Recibe el request HTTP y el id del poryecto correspondiente como parámetros
+    """
+
+    proyecto = Proyecto.objects.get(id=id_proyecto)
+    backlog = Backlog.objects.get(proyecto=proyecto)
+    tareas_PB = UserStory.objects.filter(backlog=backlog)
+    sprint = Sprint.objects.get(id=id_sprint)
+    tareas_SP = UserStory.objects.filter(sprint=id_sprint)
+
+    return render(
+        request,
+        "proyectos/ver_proyecto.html",
+        {"tareas_PB": tareas_PB, "proyecto": proyecto, "sprint": sprint},
     )

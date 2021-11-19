@@ -4,7 +4,7 @@
 <br>
 <div class="container-fluid">
     <ins>
-        <h3 align="center">Crear nuevo US</h3>
+        <h3 align="center">Editar Rol</h3>
     </ins>
     <br>
     <div class="row">
@@ -16,26 +16,28 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <label class="col-form-label">Nombre:</label>
-                    {{ form.nombre }}
+                    {{ tarea_Form.nombre }}
                 </div>
                 <div class="form-group">
-                    <label class="col-form-label">Descripcion:</label>
-                    {{ form.descripcion }}
+                    <label class="col-form-label">Descripción:</label>
+                    <br>
+                    {{ tarea_Form.descripcion }}
                 </div>
                 <div class="form-group">
-                    <label class="col-form-label">Prioridad:</label>
-                    {{ form.prioridad }}
+                    <label class="col-form-label">Desarrollador:</label>
+                    <br>
+                    {{ tarea_Form.desarrollador }}
                 </div>
                 <p align="center">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <a href="{% url 'tareas:listar_tareas' idProyecto %}" class="btn btn-primary"
+                    <a href="{% url 'tareas:listar_tareas' idProyecto%}" class="btn btn-primary"
                         role="button">Cancelar</a>
                 </p>
             </form>
         </div>
         <div class="col-md-3">
+
         </div>
     </div>
 </div>
-
 {% endblock %}

@@ -32,19 +32,19 @@ class Sprint_Form(forms.ModelForm):
         model = Sprint
         fields = [
             "objetivos",
-            "posicion",
+            "fechaInicio",
+            "fechaFin",
         ]
         labels = {
             "objetivos": "Objetivos",
-            "posicion": "Posicion",
+            "fechaInicio": "Fecha de inicio",
+            "fechaFin": "Fecha de finalización",
         }
         widgets = {
             "objetivos": forms.TextInput(attrs={"class": "form-control"}),
-            "posicion": forms.NumberInput(),
+            "fechaInicio": forms.DateInput(attrs={"type": "date"}),
+            "fechaFin": forms.DateInput(attrs={"type": "date"}),
         }
-
-    def init(self, args, **kwargs):
-        super(Sprint_Form, self).init(args, **kwargs)
 
 
 class ProyectoEdit_Form(forms.ModelForm):

@@ -16,6 +16,7 @@
                     <tr class="table-primary">
                         <th scope="col">Nombre</th>
                         <th scope="col">Descripcion</th>
+                        <th scope="col">Desarrollador</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -25,9 +26,18 @@
                         <td scope="col">{{ us.nombre }}</td>
                         <td scope="col">{{ us.descripcion }}</td>
                         <td scope="col">
-                            <a href="" class="btn boton-color">Modificar
+                            {% if us.desarrollador %}
+                            {{ us.desarrollador }}
+                            {% else %}
+                            <p>No asignado</p>
+                            {% endif %}
+                        </td>
+                        <td scope="col">
+                            <a href="{% url 'tareas:modificar_tarea' idProyecto us.id %}"
+                                class="btn boton-color">Modificar
                                 US</a>
-                            <a href="" class="btn boton-color">Eliminar
+                            <a href="{% url 'tareas:eliminar_tarea' idProyecto us.id %}"
+                                class="btn boton-color">Eliminar
                                 US</a>
                         </td>
                     </tr>
@@ -40,7 +50,7 @@
     <h4 align="center">El proyecto no tiene US creados</h4><br>
     {% endif %}
     <p align="center">
-        <a href="y{% url 'tareas:crear_tarea' idProyecto %}" class="btn boton-color">Crear US</a>
+        <a href="{% url 'tareas:crear_tarea' idProyecto %}" class="btn boton-color">Crear US</a>
         <a href="{% url 'proyectos:ver_proyecto' idProyecto %}" class="btn boton-color" role="button">Volver</a>
     </p>
 </div>

@@ -12,7 +12,7 @@ ESTADOPROY_CHOICES = [
 ]
 
 ESTADOSPR_CHOICES = [
-    ("En_cola", "En_cola"),
+    ("En_cola", "En cola"),
     ("Activo", "Activo"),
     ("Cancelado", "Cancelado"),
     ("Finalizado", "Finalizado"),
@@ -26,7 +26,7 @@ ESTADOBL_CHOICES = [
 TIPOBL_CHOICES = [
     ("Product_Backlog", "Product_Backlog"),
     ("Sprint_Backlog", "Sprint_Backlog"),
-    ("Do", "Do"),
+    ("Doing", "Doing"),
     ("To_Do", "To_Do"),
     ("Done", "Done"),
 ]
@@ -54,6 +54,7 @@ class Proyecto(models.Model):
 
 
 class Backlog(models.Model):
+    posicion = models.IntegerField(blank=False, null=True)
     tipo = models.CharField(max_length=16, choices=TIPOBL_CHOICES)
     estado = models.CharField(max_length=8, choices=ESTADOBL_CHOICES, default="Vacio")
     fechaCreacion = models.DateField(auto_now_add=True)
