@@ -18,6 +18,9 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from sgpa.views import page_not_found
+from django.conf.urls import handler404
+handler404 = page_not_found
 
 urlpatterns = [
     path("", include("usuarios.urls")),
@@ -31,6 +34,7 @@ urlpatterns = [
     ),
     path(
         "proyectos/<int:idProyecto>/miembros/",
+
         include(("miembros.urls", "miembros"), namespace="miembros"),
     ),
     path(
