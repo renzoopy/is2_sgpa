@@ -1,4 +1,4 @@
-# SGPA
+# trello-poli
 
 ## Requerimientos
 - Python 3.8 o superior.

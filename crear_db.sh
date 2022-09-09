@@ -8,5 +8,5 @@ sudo -u postgres -i psql --command "DROP ROLE IF EXISTS admin_proyecto; CREATE R
 
 #sudo -u postgres -i dropdb --if-exists sgpa1; createdb sgpa1;
 #pipenv shell && \
-#python3 manage.py migrate --run-syncdb
+#python3 manage.py migrate --run-syncdb error 
 
