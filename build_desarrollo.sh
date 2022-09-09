@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Ititialization
+# Ititialization bash para crear entorno de desarrollo 
 
 mainmenu () {
     des_db_name=sgpa
