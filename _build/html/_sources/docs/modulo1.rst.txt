@@ -1,0 +1,53 @@
+modulo1 package
+===============
+
+Submodules
+----------
+
+modulo1.admin module
+--------------------
+
+.. automodule:: modulo1.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+modulo1.apps module
+-------------------
+
+.. automodule:: modulo1.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+modulo1.models module
+---------------------
+
+.. automodule:: modulo1.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+modulo1.tests module
+--------------------
+
+.. automodule:: modulo1.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+modulo1.views module
+--------------------
+
+.. automodule:: modulo1.views
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: modulo1
+   :members:
+   :undoc-members:
+   :show-inheritance:

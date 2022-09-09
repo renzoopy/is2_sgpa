@@ -99,9 +99,9 @@ WSGI_APPLICATION = "sgpa.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "sgpa",
-        "USER": "sgpa",
-        "PASSWORD": "sgpa",
+        "NAME": "Trello_poli",
+        "USER": "postgres",
+        "PASSWORD": "admin",
         "HOST": "localhost",
         "PORT": "5432",
     }
