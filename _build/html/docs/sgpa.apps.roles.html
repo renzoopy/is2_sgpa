@@ -53,7 +53,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa.asgi">sgpa.asgi module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa.settings">sgpa.settings module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sgpa.html#sgpa-test-conexion-module">sgpa.test_conexion module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa.test_conexion">sgpa.test_conexion module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa.urls">sgpa.urls module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa.wsgi">sgpa.wsgi module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa">Module contents</a></li>
@@ -114,67 +114,8 @@
 </dd></dl>
 
 </section>
-<section id="module-sgpa.apps.roles.forms">
-<span id="sgpa-apps-roles-forms-module"></span><h2>sgpa.apps.roles.forms module<a class="headerlink" href="#module-sgpa.apps.roles.forms" title="Enlace permanente a este encabezado"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="sgpa.apps.roles.forms.Rol_Form">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgpa.apps.roles.forms.</span></span><span class="sig-name descname"><span class="pre">Rol_Form</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.roles.forms.Rol_Form" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
-<dl class="py class">
-<dt class="sig sig-object py" id="sgpa.apps.roles.forms.Rol_Form.Meta">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#sgpa.apps.roles.forms.Rol_Form.Meta" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.roles.forms.Rol_Form.Meta.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['nombre',</span> <span class="pre">'sprint']</span></em><a class="headerlink" href="#sgpa.apps.roles.forms.Rol_Form.Meta.fields" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.roles.forms.Rol_Form.Meta.labels">
-<span class="sig-name descname"><span class="pre">labels</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'nombre':</span> <span class="pre">'Nombre',</span> <span class="pre">'sprint':</span> <span class="pre">'Sprint'}</span></em><a class="headerlink" href="#sgpa.apps.roles.forms.Rol_Form.Meta.labels" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.roles.forms.Rol_Form.Meta.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#sgpa.apps.roles.forms.Rol_Form.Meta.model" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>alias de <code class="xref py py-class docutils literal notranslate"><span class="pre">Rol</span></code></p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.roles.forms.Rol_Form.Meta.widgets">
-<span class="sig-name descname"><span class="pre">widgets</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'nombre':</span> <span class="pre">&lt;django.forms.widgets.TextInput</span> <span class="pre">object&gt;,</span> <span class="pre">'sprint':</span> <span class="pre">&lt;django.forms.widgets.CheckboxSelectMultiple</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#sgpa.apps.roles.forms.Rol_Form.Meta.widgets" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.roles.forms.Rol_Form.base_fields">
-<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'nombre':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'select':</span> <span class="pre">&lt;django.forms.fields.MultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'sprint':</span> <span class="pre">&lt;django.forms.models.ModelMultipleChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#sgpa.apps.roles.forms.Rol_Form.base_fields" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.roles.forms.Rol_Form.declared_fields">
-<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'select':</span> <span class="pre">&lt;django.forms.fields.MultipleChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#sgpa.apps.roles.forms.Rol_Form.declared_fields" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="sgpa.apps.roles.forms.Rol_Form.media">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#sgpa.apps.roles.forms.Rol_Form.media" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Return all media required to render the widgets on this form.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.roles.forms.Rol_Form.permisos">
-<span class="sig-name descname"><span class="pre">permisos</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;QuerySet</span> <span class="pre">[('Permite</span> <span class="pre">cancelar</span> <span class="pre">un</span> <span class="pre">sprint',</span> <span class="pre">'Cancelar</span> <span class="pre">Sprint'),</span> <span class="pre">('Permite</span> <span class="pre">crear</span> <span class="pre">proyectos',</span> <span class="pre">'Crear</span> <span class="pre">proyecto'),</span> <span class="pre">('Permite</span> <span class="pre">crear</span> <span class="pre">un</span> <span class="pre">sprint',</span> <span class="pre">'Crear</span> <span class="pre">Sprint'),</span> <span class="pre">('Permite</span> <span class="pre">crear</span> <span class="pre">un</span> <span class="pre">user</span> <span class="pre">story',</span> <span class="pre">'Crear</span> <span class="pre">user</span> <span class="pre">story'),</span> <span class="pre">('Permite</span> <span class="pre">eliminar</span> <span class="pre">proyectos',</span> <span class="pre">'Eliminar</span> <span class="pre">proyecto'),</span> <span class="pre">('Permite</span> <span class="pre">modificar</span> <span class="pre">proyectos',</span> <span class="pre">'Modificar</span> <span class="pre">proyecto'),</span> <span class="pre">('Permite</span> <span class="pre">modificar</span> <span class="pre">un</span> <span class="pre">sprint',</span> <span class="pre">'Modificar</span> <span class="pre">Sprint')]&gt;</span></em><a class="headerlink" href="#sgpa.apps.roles.forms.Rol_Form.permisos" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.roles.forms.Rol_Form.permissions">
-<span class="sig-name descname"><span class="pre">permissions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Crear</span> <span class="pre">proyecto',</span> <span class="pre">'Modificar</span> <span class="pre">proyecto',</span> <span class="pre">'Eliminar</span> <span class="pre">proyecto',</span> <span class="pre">'Crear</span> <span class="pre">Sprint',</span> <span class="pre">'Modificar</span> <span class="pre">Sprint',</span> <span class="pre">'Cancelar</span> <span class="pre">Sprint',</span> <span class="pre">'Crear</span> <span class="pre">user</span> <span class="pre">story',</span> <span class="pre">'Modificar</span> <span class="pre">user</span> <span class="pre">storyEliminar</span> <span class="pre">user</span> <span class="pre">story']</span></em><a class="headerlink" href="#sgpa.apps.roles.forms.Rol_Form.permissions" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<section id="sgpa-apps-roles-forms-module">
+<h2>sgpa.apps.roles.forms module<a class="headerlink" href="#sgpa-apps-roles-forms-module" title="Enlace permanente a este encabezado"></a></h2>
 </section>
 <section id="sgpa-apps-roles-models-module">
 <h2>sgpa.apps.roles.models module<a class="headerlink" href="#sgpa-apps-roles-models-module" title="Enlace permanente a este encabezado"></a></h2>
@@ -182,147 +123,11 @@
 <section id="sgpa-apps-roles-tests-module">
 <h2>sgpa.apps.roles.tests module<a class="headerlink" href="#sgpa-apps-roles-tests-module" title="Enlace permanente a este encabezado"></a></h2>
 </section>
-<section id="module-sgpa.apps.roles.urls">
-<span id="sgpa-apps-roles-urls-module"></span><h2>sgpa.apps.roles.urls module<a class="headerlink" href="#module-sgpa.apps.roles.urls" title="Enlace permanente a este encabezado"></a></h2>
+<section id="sgpa-apps-roles-urls-module">
+<h2>sgpa.apps.roles.urls module<a class="headerlink" href="#sgpa-apps-roles-urls-module" title="Enlace permanente a este encabezado"></a></h2>
 </section>
-<section id="module-sgpa.apps.roles.views">
-<span id="sgpa-apps-roles-views-module"></span><h2>sgpa.apps.roles.views module<a class="headerlink" href="#module-sgpa.apps.roles.views" title="Enlace permanente a este encabezado"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.CrearRol">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgpa.apps.roles.views.</span></span><span class="sig-name descname"><span class="pre">CrearRol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.roles.views.CrearRol" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateView</span></code></p>
-<p>Vista basada en modelos que permite crear un rol y el grupo asociado con los permisos correspondientes
-La Validación se redefine para permitir la creación del grupo y asociar los permisos correspondientes
-No recibe parámetros
-Requiere inicio de sesión</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.CrearRol.form_class">
-<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#sgpa.apps.roles.views.CrearRol.form_class" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>alias de <code class="xref py py-class docutils literal notranslate"><span class="pre">Rol_Form</span></code></p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.CrearRol.form_valid">
-<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.roles.views.CrearRol.form_valid" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>If the form is valid, save the associated model.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.CrearRol.get_context_data">
-<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.roles.views.CrearRol.get_context_data" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Insert the form into the context dict.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.CrearRol.get_form_kwargs">
-<span class="sig-name descname"><span class="pre">get_form_kwargs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.roles.views.CrearRol.get_form_kwargs" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Return the keyword arguments for instantiating the form.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.CrearRol.get_success_url">
-<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.roles.views.CrearRol.get_success_url" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Return the URL to redirect to after processing a valid form.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.CrearRol.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#sgpa.apps.roles.views.CrearRol.model" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>alias de <code class="xref py py-class docutils literal notranslate"><span class="pre">Rol</span></code></p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.CrearRol.redirect_field_name">
-<span class="sig-name descname"><span class="pre">redirect_field_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'redirect_to'</span></em><a class="headerlink" href="#sgpa.apps.roles.views.CrearRol.redirect_field_name" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.CrearRol.template_name">
-<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'roles/nuevo_rol.html'</span></em><a class="headerlink" href="#sgpa.apps.roles.views.CrearRol.template_name" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.ListarRol">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgpa.apps.roles.views.</span></span><span class="sig-name descname"><span class="pre">ListarRol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.roles.views.ListarRol" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ListView</span></code></p>
-<p>Vista basada en modelos que permite listar todos los roles creados
-Muestra la lista de los roles asociados al proyecto en forma de tabla
-No recibe parámetros
-Requiere inicio de sesión</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.ListarRol.get_context_data">
-<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.roles.views.ListarRol.get_context_data" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Get the context for this view.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.ListarRol.get_queryset">
-<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.roles.views.ListarRol.get_queryset" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Return the list of items for this view.</p>
-<p>The return value must be an iterable and may be an instance of
-<cite>QuerySet</cite> in which case <cite>QuerySet</cite> specific behavior will be enabled.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.ListarRol.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#sgpa.apps.roles.views.ListarRol.model" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>alias de <code class="xref py py-class docutils literal notranslate"><span class="pre">Rol</span></code></p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.ListarRol.redirect_field_name">
-<span class="sig-name descname"><span class="pre">redirect_field_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'redirect_to'</span></em><a class="headerlink" href="#sgpa.apps.roles.views.ListarRol.redirect_field_name" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.ListarRol.template_name">
-<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'roles/listar_roles.html'</span></em><a class="headerlink" href="#sgpa.apps.roles.views.ListarRol.template_name" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.asignarRol">
-<span class="sig-prename descclassname"><span class="pre">sgpa.apps.roles.views.</span></span><span class="sig-name descname"><span class="pre">asignarRol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idProyecto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idMiembro</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idRol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.roles.views.asignarRol" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Vista basada en funciones que permite asignar un rol seleccionado y su grupo asociado a un usuario miembro del proyecto
-Recibe el request HTTP, el id del proyecto asociado, el id miembro y el id del rol a asignar
-Requiere inicio de sesión</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.desasignarRol">
-<span class="sig-prename descclassname"><span class="pre">sgpa.apps.roles.views.</span></span><span class="sig-name descname"><span class="pre">desasignarRol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idProyecto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idMiembro</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idRol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.roles.views.desasignarRol" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Vista basada en funciones que permite revocar un rol seleccionado y su grupo asociado a un usuario miembro del proyecto
-Recibe el request HTTP, el id del proyecto asociado, el id del miembro y el id del rol a revocar
-Requiere inicio de sesión</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.editarRol">
-<span class="sig-prename descclassname"><span class="pre">sgpa.apps.roles.views.</span></span><span class="sig-name descname"><span class="pre">editarRol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idProyecto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_rol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.roles.views.editarRol" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Vista basada en funciones que permite editar un rol seleccionado y su grupo asociado
-Recibe el request HTTP y el id del rol a editar
-Requiere inicio de sesión</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.eliminarRol">
-<span class="sig-prename descclassname"><span class="pre">sgpa.apps.roles.views.</span></span><span class="sig-name descname"><span class="pre">eliminarRol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idProyecto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_rol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.roles.views.eliminarRol" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Vista basada en funciones que permite eliminar un rol seleccionado y su grupo asociado
-Recibe el request HTTP y el id del rol a eliminar
-Requiere inicio de sesión</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="sgpa.apps.roles.views.verRoles">
-<span class="sig-prename descclassname"><span class="pre">sgpa.apps.roles.views.</span></span><span class="sig-name descname"><span class="pre">verRoles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idProyecto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idMiembro</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.roles.views.verRoles" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Vista basada en modelos que permite listar todos los reoles creados
-Recibe el request HTTP, el id del proyecto asociado y el id del miembro
-Requiere inicio de sesión</p>
-</dd></dl>
-
+<section id="sgpa-apps-roles-views-module">
+<h2>sgpa.apps.roles.views module<a class="headerlink" href="#sgpa-apps-roles-views-module" title="Enlace permanente a este encabezado"></a></h2>
 </section>
 <section id="module-sgpa.apps.roles">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sgpa.apps.roles" title="Enlace permanente a este encabezado"></a></h2>

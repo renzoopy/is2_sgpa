@@ -53,7 +53,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa.asgi">sgpa.asgi module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa.settings">sgpa.settings module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sgpa.html#sgpa-test-conexion-module">sgpa.test_conexion module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa.test_conexion">sgpa.test_conexion module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa.urls">sgpa.urls module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa.wsgi">sgpa.wsgi module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa">Module contents</a></li>
@@ -114,84 +114,8 @@
 </dd></dl>
 
 </section>
-<section id="module-sgpa.apps.tareas.forms">
-<span id="sgpa-apps-tareas-forms-module"></span><h2>sgpa.apps.tareas.forms module<a class="headerlink" href="#module-sgpa.apps.tareas.forms" title="Enlace permanente a este encabezado"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.forms.UserStoryEdit_Form">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgpa.apps.tareas.forms.</span></span><span class="sig-name descname"><span class="pre">UserStoryEdit_Form</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.tareas.forms.UserStoryEdit_Form" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
-<dl class="py class">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.forms.UserStoryEdit_Form.Meta">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#sgpa.apps.tareas.forms.UserStoryEdit_Form.Meta" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.forms.UserStoryEdit_Form.Meta.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['nombre',</span> <span class="pre">'descripcion',</span> <span class="pre">'estado',</span> <span class="pre">'desarrollador']</span></em><a class="headerlink" href="#sgpa.apps.tareas.forms.UserStoryEdit_Form.Meta.fields" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.forms.UserStoryEdit_Form.Meta.init">
-<span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.tareas.forms.UserStoryEdit_Form.Meta.init" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.forms.UserStoryEdit_Form.Meta.labels">
-<span class="sig-name descname"><span class="pre">labels</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'desarrollador':</span> <span class="pre">'Desarrollador',</span> <span class="pre">'descripcion':</span> <span class="pre">'Descripcion',</span> <span class="pre">'estado':</span> <span class="pre">'Estado',</span> <span class="pre">'nombre':</span> <span class="pre">'Nombre'}</span></em><a class="headerlink" href="#sgpa.apps.tareas.forms.UserStoryEdit_Form.Meta.labels" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.forms.UserStoryEdit_Form.Meta.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#sgpa.apps.tareas.forms.UserStoryEdit_Form.Meta.model" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>alias de <code class="xref py py-class docutils literal notranslate"><span class="pre">UserStory</span></code></p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.forms.UserStoryEdit_Form.Meta.widgets">
-<span class="sig-name descname"><span class="pre">widgets</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'desarrollador':</span> <span class="pre">&lt;django.forms.widgets.Select</span> <span class="pre">object&gt;,</span> <span class="pre">'descripcion':</span> <span class="pre">&lt;django.forms.widgets.TextInput</span> <span class="pre">object&gt;,</span> <span class="pre">'estado':</span> <span class="pre">&lt;django.forms.widgets.Select</span> <span class="pre">object&gt;,</span> <span class="pre">'nombre':</span> <span class="pre">&lt;django.forms.widgets.TextInput</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#sgpa.apps.tareas.forms.UserStoryEdit_Form.Meta.widgets" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.forms.UserStoryEdit_Form.base_fields">
-<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'desarrollador':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'descripcion':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'estado':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'nombre':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#sgpa.apps.tareas.forms.UserStoryEdit_Form.base_fields" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.forms.UserStoryEdit_Form.declared_fields">
-<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#sgpa.apps.tareas.forms.UserStoryEdit_Form.declared_fields" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.forms.UserStoryEdit_Form.media">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#sgpa.apps.tareas.forms.UserStoryEdit_Form.media" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Return all media required to render the widgets on this form.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.forms.UserStoryForm">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgpa.apps.tareas.forms.</span></span><span class="sig-name descname"><span class="pre">UserStoryForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.tareas.forms.UserStoryForm" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Form</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.forms.UserStoryForm.base_fields">
-<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'descripcion':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'nombre':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'prioridad':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#sgpa.apps.tareas.forms.UserStoryForm.base_fields" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.forms.UserStoryForm.declared_fields">
-<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'descripcion':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'nombre':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'prioridad':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#sgpa.apps.tareas.forms.UserStoryForm.declared_fields" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.forms.UserStoryForm.media">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#sgpa.apps.tareas.forms.UserStoryForm.media" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Return all media required to render the widgets on this form.</p>
-</dd></dl>
-
-</dd></dl>
-
+<section id="sgpa-apps-tareas-forms-module">
+<h2>sgpa.apps.tareas.forms module<a class="headerlink" href="#sgpa-apps-tareas-forms-module" title="Enlace permanente a este encabezado"></a></h2>
 </section>
 <section id="sgpa-apps-tareas-models-module">
 <h2>sgpa.apps.tareas.models module<a class="headerlink" href="#sgpa-apps-tareas-models-module" title="Enlace permanente a este encabezado"></a></h2>
@@ -199,78 +123,11 @@
 <section id="sgpa-apps-tareas-tests-module">
 <h2>sgpa.apps.tareas.tests module<a class="headerlink" href="#sgpa-apps-tareas-tests-module" title="Enlace permanente a este encabezado"></a></h2>
 </section>
-<section id="module-sgpa.apps.tareas.urls">
-<span id="sgpa-apps-tareas-urls-module"></span><h2>sgpa.apps.tareas.urls module<a class="headerlink" href="#module-sgpa.apps.tareas.urls" title="Enlace permanente a este encabezado"></a></h2>
+<section id="sgpa-apps-tareas-urls-module">
+<h2>sgpa.apps.tareas.urls module<a class="headerlink" href="#sgpa-apps-tareas-urls-module" title="Enlace permanente a este encabezado"></a></h2>
 </section>
-<section id="module-sgpa.apps.tareas.views">
-<span id="sgpa-apps-tareas-views-module"></span><h2>sgpa.apps.tareas.views module<a class="headerlink" href="#module-sgpa.apps.tareas.views" title="Enlace permanente a este encabezado"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.views.ListarUserStory">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgpa.apps.tareas.views.</span></span><span class="sig-name descname"><span class="pre">ListarUserStory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.tareas.views.ListarUserStory" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ListView</span></code></p>
-<p>Vista basada en modelos que permite listar todos los user stories creados
-Muestra la lista de los user stories asociados al proyecto en forma de tabla
-No recibe parámetros
-Requiere inicio de sesión</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.views.ListarUserStory.get_context_data">
-<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.tareas.views.ListarUserStory.get_context_data" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Get the context for this view.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.views.ListarUserStory.get_queryset">
-<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.tareas.views.ListarUserStory.get_queryset" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Return the list of items for this view.</p>
-<p>The return value must be an iterable and may be an instance of
-<cite>QuerySet</cite> in which case <cite>QuerySet</cite> specific behavior will be enabled.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.views.ListarUserStory.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#sgpa.apps.tareas.views.ListarUserStory.model" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>alias de <code class="xref py py-class docutils literal notranslate"><span class="pre">UserStory</span></code></p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.views.ListarUserStory.redirect_field_name">
-<span class="sig-name descname"><span class="pre">redirect_field_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'redirect_to'</span></em><a class="headerlink" href="#sgpa.apps.tareas.views.ListarUserStory.redirect_field_name" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.views.ListarUserStory.template_name">
-<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tareas/listar_userStory.html'</span></em><a class="headerlink" href="#sgpa.apps.tareas.views.ListarUserStory.template_name" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.views.asignarSprint">
-<span class="sig-prename descclassname"><span class="pre">sgpa.apps.tareas.views.</span></span><span class="sig-name descname"><span class="pre">asignarSprint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idProyecto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idMiembro</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_tarea</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.tareas.views.asignarSprint" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.views.crearUserStory">
-<span class="sig-prename descclassname"><span class="pre">sgpa.apps.tareas.views.</span></span><span class="sig-name descname"><span class="pre">crearUserStory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idProyecto</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.tareas.views.crearUserStory" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.views.eliminarUserStory">
-<span class="sig-prename descclassname"><span class="pre">sgpa.apps.tareas.views.</span></span><span class="sig-name descname"><span class="pre">eliminarUserStory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idProyecto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_tarea</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.tareas.views.eliminarUserStory" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Vista basada en funciones que permite eliminar un User Story seleccionado
-Recibe el request HTTP y el id del rol a eliminar
-Requiere inicio de sesión</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="sgpa.apps.tareas.views.modificarUserStory">
-<span class="sig-prename descclassname"><span class="pre">sgpa.apps.tareas.views.</span></span><span class="sig-name descname"><span class="pre">modificarUserStory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idProyecto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_tarea</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.tareas.views.modificarUserStory" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Vista basada en función, para actualizar un User Story existente
-Recibe el request HTTP y el id del US correspondiente como parámetros
-Al finalizar los cambios en los campos del formulario, guarda la información y redirige a la lista de US asociados
-Requiere inicio de sesión y permisos de Scrum Master o administrador</p>
-</dd></dl>
-
+<section id="sgpa-apps-tareas-views-module">
+<h2>sgpa.apps.tareas.views module<a class="headerlink" href="#sgpa-apps-tareas-views-module" title="Enlace permanente a este encabezado"></a></h2>
 </section>
 <section id="module-sgpa.apps.tareas">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sgpa.apps.tareas" title="Enlace permanente a este encabezado"></a></h2>

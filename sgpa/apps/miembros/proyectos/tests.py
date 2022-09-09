@@ -21,13 +21,7 @@ def test_ListarProyecto():
     client = Client()
     client.login(username="usuarioPrueba", password="12345")
     # Verifica que la vista responda correctamente a un pedido GET
-    response = client.get("http://127.0.0.1:8000/proyectos/listar/")
-
-    assert response.status_code == 200
-
-
-# --- Test Crear Proyecto --- #
-# Verifica la creación de un proyecto
+    response = client.get("http://127.0.0.1:800@pytest.
 @pytest.mark.django_db
 def test_CrearProyecto():
     usuario = User.objects.create_user("Won", "won@seo.com", "hyungwon")

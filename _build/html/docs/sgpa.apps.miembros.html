@@ -53,7 +53,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa.asgi">sgpa.asgi module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa.settings">sgpa.settings module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sgpa.html#sgpa-test-conexion-module">sgpa.test_conexion module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa.test_conexion">sgpa.test_conexion module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa.urls">sgpa.urls module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa.wsgi">sgpa.wsgi module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgpa.html#module-sgpa">Module contents</a></li>
@@ -114,57 +114,8 @@
 </dd></dl>
 
 </section>
-<section id="module-sgpa.apps.miembros.forms">
-<span id="sgpa-apps-miembros-forms-module"></span><h2>sgpa.apps.miembros.forms module<a class="headerlink" href="#module-sgpa.apps.miembros.forms" title="Enlace permanente a este encabezado"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="sgpa.apps.miembros.forms.MiembrosForm">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sgpa.apps.miembros.forms.</span></span><span class="sig-name descname"><span class="pre">MiembrosForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.miembros.forms.MiembrosForm" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
-<dl class="py class">
-<dt class="sig sig-object py" id="sgpa.apps.miembros.forms.MiembrosForm.Meta">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#sgpa.apps.miembros.forms.MiembrosForm.Meta" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.miembros.forms.MiembrosForm.Meta.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['idPerfil']</span></em><a class="headerlink" href="#sgpa.apps.miembros.forms.MiembrosForm.Meta.fields" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.miembros.forms.MiembrosForm.Meta.labels">
-<span class="sig-name descname"><span class="pre">labels</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'idPerfil':</span> <span class="pre">'Perfil'}</span></em><a class="headerlink" href="#sgpa.apps.miembros.forms.MiembrosForm.Meta.labels" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.miembros.forms.MiembrosForm.Meta.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#sgpa.apps.miembros.forms.MiembrosForm.Meta.model" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>alias de <code class="xref py py-class docutils literal notranslate"><span class="pre">Miembro</span></code></p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.miembros.forms.MiembrosForm.Meta.widgets">
-<span class="sig-name descname"><span class="pre">widgets</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'idPerfil':</span> <span class="pre">&lt;django.forms.widgets.Select</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#sgpa.apps.miembros.forms.MiembrosForm.Meta.widgets" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.miembros.forms.MiembrosForm.base_fields">
-<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'idPerfil':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#sgpa.apps.miembros.forms.MiembrosForm.base_fields" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="sgpa.apps.miembros.forms.MiembrosForm.declared_fields">
-<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#sgpa.apps.miembros.forms.MiembrosForm.declared_fields" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="sgpa.apps.miembros.forms.MiembrosForm.media">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#sgpa.apps.miembros.forms.MiembrosForm.media" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Return all media required to render the widgets on this form.</p>
-</dd></dl>
-
-</dd></dl>
-
+<section id="sgpa-apps-miembros-forms-module">
+<h2>sgpa.apps.miembros.forms module<a class="headerlink" href="#sgpa-apps-miembros-forms-module" title="Enlace permanente a este encabezado"></a></h2>
 </section>
 <section id="sgpa-apps-miembros-models-module">
 <h2>sgpa.apps.miembros.models module<a class="headerlink" href="#sgpa-apps-miembros-models-module" title="Enlace permanente a este encabezado"></a></h2>
@@ -172,37 +123,11 @@
 <section id="sgpa-apps-miembros-tests-module">
 <h2>sgpa.apps.miembros.tests module<a class="headerlink" href="#sgpa-apps-miembros-tests-module" title="Enlace permanente a este encabezado"></a></h2>
 </section>
-<section id="module-sgpa.apps.miembros.urls">
-<span id="sgpa-apps-miembros-urls-module"></span><h2>sgpa.apps.miembros.urls module<a class="headerlink" href="#module-sgpa.apps.miembros.urls" title="Enlace permanente a este encabezado"></a></h2>
+<section id="sgpa-apps-miembros-urls-module">
+<h2>sgpa.apps.miembros.urls module<a class="headerlink" href="#sgpa-apps-miembros-urls-module" title="Enlace permanente a este encabezado"></a></h2>
 </section>
-<section id="module-sgpa.apps.miembros.views">
-<span id="sgpa-apps-miembros-views-module"></span><h2>sgpa.apps.miembros.views module<a class="headerlink" href="#module-sgpa.apps.miembros.views" title="Enlace permanente a este encabezado"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="sgpa.apps.miembros.views.miembroCrear">
-<span class="sig-prename descclassname"><span class="pre">sgpa.apps.miembros.views.</span></span><span class="sig-name descname"><span class="pre">miembroCrear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idProyecto</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.miembros.views.miembroCrear" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Vista basada en funciones que permite crear miembros
-Recibe el request HTTP y el id de un proyecto como parámetros
-Al finalizar la petición se retorna a la vista de lista de miembros
-Requiere inicio de sesión</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="sgpa.apps.miembros.views.miembroEliminar">
-<span class="sig-prename descclassname"><span class="pre">sgpa.apps.miembros.views.</span></span><span class="sig-name descname"><span class="pre">miembroEliminar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idProyecto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idMiembro</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.miembros.views.miembroEliminar" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Vista basada en funciones que permite la eliminación de miembros
-Recibe el request HTTP, el id de un proyecto y el id de un miembro como parámeetros
-Una vez finalizada la petición se retorna a la lista de miembros
-Requiere inicio de sesión</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="sgpa.apps.miembros.views.verMiembros">
-<span class="sig-prename descclassname"><span class="pre">sgpa.apps.miembros.views.</span></span><span class="sig-name descname"><span class="pre">verMiembros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idProyecto</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sgpa.apps.miembros.views.verMiembros" title="Enlazar permanentemente con esta definición"></a></dt>
-<dd><p>Vista basada en funciones para listar miembros pertenecientes a un proyecto
-Recibe el request y el id de un proyecto como parámtros
-Requiere inicio de sesión</p>
-</dd></dl>
-
+<section id="sgpa-apps-miembros-views-module">
+<h2>sgpa.apps.miembros.views module<a class="headerlink" href="#sgpa-apps-miembros-views-module" title="Enlace permanente a este encabezado"></a></h2>
 </section>
 <section id="module-sgpa.apps.miembros">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sgpa.apps.miembros" title="Enlace permanente a este encabezado"></a></h2>
