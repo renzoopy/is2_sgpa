@@ -1,4 +1,4 @@
-# create virtual environment
+# create virtual environment crear entorno de desarrollo 
 echo "creando entorno virtual venv"
 virtualenv -q -p "$PYTHONPATH" venv
 # activate environment
