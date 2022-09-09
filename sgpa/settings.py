@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 import sys
 
+#from sgpa.apps import proyectos, tareas, usuarios, roles, miembros
+
 #from sgpa.apps import usuarios, tareas,roles,miembros,proyectos
 
 PROJECT_ROOT = os.path.dirname(__file__)
@@ -47,11 +49,11 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
-    "usuarios",
-    "proyectos",
-    "roles",
-    "miembros",
-    "tareas",
+    "sgpa.apps.usuarios",
+    "sgpa.apps.proyectos",
+    "sgpa.apps.roles",
+    "sgpa.apps.miembros",
+    "sgpa.apps.tareas",
 ]
 
 MIDDLEWARE = [
