@@ -49,11 +49,11 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
-    "sgpa.apps.usuarios",
-    "sgpa.apps.proyectos",
-    "sgpa.apps.roles",
-    "sgpa.apps.miembros",
-    "sgpa.apps.tareas",
+    "usuarios",
+    "proyectos",
+    "roles",
+    "miembros",
+    "tareas",
 ]
 
 MIDDLEWARE = [
@@ -105,6 +105,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME':'is2',
         'USER': 'postgres',
+        'TEST': {
+          'NAME': 'test_is2',
+        },
         'PASSWORD': 'admin',
         'HOST': 'localhost',
         'port': '5432',
