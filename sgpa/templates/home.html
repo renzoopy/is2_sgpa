@@ -5,14 +5,16 @@
 {% block content %}
 <div class="vh-100 d-flex flex-column justify-content-center align-items-center">
     <div class="bg-white d-flex flex-column shadow-lg px-5 py-5 rounded-3 align-items-center justify-content-center">
-        <h4>Bienvenido al SGPA</h4>
+        <h4>Bienvenido al Trello Poli</h4>
         <h6>Sistema Gerenciador de Proyectos Ágiles</h6>
         <hr class="h-divider mb-1">
         <div class="card-body">
             <h4 class="card-title text-center">Datos de usuario</h4>
             <ul>
                 <li>
-                    <p class="card-text">Nombre: {{ user.first_name }}</p>
+                    {% if user.first_name %}
+                         <p class="card-text">Nombre: {{ user.first_name }}</p>
+                    {% endif %}
                 </li>
                 <li>
                     <p class="card-text">Apellido: {{ user.last_name }}</p>

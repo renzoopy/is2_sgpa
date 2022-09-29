@@ -1,8 +1,8 @@
 import pytest
 import datetime
-from sgpa.apps.tareas.models import UserStory
-from apps.usuarios.models import User, Perfil
-from sgpa.apps.proyectos.models import Proyecto, Sprint
+from tareas.models import UserStory
+from usuarios.models import User, Perfil
+from proyectos.models import Proyecto, Sprint
 
 
 @pytest.mark.django_db
