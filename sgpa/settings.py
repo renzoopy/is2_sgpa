@@ -54,7 +54,12 @@ INSTALLED_APPS = [
     "roles",
     "miembros",
     "tareas",
+    #"rest_framework",
+    #"django_filters",
+    #"budget",
 ]
+#BUDGET_SECRET_TOKEN = 'SECRETTOKEN' # An arbitrary token
+#BUDGET_DOMAIN = 'http://localhost:8000' # The root domain of your hosted project
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
